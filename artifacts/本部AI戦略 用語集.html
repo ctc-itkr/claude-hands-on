@@ -1,0 +1,424 @@
+<!doctype html><html><head><!-- frame-runtime --><script>window.__FRAME_PREAMBLE={"v":1,"capabilities":{"artifact":"artifact.C12lZ9DL.js","assets":"assets.8Gk803W0.js","comments":"comments.vw5vQdGA.js","db":"db.h-3sndFg.js","downloads":"downloads.Cqv48mdo.js","embed":"embed.eqL6deQM.js","endpoints":"endpoints.CfzSv5nM.js","mcp":"mcp.Bvma3qD7.js","network":"network.B5UA9Su4.js","permissions":"permissions.BNySkLV5.js","room":"room.VSdFwTE9.js","sample":"sample.BW2Uysoh.js","self":"artifact.C12lZ9DL.js","user":"user.BpKav-Rf.js"},"transforms":"_transforms.DSB5x63f.js","comments":"_comments.lsIZQbAK.js","translate":"_translate.5HCW4BJh.js"}</script><script>(function(){"use strict";var te=["light","dark","system"],re=/^[A-Za-z0-9_-]{1,64}$/,$=/^[a-zA-Z_:][a-zA-Z0-9_:.-]{0,127}$/,ne=new Set(["class","hidden","value","checked","style","title","alt","placeholder","lang","dir","role","tabindex","disabled","readonly","contenteditable","open","colspan","rowspan"]);function oe(e){const t=e.toLowerCase();return t.startsWith("data-")||t.startsWith("aria-")||ne.has(t)}var Be="http://www.w3.org/1999/xhtml",se="http://www.w3.org/2000/svg",ae=new Set(["script","style","iframe","noscript","noframes","noembed","xmp","plaintext","template","title","textarea","object","embed"]),ie=new Set(["script","style"]);function ce(e){const t=e.localName.toLowerCase();return e.namespaceURI==="http://www.w3.org/1999/xhtml"?!ae.has(t):e.namespaceURI===se?!ie.has(t):!1}function M(e,t){return e===t||(e===160||e===32)&&(t===160||t===32)}function le(e,t){const r=e.length,n=t.length;let s=0;for(;s<r&&s<n&&M(e.charCodeAt(s),t.charCodeAt(s));)s++;let o=0;for(;o<r-s&&o<n-s&&M(e.charCodeAt(r-1-o),t.charCodeAt(n-1-o));)o++;return{p:s,s:o}}function ue(e,t){const r=e.firstChild;if(e.childNodes.length!==1||r===null||r.nodeType!==Node.TEXT_NODE){e.textContent=t;return}const n=r.data,s=n.length,o=t.length,{p:i,s:c}=le(n,t);i===s&&c===0&&s===o||r.replaceData(i,s-i-c,t.slice(i,o-c));const h=r.data,p=e.ownerDocument.getSelection?.()??null,w=p!==null&&p.rangeCount>0&&(p.anchorNode===r||p.focusNode===r)?{anchor:p.anchorNode,anchorOffset:p.anchorOffset,focus:p.focusNode,focusOffset:p.focusOffset}:null;let m=-1,g=-1;for(let f=0;f<h.length&&f<t.length;f++){const v=h.charCodeAt(f),b=t.charCodeAt(f);v!==b&&M(v,b)&&(m<0&&(m=f),g=f)}const a=m>=0;if(a&&r.replaceData(m,g-m+1,t.slice(m,g+1)),a&&w!==null&&w.anchor!==null&&w.focus!==null)try{p.setBaseAndExtent(w.anchor,w.anchorOffset,w.focus,w.focusOffset)}catch{}}var fe=new Set(["html","head","body","frameset"]);function de(e){return e.namespaceURI==="http://www.w3.org/1999/xhtml"&&fe.has(e.localName)}function pe(e){if(e===null||typeof e!="object")return!1;const t=e;if(typeof t.target!="string"||!re.test(t.target)||t.text!==void 0&&typeof t.text!="string")return!1;if(t.attrsSet!==void 0){if(t.attrsSet===null||typeof t.attrsSet!="object")return!1;for(const[r,n]of Object.entries(t.attrsSet))if(!$.test(r)||typeof n!="string")return!1}if(t.attrsRemoved!==void 0){if(!Array.isArray(t.attrsRemoved))return!1;for(const r of t.attrsRemoved)if(typeof r!="string"||!$.test(r))return!1}return!0}function me(e,t){if(e===null||typeof e!="object")return!1;const{seq:r,elements:n}=e;if(typeof r!="number"||!Number.isSafeInteger(r)||!Array.isArray(n)||n.length===0||n.length>64)return!1;for(let s=0;s<n.length;s++)if(!t(n[s]))return!1;return!0}function he(e){return e===null||typeof e!="object"?!1:me(e.__frame_patch,pe)}function _e(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_init;return t!==null&&typeof t=="object"}function ve(e){return e!==null&&typeof e=="object"&&e.__frame_size_poke===!0}function ye(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_theme;if(t===null||typeof t!="object")return!1;const r=t.theme;return typeof r=="string"&&te.includes(r)}var A=/^[\w.-]+\.js$/;function we(e,t,r){return r?"inert":typeof t=="string"&&A.test(t)?e?[t]:"inert":e?"inert":"framed"}function ge(){return{post(e,t){parent.postMessage(e,t)},on(e){const t=r=>{r.source===parent&&e(r.data,r.origin,r.isTrusted)};return addEventListener("message",t),()=>removeEventListener("message",t)}}}function be(){return{post:()=>{},on:()=>()=>{}}}var j="__frame_scroll",Ee=150,Ae=310,Se=160,Te=3e4;function ke(){let e=0,t=!1,r=!1,n=!1,s=0,o=null;const i=l=>{try{sessionStorage.setItem(j,JSON.stringify({y:l}))}catch{}},c=()=>{if(clearTimeout(e),o===null)return;const l=o;o=null,i(l)},h=()=>{if(t){t=!1;return}r=!0,o=scrollY,clearTimeout(e),e=setTimeout(c,Ee)};try{addEventListener("scroll",h,{passive:!0}),addEventListener("pagehide",c)}catch{}const p=()=>{let l;try{l=sessionStorage.getItem(j)}catch{return null}if(l===null)return null;let _;try{_=JSON.parse(l)}catch{_=null}const d=_?.y;if(!(typeof d=="number"&&Number.isFinite(d)&&d>=0)){try{sessionStorage.removeItem(j)}catch{}return null}return d};let w=!1;const m=l=>{try{const _=scrollY;scrollTo({top:l,left:0,behavior:"instant"}),s=l,n=!0,clearTimeout(e),o=null,i(l);const d=scrollY;d!==_&&(t=!0),d!==l&&!w&&(w=!0,addEventListener("load",()=>{try{if(scrollY===d){const T=p();m(T!==null?T:s)}}catch{}},{once:!0}))}catch{}},g=()=>{try{return!!location.hash}catch{return!0}};let a=!1;const f=()=>{try{if(a||innerWidth>Ae||innerHeight>Se)return;a=!0;const l=Date.now(),_=()=>{try{removeEventListener("resize",_)}catch{}if(Date.now()-l>Te||r||g())return;const d=p();m(d!==null?d:s)};addEventListener("resize",_)}catch{}};let v=!1,b=!1;return{restore(){if(v||(v=!0,g()))return;const l=p();l!==null&&(m(l),f())},promoted(){if(b||(b=!0,g()))return;const l=p();l!==null?(m(l),f()):n&&m(s)}}}function Re(e,t,r,n){let s=null;try{s=window.trustedTypes?.createPolicy("frame-runtime",{createScriptURL:h=>h})??null}catch{}const o=window.Worker,i=o?.prototype,c=Object.freeze({Worker:o,workerOn:i?.addEventListener,workerPost:i?.postMessage,workerTerminate:i?.terminate,fetch:window.fetch.bind(window),preventDefault:Event.prototype.preventDefault,policy:s,origins:t});r(e).then(h=>h?.bootTopLevel?h.bootTopLevel(c,n):n.settle()).catch(()=>n.settle())}var De="modulepreload",Ie=function(e){return"/"+e},Ue={},Le=function(t,r,n){let s=Promise.resolve();function o(i){const c=new Event("vite:preloadError",{cancelable:!0});if(c.payload=i,window.dispatchEvent(c),!c.defaultPrevented)throw i}return s.then(i=>{for(const c of i||[])c.status==="rejected"&&o(c.reason);return t().catch(o)})},Oe=window===top,q=Object.getOwnPropertyDescriptor(window,"claude"),k=we(Oe,window.__FRAME_PREAMBLE?.topLevel,q?.writable===!1),N=typeof k=="object"&&k[0],y=N?be():ge();(function(){const e=Object.defineProperty,t=globalThis,r=["RTCPeerConnection","webkitRTCPeerConnection","RTCDataChannel","RTCIceCandidate","RTCSessionDescription","RTCRtpSender","RTCRtpReceiver"];let n=0;for(let s=0;s<r.length;s++){const o=r[s];try{e(t,o,{value:void 0,writable:!1,configurable:!1})}catch{try{delete t[o]}catch{}try{e(t,o,{value:void 0,writable:!1,configurable:!0})}catch{}}typeof t[o]=="function"&&n++}if(n&&k==="framed")try{y.post({__frame_rtc_lockdown_failed:n},"*")}catch{}})();var Pe=1e4,Y=Object.freeze([...window.__FRAME_PREAMBLE?.origins??["https://claude.ai","https://preview.claude.ai"]]);function X(e){for(const t of Y)if(t.endsWith(":*"))try{const r=new URL(e);if(`${r.protocol}//${r.hostname}:*`===t)return!0}catch{}else if(e===t)return!0;return!1}var R=Object.freeze({...window.__FRAME_PREAMBLE?.capabilities}),B=window.__FRAME_PREAMBLE?.transforms,D=window.__FRAME_PREAMBLE?.comments,I=window.__FRAME_PREAMBLE?.translate;function S(e){return Le(()=>import("/_runtime/"+e),void 0)}function G(e,t){return{contract:e.contract,changes:new Set(e.changes??[]),flags:new Set(e.flags??[]),capabilities:e.capabilities??{},capBudgets:e.capBudgets??{},transforms:new Map,shellOrigin:t,mount:x,hooks:O,pipe:()=>({wrap:(r,n)=>(...s)=>{try{return n(...s)}catch(o){return Promise.reject(o)}}})}}var L=null,E=null;function V(e,t,r){try{Object.defineProperty(e,t,{value:r,writable:!1,configurable:!1,enumerable:!0})}catch{try{Object.defineProperty(e,t,{value:r,writable:!1,configurable:!0,enumerable:!0})}catch{}}}var U=!1,O={editBefore:null,edit:null};function Ce(e,t,r=!1){const n=[];let s;if(r)try{O.editBefore?.(e)}catch{}for(const o of e.elements){const i=document.querySelector(`[data-id="${o.target}"]`);if(!i){s=o.target;break}if([...Object.keys(o.attrsSet??{}),...o.attrsRemoved??[]].some(c=>!oe(c))){s=o.target;break}if(o.text!==void 0&&(!ce(i)||de(i))){s=o.target;break}for(const[c,h]of Object.entries(o.attrsSet??{}))if(!J(i,c)){try{i.setAttribute(c,h)}catch{}Z(i,c,h)}for(const c of o.attrsRemoved??[])J(i,c)||(i.removeAttribute(c),Z(i,c,null));typeof o.text=="string"&&ue(i,o.text),n.push(o.target)}if(r)try{O.edit?.(e.seq,n,s)}catch{}if(s!==void 0){y.post({__frame_patch_miss:{seq:e.seq}},t);return}try{document.dispatchEvent(new CustomEvent("claude:edit",{detail:{seq:e.seq,targets:n}}))}catch{}}function Z(e,t,r){if(!(e instanceof HTMLInputElement))return;const n=t.toLowerCase();n==="checked"?e.checked=r!==null:n==="value"&&e.type!=="file"&&(e.value=r??"")}function J(e,t){const r=t.toLowerCase(),n=e;return r==="data-id"||(r==="value"||r==="checked")&&(n.__artifactSecret===!0||/^(password|hidden|file)$/.test(n.type??"")||/(^|\s)(cc-|one-time-code|current-password|new-password)/i.test(`${e.getAttribute("autocomplete")??""} ${n.autocomplete??""}`))}function Q(e){const t=document.documentElement;e==="light"||e==="dark"?(t.dataset.theme=e,t.style.colorScheme=e,U=!0):U&&(delete t.dataset.theme,t.style.colorScheme="",U=!1)}var P=new Map;function Me(){let e;const t={u:new Promise(r=>{e=r}),r:r=>{t.done=!0,e(r)},done:!1,nulled:!1};return t}function F(){for(const e of P.values())e.done||(e.nulled=!0,e.r(null))}var je=Object.freeze(Object.assign(Object.create(null),{call:Function.prototype.call,apply:Function.prototype.apply,bind:Function.prototype.bind})),x=(e,t)=>{const r=P.get(e);if(!r||r.done){r?.nulled&&E&&y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:e}},E);return}const n=typeof t=="function"?Object.setPrototypeOf(t,je):Object.assign(Object.create(null),t);typeof n.then=="function"&&delete n.then,r.r(Object.freeze(n))};function ee(){const e=q?.value??{};V(window,"claude",e);for(const t of Object.keys(R)){if(e[t]!==void 0){V(e,t,e[t]);continue}P.set(t,Me())}if(e.use===void 0){const t=r=>{if(typeof r!="string"||!Object.hasOwn(R,r))return Promise.resolve(null);const n=P.get(r);return n?n.u:Promise.resolve(e[r]??null)};try{Object.defineProperty(e,"use",{value:t,writable:!0,configurable:!0,enumerable:!1})}catch{}}}if(k==="framed"){const e=B&&A.test(B)?S(B).catch(()=>{}):Promise.resolve(void 0),t=a=>{if(a.type==="auxclick"&&a.button!==1)return;const f=a.target,v=f&&f.closest?f.closest("a[href],area[href]"):null;if(!v)return;const b=v.getAttribute("href");if(!b)return;let l;try{l=new URL(b,document.baseURI)}catch{return}if((l.protocol==="http:"||l.protocol==="https:")&&l.origin!==location.origin){a.preventDefault();const _=(v.getAttribute("target")??"").toLowerCase(),d=a.type==="auxclick"||a.metaKey||a.ctrlKey||a.shiftKey||a.altKey||!["","_self","_top","_parent"].includes(_);y.post({__frame_nav:!0,url:l.href,newTab:d},"*")}};addEventListener("click",t,!0),addEventListener("auxclick",t,!0);const r={},n=a=>{a.isTrusted&&(r.pointer=!0)},s=a=>{a.isTrusted&&(r.click=!0)};addEventListener("pointermove",n,{capture:!0,passive:!0}),addEventListener("click",s,{capture:!0,passive:!0}),e.then(a=>{a?.wireNav&&(a.wireNav(),removeEventListener("click",t,!0),removeEventListener("auxclick",t,!0),removeEventListener("pointermove",n,!0),removeEventListener("click",s,!0),a.wireEngagement?.(r))});let o=null;try{o=ke()}catch{}ee();let i=null,c=null,h=0;const p=y.on((a,f)=>{X(f)&&_e(a)&&(i=a.__frame_init,E=f,p(),clearTimeout(h),c?.())});y.post({__frame_connect:!0},"*");const w=new Promise(a=>{c=a,h=setTimeout(()=>{p(),a()},Pe)}),m=document.readyState==="loading"?new Promise(a=>document.addEventListener("DOMContentLoaded",()=>a(),{once:!0})):Promise.resolve();m.then(()=>{try{o?.restore()}catch{}});const g={cb:null};y.on((a,f)=>{if(X(f)&&ve(a)){try{o?.promoted()}catch{}g.cb?.()}}),w.then(async()=>{if(!i||!E){F();return}Q(i.theme);const a=E;let f=!1,v=!1;y.on((u,z,C)=>{if(z!==a)return;ye(u)&&Q(u.__frame_theme.theme),he(u)&&Ce(u.__frame_patch,a,C);const H=u?.__fc_mode;H&&typeof H=="object"&&!f&&D&&A.test(D)&&(f=!0,S(D).then(K=>K.install?.(a,H.on===!0)).catch(()=>{}));const W=u?.__ft_cmd;W&&typeof W=="object"&&!v&&I&&A.test(I)&&(v=!0,S(I).then(K=>K.install?.(a,W)).catch(()=>{}))});const b=Object.keys(i.capabilities??{}).filter(u=>Object.hasOwn(R,u)).map(u=>[u,R[u]]).filter(u=>typeof u[1]=="string"&&A.test(u[1])),l=await Promise.allSettled(b.map(([,u])=>S(u))),_=await e,d=E;if(_?.buildBoot||y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},d),_?.buildBoot)try{L=_.buildBoot(i,_.TRANSFORMS??{},{shellOrigin:d,mount:x,hooks:O},u=>y.post({__frame_cap_telemetry:u},d))}catch{y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},d),L=G(i,d)}else L=G(i,d);const T=u=>y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:u}},d),Ne=L;l.forEach((u,z)=>{const C=b[z][0];if(u.status!=="fulfilled"){T(C);return}try{u.value?.install?.(Ne)}catch{T(C)}}),F(),await m,y.post({__frame_ready:!0},E),e.then(u=>u?.installSizeReporter?.(d,g))})}else N&&(ee(),Re(N,Y,S,{settle:F,mount:x}))})();</script><!-- /frame-runtime --><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style></head><body>
+<title>本部AI戦略 用語集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+
+<style>
+  :root{
+    --ground:#f5f5f8;
+    --surface:#ffffff;
+    --surface-2:#fbfbfd;
+    --ink:#1a1a2b;
+    --ink-soft:#3b3b52;
+    --muted:#71718c;
+    --faint:#9a9ab0;
+    --line:#e6e4ef;
+    --line-strong:#d6d3e6;
+    --accent:#5b3fd9;
+    --accent-soft:#efeafc;
+    --accent-ink:#4a30bd;
+    /* category hues (muted, chosen not default) */
+    --c-agent:#5b3fd9;   --c-agent-bg:#efeafc;
+    --c-data:#0e7c86;    --c-data-bg:#e2f4f5;
+    --c-deliver:#b4531a; --c-deliver-bg:#fbede2;
+    --c-biz:#a01a63;     --c-biz-bg:#fbe6f1;
+    --c-comp:#5a6270;    --c-comp-bg:#eceef1;
+    --shadow:0 1px 2px rgba(26,26,43,.04),0 4px 16px rgba(26,26,43,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#111018;
+      --surface:#1a1926;
+      --surface-2:#201f2e;
+      --ink:#ecebf5;
+      --ink-soft:#c8c6da;
+      --muted:#9694ac;
+      --faint:#6f6d85;
+      --line:#2c2a3c;
+      --line-strong:#3a3850;
+      --accent:#a390f5;
+      --accent-soft:#241f3d;
+      --accent-ink:#b7a8f8;
+      --c-agent:#a390f5;   --c-agent-bg:#241f3d;
+      --c-data:#4fc9d4;    --c-data-bg:#122e30;
+      --c-deliver:#e79a67; --c-deliver-bg:#33211410;
+      --c-deliver-bg:#332114;
+      --c-biz:#ec87bd;     --c-biz-bg:#331526;
+      --c-comp:#a9b1c2;    --c-comp-bg:#23262e;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#111018;
+    --surface:#1a1926;
+    --surface-2:#201f2e;
+    --ink:#ecebf5;
+    --ink-soft:#c8c6da;
+    --muted:#9694ac;
+    --faint:#6f6d85;
+    --line:#2c2a3c;
+    --line-strong:#3a3850;
+    --accent:#a390f5;
+    --accent-soft:#241f3d;
+    --accent-ink:#b7a8f8;
+    --c-agent:#a390f5;   --c-agent-bg:#241f3d;
+    --c-data:#4fc9d4;    --c-data-bg:#122e30;
+    --c-deliver:#e79a67; --c-deliver-bg:#332114;
+    --c-biz:#ec87bd;     --c-biz-bg:#331526;
+    --c-comp:#a9b1c2;    --c-comp-bg:#23262e;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"Noto Sans JP","IBM Plex Sans",system-ui,sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ---- header ---- */
+  header.top{
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,var(--surface-2),var(--ground));
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent-ink);font-weight:600;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);display:inline-block}
+  h1{
+    font-family:"IBM Plex Sans","Noto Sans JP",sans-serif;
+    font-weight:700;font-size:clamp(30px,5vw,46px);
+    line-height:1.15;letter-spacing:-.01em;margin:.5em 0 .3em;
+    text-wrap:balance;
+  }
+  .lede{
+    font-size:16px;color:var(--ink-soft);max-width:64ch;margin:0 0 4px;
+  }
+  .meta{
+    display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:20px;
+    font-size:13px;color:var(--muted);
+  }
+  .meta b{color:var(--ink-soft);font-weight:600}
+  .top-inner{padding:44px 0 34px}
+
+  /* ---- controls ---- */
+  .controls{
+    position:sticky;top:0;z-index:20;
+    background:color-mix(in srgb,var(--ground) 88%,transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding:14px 0;
+  }
+  .controls-inner{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  #search{
+    flex:1 1 240px;min-width:200px;
+    font-family:inherit;font-size:14px;color:var(--ink);
+    background:var(--surface);border:1px solid var(--line-strong);
+    border-radius:9px;padding:10px 14px;
+  }
+  #search::placeholder{color:var(--faint)}
+  #search:focus-visible{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{
+    font-family:"IBM Plex Sans",sans-serif;font-size:12.5px;font-weight:500;
+    color:var(--muted);background:var(--surface);
+    border:1px solid var(--line-strong);border-radius:999px;
+    padding:6px 13px;cursor:pointer;transition:.15s;
+  }
+  .chip:hover{color:var(--ink);border-color:var(--accent)}
+  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  :root[data-theme="dark"] .chip[aria-pressed="true"],
+  .chip[aria-pressed="true"]{color:#fff}
+
+  main{padding:36px 0 80px}
+  .count{font-size:13px;color:var(--faint);margin:0 0 24px;font-family:"IBM Plex Mono",monospace}
+
+  section.grp{margin-bottom:14px;scroll-margin-top:80px}
+  .grp-head{
+    display:flex;align-items:baseline;gap:12px;
+    margin:34px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--line);
+  }
+  .grp-head h2{
+    font-family:"IBM Plex Sans","Noto Sans JP",sans-serif;
+    font-size:19px;font-weight:600;margin:0;letter-spacing:.01em;
+  }
+  .grp-head .en{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--faint);font-weight:500}
+  .grp-head .dot{width:9px;height:9px;border-radius:50%;flex:none;transform:translateY(1px)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+  .term{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:13px;padding:18px 19px 17px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:9px;
+  }
+  .term-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .term h3{
+    font-family:"IBM Plex Sans","Noto Sans JP",sans-serif;
+    font-size:17px;font-weight:600;margin:0;line-height:1.3;
+  }
+  .term .abbr{
+    display:block;font-family:"IBM Plex Mono",monospace;
+    font-size:11.5px;color:var(--muted);font-weight:500;margin-top:3px;letter-spacing:.01em;
+  }
+  .tag{
+    font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;
+    letter-spacing:.06em;text-transform:uppercase;
+    padding:4px 8px;border-radius:6px;white-space:nowrap;flex:none;
+  }
+  .def{font-size:14px;color:var(--ink-soft);margin:0}
+  .use{
+    font-size:12.5px;color:var(--muted);margin:0;padding-top:9px;
+    border-top:1px dashed var(--line-strong);
+  }
+  .use b{
+    color:var(--accent-ink);font-weight:600;font-family:"IBM Plex Sans",sans-serif;
+    font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;
+    display:block;margin-bottom:2px;
+  }
+  .hidden{display:none !important}
+  .empty{color:var(--faint);font-size:14px;padding:30px 0}
+
+  footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--faint);font-size:12.5px}
+  footer a{color:var(--accent-ink)}
+
+  @media (max-width:560px){
+    .top-inner{padding:32px 0 24px}
+    .grid{grid-template-columns:1fr}
+  }
+</style>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="eyebrow">CTC 本部AI戦略 &nbsp;/&nbsp; Reference</div>
+    <h1>AIエージェント事業 用語集</h1>
+    <p class="lede">「本部AI戦略」Miroボードに登場するAI・技術用語を、意味と<b>このプロジェクトでの使われ方</b>のセットで整理したものです。人月型SIからAIエージェント型ビジネスへの構造転換をチームで議論するための、共通語彙リファレンスです。</p>
+    <div class="meta">
+      <span><b>出典</b>　本部AI戦略 Miroボード</span>
+      <span><b>収録</b>　AI・技術用語を中心に全35語</span>
+      <span><b>用途</b>　プロジェクト共通理解 / 中間共有</span>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap controls-inner">
+    <input id="search" type="search" placeholder="用語・意味で検索（例：RAG、伴走、収益）" aria-label="用語を検索">
+    <div class="chips" id="chips">
+      <button class="chip" data-cat="all" aria-pressed="true">すべて</button>
+      <button class="chip" data-cat="agent" aria-pressed="false">エージェント・AI技術</button>
+      <button class="chip" data-cat="data" aria-pressed="false">データ・連携・基盤</button>
+      <button class="chip" data-cat="deliver" aria-pressed="false">導入・伴走・検証</button>
+      <button class="chip" data-cat="biz" aria-pressed="false">ビジネスモデル・戦略</button>
+      <button class="chip" data-cat="comp" aria-pressed="false">競合・関連</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <p class="count" id="count"></p>
+  <div id="terms"></div>
+  <p class="empty hidden" id="empty">該当する用語が見つかりませんでした。</p>
+</main>
+
+<footer class="wrap">
+  作成：本部AI戦略プロジェクト用リファレンス　·　定義は一般的なAI・IT用語の意味に、ボード上の文脈での使われ方を添えています。用語や解釈の追加・修正があれば更新できます。
+</footer>
+
+<script>
+const CATS = {
+  agent:  {label:"エージェント・AI技術", en:"Agents & AI", color:"var(--c-agent)",  bg:"var(--c-agent-bg)"},
+  data:   {label:"データ・連携・基盤",   en:"Data & Platform", color:"var(--c-data)",  bg:"var(--c-data-bg)"},
+  deliver:{label:"導入・伴走・検証",     en:"Delivery & Validation", color:"var(--c-deliver)", bg:"var(--c-deliver-bg)"},
+  biz:    {label:"ビジネスモデル・戦略", en:"Business Model", color:"var(--c-biz)",   bg:"var(--c-biz-bg)"},
+  comp:   {label:"競合・関連",           en:"Competitors & Refs", color:"var(--c-comp)", bg:"var(--c-comp-bg)"},
+};
+
+const TERMS = [
+  // ---- agent ----
+  {cat:"agent", jp:"AIエージェント", abbr:"AI Agent",
+   def:"指示された目的に対し、自ら判断・ツール実行しながらタスクを遂行する自律型AI。従来の受け答え型チャットボットより広い業務を担う。",
+   use:"本サービスの中核商品。「アプリ開発」「インフラ構築」「問い合わせ対応」など用途別に取り揃え、カタログで販売する。"},
+  {cat:"agent", jp:"AI駆動開発", abbr:"AI-driven Development",
+   def:"AIを開発プロセスの主体に据え、コーディングや設計をAIに任せて進める手法。",
+   use:"初期ブレストの起点。「AI駆動開発のベース作り＋エージェントの展開」が構想の出発点。"},
+  {cat:"agent", jp:"生成AI", abbr:"Generative AI",
+   def:"文章・画像・コードなどを新規生成するAIの総称。LLM（大規模言語モデル）を含む。",
+   use:"競合分析の文脈で「各種生成AIスタートアップ」として登場。"},
+  {cat:"agent", jp:"RAG（検索拡張生成）", abbr:"Retrieval-Augmented Generation",
+   def:"AIが回答前に社内文書やDBなど外部データを検索・参照し、正確で自社固有の回答を生成する仕組み。",
+   use:"最重要キーワードの一つ。顧客の固有データとエージェントを繋ぐ「付加価値オプション」の核。構築工数が導入初期のボトルネックにもなる。"},
+
+  // ---- data ----
+  {cat:"data", jp:"iPaaS", abbr:"integration Platform as a Service",
+   def:"複数のクラウド／社内システムをAPI経由で自動連携させるクラウド統合基盤。",
+   use:"購入後、裏側で自動的に顧客システムと繋ぎ、利用開始設定（アクティベーション）を行う仕組みとして記載。"},
+  {cat:"data", jp:"API", abbr:"Application Programming Interface",
+   def:"ソフトウェア同士が機能やデータをやり取りするための接続仕様。",
+   use:"社内ファイルサーバーやDBとエージェントを繋ぐ技術的接点。事業部門が自力設定できない点が課題として挙がる。"},
+  {cat:"data", jp:"データクレンジング", abbr:"Data Cleansing",
+   def:"表記ゆれや欠損・重複を整え、データを利用可能な状態に整備する作業。",
+   use:"「エージェントを動かす前段階」で多大な工数が発生する領域。期待値調整が必要と指摘。"},
+  {cat:"data", jp:"サイロ化", abbr:"Data Silos",
+   def:"部門やシステムごとにデータが分断され、横断利用できない状態。",
+   use:"日本企業が抱える「社内データがバラバラでAIが使えない」課題。CTCが解決する泥臭い価値の源泉。"},
+  {cat:"data", jp:"アクティベーション", abbr:"Activation",
+   def:"購入したサービスを使える状態にする初期有効化・利用開始設定。",
+   use:"カタログ購入後、iPaaS/APIで自動的に行われる利用開始プロセスとして図解。"},
+  {cat:"data", jp:"SaaS", abbr:"Software as a Service",
+   def:"ソフトウェアをインストールせずクラウド経由・サブスクで利用する提供形態。",
+   use:"エージェント単体販売の形。ただし「SaaS単体では大手に敗北する」として付加価値との組合せが強調される。"},
+
+  // ---- deliver ----
+  {cat:"deliver", jp:"FDE（現場伴走エンジニア）", abbr:"Forward Deployed Engineer",
+   def:"顧客の現場・業務に入り込み、データ接続から運用定着までを伴走支援するエンジニア。",
+   use:"CTCの強みそのもの。エージェント＋データ連携＋FDE伴走の「ハイブリッド型」で継続収益を得る中心的存在。"},
+  {cat:"deliver", jp:"アダプション", abbr:"Adoption",
+   def:"導入したツールが現場で実際に使われ、定着していくこと。",
+   use:"「お客様の元でアダプションしていく」＝納品して終わりでなく定着まで担う方針。"},
+  {cat:"deliver", jp:"PoC（概念実証）", abbr:"Proof of Concept",
+   def:"本格導入前に、有効性や実現性を小規模に検証する試行。",
+   use:"進め方案の最終ステップ。関係の強い顧客と業務要件を定義しながら実証する。"},
+  {cat:"deliver", jp:"Dogfooding", abbr:"ドッグフーディング",
+   def:"自社製品を自ら使い、効果や課題を検証すること。",
+   use:"IT部門向け案のメリット。自社・親しい顧客のIT部門で使い効果を証明しやすい。"},
+  {cat:"deliver", jp:"Co-creation（共同構築）", abbr:"Co-creation",
+   def:"顧客と協働で、成功パターン（型）やサービスを一緒に作り上げること。",
+   use:"最終方針の核。関係の強いパートナー顧客3〜5社と導入・運用の型を共同構築する。"},
+  {cat:"deliver", jp:"キラーユースケース", abbr:"Killer Use Case",
+   def:"最初に標準化・商品化する、効果が明確で訴求力の高い代表業務。",
+   use:"第1フェーズで対象業務を1〜2点に集約する対象。"},
+
+  // ---- biz ----
+  {cat:"biz", jp:"人月型SI / 人月モデル", abbr:"Man-month SI",
+   def:"エンジニアの作業時間（人月）に応じて課金する従来型のシステム受託モデル。",
+   use:"脱却すべき現状。個別カスタマイズが増えるとここへ逆戻りする構造的リスクが繰り返し警告される。"},
+  {cat:"biz", jp:"ストック型ビジネス", abbr:"Recurring / Stock Model",
+   def:"継続利用や保守で安定的・積み上げ型の収益を得るモデル。",
+   use:"目指す姿。「エージェント＋付加価値オプションによるストック型・高収益ビジネスへの構造転換」。"},
+  {cat:"biz", jp:"オファリング", abbr:"Offering",
+   def:"顧客に提供する商品・サービスのパッケージ構成。",
+   use:"「標準エージェント＋データ連携/RAG＋FDE現場定着」の3層構造と価格プランを設計する対象。"},
+  {cat:"biz", jp:"クロスセル / アップセル", abbr:"Cross-sell / Up-sell",
+   def:"関連商品を併売する（クロスセル）／上位・高単価商品へ引き上げる（アップセル）営業手法。",
+   use:"エージェント販売をフックに、個別開発やSIデリバリー、運用オプションへ繋げる収益拡大の仕掛け。"},
+  {cat:"biz", jp:"プロダクトアウト / マーケットイン", abbr:"Product-out / Market-in",
+   def:"作り手の技術起点で進める（プロダクトアウト）／市場・顧客ニーズ起点で進める（マーケットイン）発想。",
+   use:"現状は「完全なプロダクトアウト」と自己認識。マーケットインへ転換するためデザイナーが参加。"},
+  {cat:"biz", jp:"ROI（投資対効果）", abbr:"Return on Investment",
+   def:"投じたコストに対して得られる効果・リターンの割合。",
+   use:"顧客が最重視する指標。削減工数・コストを定量測定し「実証された顧客事例」として示すことが鍵。"},
+  {cat:"biz", jp:"WTP（支払意思額）", abbr:"Willingness To Pay",
+   def:"顧客がその価値に対して支払ってもよいと考える金額・意思。",
+   use:"初期パートナー顧客で「伴走型オプションへの対価支払い意思」を検証する対象。"},
+  {cat:"biz", jp:"Pain（ペイン）", abbr:"顧客の業務課題",
+   def:"顧客が業務上で抱える具体的な苦痛・困りごと。",
+   use:"訴求の主語。「どんなAI技術か」でなく「どの業務のPainをどれだけ削減できるか」で語る。"},
+  {cat:"biz", jp:"Outcome（成果）", abbr:"導入効果",
+   def:"導入によって得られる業務上の成果・アウトカム。",
+   use:"「残業時間の削減」「手作業の削減」など、事業部門長に響く効果として提示。"},
+  {cat:"biz", jp:"成果報酬型", abbr:"Outcome-based Pricing",
+   def:"作業量（人工）でなく、達成した成果に応じて対価を得る課金モデル。",
+   use:"「人工ではなく成果報酬へのシフト」として今後の方向性に記載。"},
+  {cat:"biz", jp:"シャドーIT", abbr:"Shadow IT",
+   def:"情シスの承認を経ずに、現場が独自に導入・利用するIT・SaaS。",
+   use:"事業部門がWebで勝手にSaaS契約しデータ投入することはコンプラ上禁止。即時Web決済が成立しない理由。"},
+  {cat:"biz", jp:"稟議", abbr:"Ringi / 社内承認",
+   def:"一定金額以上の導入で必要となる、社内の合議・承認プロセス。",
+   use:"数百万円規模になると稟議が必須。提案書・見積書の作成支援が営業に不可欠となる根拠。"},
+
+  // ---- comp ----
+  {cat:"comp", jp:"IBM AIエージェント・ソリューション", abbr:"IBM watsonx / Agent",
+   def:"IBMが提供するAIエージェント関連ソリューション群。",
+   use:"「IBMもAIエージェント・ソリューションも同構造」と位置づけ、目指すハイブリッド型の参照モデル。次のデスクトップリサーチ対象。"},
+  {cat:"comp", jp:"Microsoft Copilot", abbr:"Microsoft Copilot",
+   def:"Microsoftの生成AIアシスタント／エージェント基盤。",
+   use:"標準構成エージェントで戦うと敗北しかねない競合の一つ。"},
+  {cat:"comp", jp:"Salesforce Agentforce", abbr:"Salesforce Agentforce",
+   def:"Salesforceが提供する業務自動化AIエージェント基盤。",
+   use:"価格競争に巻き込まれるリスクを示す競合例。"},
+  {cat:"comp", jp:"ServiceNow", abbr:"ServiceNow",
+   def:"業務・ITワークフロー自動化のSaaSプラットフォーム。AIエージェント機能を強化中。",
+   use:"大手SaaS競合として言及。標準機能として市場を侵食してくる脅威。"},
+  {cat:"comp", jp:"C-Nativ", abbr:"CTC 取り組み",
+   def:"CTC社内の関連イニシアチブ（戦略費が付いている取り組み）。",
+   use:"ボード上部に関連文脈として配置。"},
+];
+
+const termsRoot = document.getElementById('terms');
+const countEl = document.getElementById('count');
+const emptyEl = document.getElementById('empty');
+const searchEl = document.getElementById('search');
+const chipsEl = document.getElementById('chips');
+
+let activeCat = 'all';
+let query = '';
+
+function render(){
+  termsRoot.innerHTML = '';
+  const order = ['agent','data','deliver','biz','comp'];
+  let shown = 0;
+  const q = query.trim().toLowerCase();
+
+  order.forEach(cat=>{
+    if(activeCat!=='all' && activeCat!==cat) return;
+    const items = TERMS.filter(t=>t.cat===cat).filter(t=>{
+      if(!q) return true;
+      return (t.jp+' '+t.abbr+' '+t.def+' '+t.use).toLowerCase().includes(q);
+    });
+    if(items.length===0) return;
+    shown += items.length;
+
+    const meta = CATS[cat];
+    const sec = document.createElement('section');
+    sec.className='grp';
+    sec.innerHTML = `
+      <div class="grp-head">
+        <span class="dot" style="background:${meta.color}"></span>
+        <h2>${meta.label}</h2>
+        <span class="en">${meta.en}</span>
+      </div>
+      <div class="grid"></div>`;
+    const grid = sec.querySelector('.grid');
+    items.forEach(t=>{
+      const card = document.createElement('article');
+      card.className='term';
+      card.innerHTML = `
+        <div class="term-top">
+          <div>
+            <h3>${t.jp}</h3>
+            <span class="abbr">${t.abbr}</span>
+          </div>
+          <span class="tag" style="color:${meta.color};background:${meta.bg}">${cat}</span>
+        </div>
+        <p class="def">${t.def}</p>
+        <p class="use"><b>ボードでの使われ方</b>${t.use}</p>`;
+      grid.appendChild(card);
+    });
+    termsRoot.appendChild(sec);
+  });
+
+  countEl.textContent = `${shown} / ${TERMS.length} 語を表示`;
+  emptyEl.classList.toggle('hidden', shown>0);
+}
+
+chipsEl.addEventListener('click', e=>{
+  const btn = e.target.closest('.chip');
+  if(!btn) return;
+  activeCat = btn.dataset.cat;
+  [...chipsEl.querySelectorAll('.chip')].forEach(c=>c.setAttribute('aria-pressed', c===btn));
+  render();
+});
+searchEl.addEventListener('input', e=>{ query = e.target.value; render(); });
+
+render();
+</script>
+
+</body></html>

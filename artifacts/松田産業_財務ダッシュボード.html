@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>松田産業株式会社 財務ダッシュボード</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#f4f1ea; --surface:#fffdf8; --surface-2:#ece7dc; --border:#dcd5c6;
+    --ink:#241f17; --ink-2:#6a6353; --ink-3:#948b78;
+    --accent:#9a6a12; --accent-2:#c79433; --accent-wash:rgba(154,106,18,.10);
+    --pos:#2f7d57; --neg:#b23b34; --grid:rgba(36,31,23,.09);
+    --shadow:0 1px 2px rgba(36,31,23,.05),0 6px 18px rgba(36,31,23,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#151309; --surface:#201d13; --surface-2:#2a2618; --border:#3a3423;
+      --ink:#f1ecdf; --ink-2:#ada28c; --ink-3:#7c745f;
+      --accent:#d8ab4f; --accent-2:#e9c877; --accent-wash:rgba(216,171,79,.12);
+      --pos:#5cbf8e; --neg:#e5817a; --grid:rgba(241,236,223,.10);
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#151309; --surface:#201d13; --surface-2:#2a2618; --border:#3a3423;
+    --ink:#f1ecdf; --ink-2:#ada28c; --ink-3:#7c745f;
+    --accent:#d8ab4f; --accent-2:#e9c877; --accent-wash:rgba(216,171,79,.12);
+    --pos:#5cbf8e; --neg:#e5817a; --grid:rgba(241,236,223,.10);
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);
+    font-family:"Noto Sans JP",system-ui,sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased;margin:0}
+  .wrap{max-width:1140px;margin:0 auto;padding:32px 22px 60px}
+  .mono{font-family:"Roboto Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+  header{display:flex;flex-wrap:wrap;gap:18px 26px;align-items:flex-end;
+    justify-content:space-between;padding-bottom:20px;border-bottom:2px solid var(--ink);}
+  .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin:0 0 6px}
+  h1{font-size:clamp(23px,3.2vw,32px);line-height:1.15;margin:0;font-weight:700;
+    letter-spacing:.01em;text-wrap:balance}
+  .sub{color:var(--ink-2);font-size:13.5px;margin:8px 0 0}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+  .chip{font-size:11.5px;padding:4px 10px;border:1px solid var(--border);border-radius:999px;
+    background:var(--surface);color:var(--ink-2);white-space:nowrap}
+  .chip b{color:var(--ink);font-weight:600}
+  .chip.key{border-color:var(--accent);color:var(--accent);background:var(--accent-wash)}
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:24px 0 28px}
+  @media(max-width:820px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:440px){.kpis{grid-template-columns:1fr}}
+  .kpi{background:var(--surface);border:1px solid var(--border);border-radius:12px;
+    padding:14px 15px 13px;box-shadow:var(--shadow)}
+  .kpi .lab{font-size:11.5px;color:var(--ink-2);margin:0 0 8px;min-height:2.4em}
+  .kpi .val{font-size:24px;font-weight:600;letter-spacing:-.01em;line-height:1}
+  .kpi .unit{font-size:12px;color:var(--ink-3);font-weight:500;margin-left:3px}
+  .kpi .yoy{font-size:12px;margin-top:8px;display:inline-flex;align-items:center;gap:4px;font-weight:500}
+  .up{color:var(--pos)} .down{color:var(--neg)}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;
+    padding:16px 16px 12px;box-shadow:var(--shadow)}
+  .card h3{margin:0;font-size:14px;font-weight:700;letter-spacing:.01em;
+    display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .card h3 .now{font-size:12px;color:var(--ink-2);font-weight:500;white-space:nowrap}
+  .card .cap{margin:2px 0 6px;font-size:11px;color:var(--ink-3)}
+  svg{display:block;width:100%;height:auto}
+  .chart-txt{fill:var(--ink-3);font-size:10px;font-family:"Roboto Mono",monospace}
+  .chart-val{fill:var(--ink-2);font-size:9.5px;font-family:"Roboto Mono",monospace;font-weight:500}
+  .note{grid-column:1/-1;background:var(--surface-2);border:1px solid var(--border);
+    border-left:3px solid var(--accent);border-radius:10px;padding:13px 16px;
+    font-size:12.5px;color:var(--ink-2)}
+  .note b{color:var(--ink)}
+  .tblwrap{margin-top:26px;overflow-x:auto;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;font-size:12.5px;background:var(--surface);min-width:560px}
+  th,td{padding:9px 13px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
+  th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--surface)}
+  thead th{background:var(--surface-2);font-weight:600;color:var(--ink-2);font-size:11.5px}
+  tbody tr:last-child td{border-bottom:none}
+  tbody td{font-family:"Roboto Mono",monospace;font-variant-numeric:tabular-nums;color:var(--ink)}
+  tbody th{font-weight:500;color:var(--ink-2)}
+  .cur{color:var(--accent);font-weight:600}
+  footer{margin-top:24px;font-size:11px;color:var(--ink-3);line-height:1.7}
+  footer a{color:var(--ink-2)}
+  .toggle{position:fixed;top:14px;right:14px;background:var(--surface);border:1px solid var(--border);
+    color:var(--ink-2);border-radius:999px;padding:6px 12px;font-size:11.5px;cursor:pointer;
+    font-family:inherit;box-shadow:var(--shadow)}
+  .toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<button class="toggle" id="tg" aria-label="テーマ切替">◐ テーマ</button>
+<div class="wrap">
+  <header>
+    <div>
+      <p class="eyebrow">EDINET 有価証券報告書 · XBRL 可視化</p>
+      <h1 id="h1"></h1>
+      <p class="sub" id="sub"></p>
+    </div>
+    <div class="meta" id="meta"></div>
+  </header>
+  <section class="kpis" id="kpis"></section>
+  <div class="grid" id="grid"></div>
+  <div class="tblwrap"><table id="tbl"></table></div>
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const D = {"company": "松田産業株式会社", "edinetCode": "E02821", "secCode": "74560", "accounting": "Japan GAAP", "fyEnd": "2025-03-31", "fiscalYears": ["2021/3", "2022/3", "2023/3", "2024/3", "2025/3"], "source": "EDINET XBRL: jpcrp030000-asr-001_E02821-000_2025-03-31_01_2025-06-24.xbrl", "metrics": {"revenue": {"label": "売上高", "unit": "億円", "kind": "bar", "data": [2315.59, 2722.92, 3510.28, 3605.27, 4688.41]}, "income2": {"label": "経常利益", "unit": "億円", "kind": "line", "data": [83.69, 137.34, 138.43, 105.51, 135.23]}, "profit": {"label": "当期純利益", "unit": "億円", "kind": "bar", "data": [60.98, 95.58, 96.96, 72.86, 94.56]}, "totalassets": {"label": "総資産", "unit": "億円", "kind": "bar", "data": [1042.65, 1157.97, 1292.08, 1489.37, 1689.0]}, "equity": {"label": "純資産", "unit": "億円", "kind": "bar", "data": [656.05, 744.2, 846.48, 913.74, 1001.34]}, "cfo": {"label": "営業キャッシュ・フロー", "unit": "億円", "kind": "bar", "data": [1.85, 70.32, 106.46, 18.33, 25.42]}, "roe": {"label": "自己資本利益率", "unit": "%", "kind": "line", "data": [9.7, 13.7, 12.2, 8.3, 9.9]}, "equityratio": {"label": "自己資本比率", "unit": "%", "kind": "line", "data": [62.8, 64.2, 65.4, 61.2, 59.1]}, "eps": {"label": "1株当たり当期純利益", "unit": "円", "kind": "line", "data": [232.68, 366.4, 371.7, 280.2, 364.87]}, "dividend": {"label": "1株当たり配当", "unit": "円", "kind": "bar", "data": [38.0, 46.0, 50.0, 60.0, 75.0]}, "employees": {"label": "従業員数", "unit": "人", "kind": "line", "data": [1468.0, 1500.0, 1605.0, 1624.0, 1698.0]}}};
+
+const FY = D.fiscalYears;
+const M = D.metrics;
+const nf = (v,d=0)=> v==null?"–":v.toLocaleString("ja-JP",{minimumFractionDigits:d,maximumFractionDigits:d});
+const fmt = (v,u)=>{
+  if(v==null) return "–";
+  if(u==="億円") return nf(v, Math.abs(v)>=1000?0:1);
+  if(u==="%")  return nf(v,1);
+  if(u==="円")  return nf(v, Number.isInteger(v)?0:2);
+  return nf(v,0);
+};
+const last = a => a[a.length-1];
+const has = k => M[k] && M[k].data.some(v=>v!=null);
+
+/* header */
+document.getElementById("h1").textContent = D.company + "　財務ダッシュボード";
+document.getElementById("sub").textContent =
+  `証券コード ${D.secCode||"—"}／ EDINETコード ${D.edinetCode||"—"}　`+
+  `決算期末 ${D.fyEnd||"—"}`;
+document.getElementById("meta").innerHTML =
+  `<span class="chip key">会計基準 <b>${D.accounting||"—"}</b></span>`+
+  `<span class="chip">対象 <b>${FY[0]} – ${last(FY)}</b></span>`+
+  `<span class="chip">出典 <b>EDINET XBRL</b></span>`;
+
+/* KPI */
+const kpiPref = ["revenue","profit","totalassets","roe","equity","dividend","eps"];
+const kpiKeys = kpiPref.filter(has).slice(0,5);
+document.getElementById("kpis").innerHTML = kpiKeys.map(k=>{
+  const s=M[k], arr=s.data, cur=last(arr);
+  // 直近の非null2点で前期比
+  let i=arr.length-1; while(i>0 && arr[i]==null) i--;
+  let j=i-1; while(j>=0 && arr[j]==null) j--;
+  let yoy="";
+  if(j>=0 && arr[j]!=null){
+    if(s.unit==="%"){ const d=cur-arr[j],c=d>=0?"up":"down";
+      yoy=`<span class="yoy ${c}">${d>=0?"▲":"▼"} ${nf(Math.abs(d),1)} pt</span>`;
+    }else{ const p=(cur/arr[j]-1)*100,c=p>=0?"up":"down";
+      yoy=`<span class="yoy ${c}">${p>=0?"▲":"▼"} ${nf(Math.abs(p),1)}% <span style="color:var(--ink-3)">前期比</span></span>`; }
+  }
+  return `<div class="kpi"><p class="lab">${s.label}</p>
+    <div class="val mono">${fmt(cur,s.unit)}<span class="unit">${s.unit}</span></div>${yoy}</div>`;
+}).join("");
+
+/* SVG chart (shared scale, zero-baseline aware) */
+function chart(s){
+  const W=380,H=150, padL=36,padR=30,padT=16,padB=22;
+  const iw=W-padL-padR, ih=H-padT-padB, n=s.data.length;
+  const vals=s.data.filter(v=>v!=null);
+  let lo=Math.min(0,...vals), hi=Math.max(0,...vals);
+  if(hi===lo) hi=lo+1;
+  const pad=(hi-lo)*0.12; hi+=pad; if(lo<0) lo-=pad*0.6;
+  const x=i=> padL + (n===1?iw/2:iw*i/(n-1));
+  const y=v=> padT + ih*(1-(v-lo)/(hi-lo));
+  const bw=Math.min(38, iw/n*0.52), zeroY=y(0);
+  let g="";
+  for(let t=0;t<=2;t++){ const gv=lo+(hi-lo)*t/2, gy=y(gv);
+    g+=`<line x1="${padL}" y1="${gy.toFixed(1)}" x2="${W-padR}" y2="${gy.toFixed(1)}" stroke="var(--grid)"/>`;
+    g+=`<text class="chart-txt" x="${padL-5}" y="${(gy+3).toFixed(1)}" text-anchor="end">${fmt(gv,s.unit)}</text>`; }
+  s.data.forEach((v,i)=> g+=`<text class="chart-txt" x="${x(i).toFixed(1)}" y="${H-7}" text-anchor="middle">${FY[i]||""}</text>`);
+  if(s.kind==="bar"){
+    s.data.forEach((v,i)=>{ if(v==null) return;
+      const yv=y(v), top=Math.min(yv,zeroY), h=Math.abs(yv-zeroY), cur=i===n-1;
+      const fill=v<0?"var(--neg)":(cur?"var(--accent)":"var(--accent-2)"), op=v<0?0.85:(cur?1:0.5);
+      g+=`<rect x="${(x(i)-bw/2).toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1,h).toFixed(1)}" rx="2.5" fill="${fill}" opacity="${op}"/>`;
+      g+=`<text class="chart-val" x="${x(i).toFixed(1)}" y="${(v<0?yv+12:top-4).toFixed(1)}" text-anchor="middle">${fmt(v,s.unit)}</text>`; });
+  }else{
+    const pts=s.data.map((v,i)=>v==null?null:[x(i),y(v)]).filter(Boolean);
+    if(pts.length){
+      const dline=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");
+      const darea=`M${pts[0][0].toFixed(1)} ${zeroY.toFixed(1)} `+pts.map(p=>"L"+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ")+` L${pts[pts.length-1][0].toFixed(1)} ${zeroY.toFixed(1)} Z`;
+      g+=`<path d="${darea}" fill="var(--accent-wash)"/>`;
+      g+=`<path d="${dline}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+      s.data.forEach((v,i)=>{ if(v==null) return; const px=x(i),py=y(v),cur=i===n-1;
+        g+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${cur?4:2.6}" fill="${cur?'var(--accent)':'var(--surface)'}" stroke="var(--accent)" stroke-width="1.6"/>`;
+        g+=`<text class="chart-val" x="${px.toFixed(1)}" y="${(py-8).toFixed(1)}" text-anchor="middle">${fmt(v,s.unit)}</text>`; });
+    }
+  }
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${s.label}の推移">${g}</svg>`;
+}
+
+/* chart cards */
+const chartPref=["revenue","profit","totalassets","equity","cfo","roe","eps","dividend","income2","equityratio","employees"];
+const chartKeys=chartPref.filter(has).slice(0,8);
+let html = chartKeys.map(k=>{ const s=M[k];
+  return `<div class="card"><h3>${s.label}<span class="now mono">${fmt(last(s.data),s.unit)} ${s.unit}</span></h3>
+    <div class="cap">${FY[0]} – ${last(FY)} ・ 単位: ${s.unit}</div>${chart(s)}</div>`; }).join("");
+
+/* auto insight */
+(function(){
+  const bits=[];
+  if(has("revenue")){ const a=M.revenue.data.filter(v=>v!=null);
+    if(a.length>=2 && a[0]>0){ const mult=(last(a)/a[0]); bits.push(`売上は期間で <b>約${mult.toFixed(1)}倍</b>（${fmt(a[0],"億円")}→${fmt(last(a),"億円")}億円）`);} }
+  if(has("cfo")){ const c=M.cfo.data; const negI=c.findIndex(v=>v!=null&&v<0);
+    if(negI>=0) bits.push(`一方で <b>${FY[negI]}期の営業CFは${fmt(c[negI],"億円")}億円</b> とマイナス。運転資本・在庫変動の影響が読み取れる`); }
+  if(bits.length) html += `<div class="note">📌 <b>自動サマリ</b>：${bits.join("。 ")}。（数値はXBRLの「経営指標等」より機械抽出）</div>`;
+  document.getElementById("grid").innerHTML = html;
+})();
+
+/* table */
+const tblPref=["revenue","income2","profit","totalassets","equity","cfo","roe","equityratio","eps","dividend","employees"];
+const tblKeys=tblPref.filter(has);
+document.getElementById("tbl").innerHTML =
+  `<thead><tr><th>指標（単位）</th>${FY.map((f,i)=>`<th class="${i===FY.length-1?'cur':''}">${f}</th>`).join("")}</tr></thead>`+
+  `<tbody>`+tblKeys.map(k=>{ const s=M[k];
+    return `<tr><th>${s.label}<span style="color:var(--ink-3)"> (${s.unit})</span></th>`+
+      s.data.map((v,i)=>`<td class="${i===s.data.length-1?'cur':''}">${fmt(v,s.unit)}</td>`).join("")+`</tr>`;
+  }).join("")+`</tbody>`;
+
+/* footer */
+document.getElementById("foot").innerHTML =
+  `<div>データ出典：金融庁 EDINET（<a href="https://disclosure2.edinet-fsa.go.jp/">disclosure2.edinet-fsa.go.jp</a>）。`+
+  `${D.company}（EDINETコード ${D.edinetCode}）の有価証券報告書XBRLから「経営指標等」タグを機械抽出。`+
+  `${D.source}。</div>`+
+  `<div style="margin-top:5px">金額は原則連結。1株当たり配当は提出会社（個別）ベースの場合あり。XBRLの英語ラベル等は参考訳で正確性を保証しない。数値は表示桁で四捨五入。本ページはハンズオン用に自動生成。</div>`;
+
+/* theme toggle */
+const tg=document.getElementById("tg"), r=document.documentElement;
+tg.onclick=()=>{ const cur=r.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
+  r.setAttribute("data-theme", cur==="dark"?"light":"dark"); };
+</script>
+</body>
+</html>

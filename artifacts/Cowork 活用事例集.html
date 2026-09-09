@@ -1,0 +1,284 @@
+<!doctype html><html><head><!-- frame-runtime --><script>window.__FRAME_PREAMBLE={"v":1,"capabilities":{"artifact":"artifact.C12lZ9DL.js","assets":"assets.8Gk803W0.js","comments":"comments.vw5vQdGA.js","db":"db.h-3sndFg.js","downloads":"downloads.Cqv48mdo.js","embed":"embed.eqL6deQM.js","endpoints":"endpoints.CfzSv5nM.js","mcp":"mcp.Bvma3qD7.js","network":"network.B5UA9Su4.js","permissions":"permissions.BNySkLV5.js","room":"room.VSdFwTE9.js","sample":"sample.BW2Uysoh.js","self":"artifact.C12lZ9DL.js","user":"user.BpKav-Rf.js"},"transforms":"_transforms.DSB5x63f.js","comments":"_comments.lsIZQbAK.js","translate":"_translate.5HCW4BJh.js"}</script><script>(function(){"use strict";var te=["light","dark","system"],re=/^[A-Za-z0-9_-]{1,64}$/,$=/^[a-zA-Z_:][a-zA-Z0-9_:.-]{0,127}$/,ne=new Set(["class","hidden","value","checked","style","title","alt","placeholder","lang","dir","role","tabindex","disabled","readonly","contenteditable","open","colspan","rowspan"]);function oe(e){const t=e.toLowerCase();return t.startsWith("data-")||t.startsWith("aria-")||ne.has(t)}var Be="http://www.w3.org/1999/xhtml",se="http://www.w3.org/2000/svg",ae=new Set(["script","style","iframe","noscript","noframes","noembed","xmp","plaintext","template","title","textarea","object","embed"]),ie=new Set(["script","style"]);function ce(e){const t=e.localName.toLowerCase();return e.namespaceURI==="http://www.w3.org/1999/xhtml"?!ae.has(t):e.namespaceURI===se?!ie.has(t):!1}function M(e,t){return e===t||(e===160||e===32)&&(t===160||t===32)}function le(e,t){const r=e.length,n=t.length;let s=0;for(;s<r&&s<n&&M(e.charCodeAt(s),t.charCodeAt(s));)s++;let o=0;for(;o<r-s&&o<n-s&&M(e.charCodeAt(r-1-o),t.charCodeAt(n-1-o));)o++;return{p:s,s:o}}function ue(e,t){const r=e.firstChild;if(e.childNodes.length!==1||r===null||r.nodeType!==Node.TEXT_NODE){e.textContent=t;return}const n=r.data,s=n.length,o=t.length,{p:i,s:c}=le(n,t);i===s&&c===0&&s===o||r.replaceData(i,s-i-c,t.slice(i,o-c));const h=r.data,p=e.ownerDocument.getSelection?.()??null,w=p!==null&&p.rangeCount>0&&(p.anchorNode===r||p.focusNode===r)?{anchor:p.anchorNode,anchorOffset:p.anchorOffset,focus:p.focusNode,focusOffset:p.focusOffset}:null;let m=-1,g=-1;for(let f=0;f<h.length&&f<t.length;f++){const v=h.charCodeAt(f),b=t.charCodeAt(f);v!==b&&M(v,b)&&(m<0&&(m=f),g=f)}const a=m>=0;if(a&&r.replaceData(m,g-m+1,t.slice(m,g+1)),a&&w!==null&&w.anchor!==null&&w.focus!==null)try{p.setBaseAndExtent(w.anchor,w.anchorOffset,w.focus,w.focusOffset)}catch{}}var fe=new Set(["html","head","body","frameset"]);function de(e){return e.namespaceURI==="http://www.w3.org/1999/xhtml"&&fe.has(e.localName)}function pe(e){if(e===null||typeof e!="object")return!1;const t=e;if(typeof t.target!="string"||!re.test(t.target)||t.text!==void 0&&typeof t.text!="string")return!1;if(t.attrsSet!==void 0){if(t.attrsSet===null||typeof t.attrsSet!="object")return!1;for(const[r,n]of Object.entries(t.attrsSet))if(!$.test(r)||typeof n!="string")return!1}if(t.attrsRemoved!==void 0){if(!Array.isArray(t.attrsRemoved))return!1;for(const r of t.attrsRemoved)if(typeof r!="string"||!$.test(r))return!1}return!0}function me(e,t){if(e===null||typeof e!="object")return!1;const{seq:r,elements:n}=e;if(typeof r!="number"||!Number.isSafeInteger(r)||!Array.isArray(n)||n.length===0||n.length>64)return!1;for(let s=0;s<n.length;s++)if(!t(n[s]))return!1;return!0}function he(e){return e===null||typeof e!="object"?!1:me(e.__frame_patch,pe)}function _e(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_init;return t!==null&&typeof t=="object"}function ve(e){return e!==null&&typeof e=="object"&&e.__frame_size_poke===!0}function ye(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_theme;if(t===null||typeof t!="object")return!1;const r=t.theme;return typeof r=="string"&&te.includes(r)}var A=/^[\w.-]+\.js$/;function we(e,t,r){return r?"inert":typeof t=="string"&&A.test(t)?e?[t]:"inert":e?"inert":"framed"}function ge(){return{post(e,t){parent.postMessage(e,t)},on(e){const t=r=>{r.source===parent&&e(r.data,r.origin,r.isTrusted)};return addEventListener("message",t),()=>removeEventListener("message",t)}}}function be(){return{post:()=>{},on:()=>()=>{}}}var j="__frame_scroll",Ee=150,Ae=310,Se=160,Te=3e4;function ke(){let e=0,t=!1,r=!1,n=!1,s=0,o=null;const i=l=>{try{sessionStorage.setItem(j,JSON.stringify({y:l}))}catch{}},c=()=>{if(clearTimeout(e),o===null)return;const l=o;o=null,i(l)},h=()=>{if(t){t=!1;return}r=!0,o=scrollY,clearTimeout(e),e=setTimeout(c,Ee)};try{addEventListener("scroll",h,{passive:!0}),addEventListener("pagehide",c)}catch{}const p=()=>{let l;try{l=sessionStorage.getItem(j)}catch{return null}if(l===null)return null;let _;try{_=JSON.parse(l)}catch{_=null}const d=_?.y;if(!(typeof d=="number"&&Number.isFinite(d)&&d>=0)){try{sessionStorage.removeItem(j)}catch{}return null}return d};let w=!1;const m=l=>{try{const _=scrollY;scrollTo({top:l,left:0,behavior:"instant"}),s=l,n=!0,clearTimeout(e),o=null,i(l);const d=scrollY;d!==_&&(t=!0),d!==l&&!w&&(w=!0,addEventListener("load",()=>{try{if(scrollY===d){const T=p();m(T!==null?T:s)}}catch{}},{once:!0}))}catch{}},g=()=>{try{return!!location.hash}catch{return!0}};let a=!1;const f=()=>{try{if(a||innerWidth>Ae||innerHeight>Se)return;a=!0;const l=Date.now(),_=()=>{try{removeEventListener("resize",_)}catch{}if(Date.now()-l>Te||r||g())return;const d=p();m(d!==null?d:s)};addEventListener("resize",_)}catch{}};let v=!1,b=!1;return{restore(){if(v||(v=!0,g()))return;const l=p();l!==null&&(m(l),f())},promoted(){if(b||(b=!0,g()))return;const l=p();l!==null?(m(l),f()):n&&m(s)}}}function Re(e,t,r,n){let s=null;try{s=window.trustedTypes?.createPolicy("frame-runtime",{createScriptURL:h=>h})??null}catch{}const o=window.Worker,i=o?.prototype,c=Object.freeze({Worker:o,workerOn:i?.addEventListener,workerPost:i?.postMessage,workerTerminate:i?.terminate,fetch:window.fetch.bind(window),preventDefault:Event.prototype.preventDefault,policy:s,origins:t});r(e).then(h=>h?.bootTopLevel?h.bootTopLevel(c,n):n.settle()).catch(()=>n.settle())}var De="modulepreload",Ie=function(e){return"/"+e},Ue={},Le=function(t,r,n){let s=Promise.resolve();function o(i){const c=new Event("vite:preloadError",{cancelable:!0});if(c.payload=i,window.dispatchEvent(c),!c.defaultPrevented)throw i}return s.then(i=>{for(const c of i||[])c.status==="rejected"&&o(c.reason);return t().catch(o)})},Oe=window===top,q=Object.getOwnPropertyDescriptor(window,"claude"),k=we(Oe,window.__FRAME_PREAMBLE?.topLevel,q?.writable===!1),N=typeof k=="object"&&k[0],y=N?be():ge();(function(){const e=Object.defineProperty,t=globalThis,r=["RTCPeerConnection","webkitRTCPeerConnection","RTCDataChannel","RTCIceCandidate","RTCSessionDescription","RTCRtpSender","RTCRtpReceiver"];let n=0;for(let s=0;s<r.length;s++){const o=r[s];try{e(t,o,{value:void 0,writable:!1,configurable:!1})}catch{try{delete t[o]}catch{}try{e(t,o,{value:void 0,writable:!1,configurable:!0})}catch{}}typeof t[o]=="function"&&n++}if(n&&k==="framed")try{y.post({__frame_rtc_lockdown_failed:n},"*")}catch{}})();var Pe=1e4,Y=Object.freeze([...window.__FRAME_PREAMBLE?.origins??["https://claude.ai","https://preview.claude.ai"]]);function X(e){for(const t of Y)if(t.endsWith(":*"))try{const r=new URL(e);if(`${r.protocol}//${r.hostname}:*`===t)return!0}catch{}else if(e===t)return!0;return!1}var R=Object.freeze({...window.__FRAME_PREAMBLE?.capabilities}),B=window.__FRAME_PREAMBLE?.transforms,D=window.__FRAME_PREAMBLE?.comments,I=window.__FRAME_PREAMBLE?.translate;function S(e){return Le(()=>import("/_runtime/"+e),void 0)}function G(e,t){return{contract:e.contract,changes:new Set(e.changes??[]),flags:new Set(e.flags??[]),capabilities:e.capabilities??{},capBudgets:e.capBudgets??{},transforms:new Map,shellOrigin:t,mount:x,hooks:O,pipe:()=>({wrap:(r,n)=>(...s)=>{try{return n(...s)}catch(o){return Promise.reject(o)}}})}}var L=null,E=null;function V(e,t,r){try{Object.defineProperty(e,t,{value:r,writable:!1,configurable:!1,enumerable:!0})}catch{try{Object.defineProperty(e,t,{value:r,writable:!1,configurable:!0,enumerable:!0})}catch{}}}var U=!1,O={editBefore:null,edit:null};function Ce(e,t,r=!1){const n=[];let s;if(r)try{O.editBefore?.(e)}catch{}for(const o of e.elements){const i=document.querySelector(`[data-id="${o.target}"]`);if(!i){s=o.target;break}if([...Object.keys(o.attrsSet??{}),...o.attrsRemoved??[]].some(c=>!oe(c))){s=o.target;break}if(o.text!==void 0&&(!ce(i)||de(i))){s=o.target;break}for(const[c,h]of Object.entries(o.attrsSet??{}))if(!J(i,c)){try{i.setAttribute(c,h)}catch{}Z(i,c,h)}for(const c of o.attrsRemoved??[])J(i,c)||(i.removeAttribute(c),Z(i,c,null));typeof o.text=="string"&&ue(i,o.text),n.push(o.target)}if(r)try{O.edit?.(e.seq,n,s)}catch{}if(s!==void 0){y.post({__frame_patch_miss:{seq:e.seq}},t);return}try{document.dispatchEvent(new CustomEvent("claude:edit",{detail:{seq:e.seq,targets:n}}))}catch{}}function Z(e,t,r){if(!(e instanceof HTMLInputElement))return;const n=t.toLowerCase();n==="checked"?e.checked=r!==null:n==="value"&&e.type!=="file"&&(e.value=r??"")}function J(e,t){const r=t.toLowerCase(),n=e;return r==="data-id"||(r==="value"||r==="checked")&&(n.__artifactSecret===!0||/^(password|hidden|file)$/.test(n.type??"")||/(^|\s)(cc-|one-time-code|current-password|new-password)/i.test(`${e.getAttribute("autocomplete")??""} ${n.autocomplete??""}`))}function Q(e){const t=document.documentElement;e==="light"||e==="dark"?(t.dataset.theme=e,t.style.colorScheme=e,U=!0):U&&(delete t.dataset.theme,t.style.colorScheme="",U=!1)}var P=new Map;function Me(){let e;const t={u:new Promise(r=>{e=r}),r:r=>{t.done=!0,e(r)},done:!1,nulled:!1};return t}function F(){for(const e of P.values())e.done||(e.nulled=!0,e.r(null))}var je=Object.freeze(Object.assign(Object.create(null),{call:Function.prototype.call,apply:Function.prototype.apply,bind:Function.prototype.bind})),x=(e,t)=>{const r=P.get(e);if(!r||r.done){r?.nulled&&E&&y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:e}},E);return}const n=typeof t=="function"?Object.setPrototypeOf(t,je):Object.assign(Object.create(null),t);typeof n.then=="function"&&delete n.then,r.r(Object.freeze(n))};function ee(){const e=q?.value??{};V(window,"claude",e);for(const t of Object.keys(R)){if(e[t]!==void 0){V(e,t,e[t]);continue}P.set(t,Me())}if(e.use===void 0){const t=r=>{if(typeof r!="string"||!Object.hasOwn(R,r))return Promise.resolve(null);const n=P.get(r);return n?n.u:Promise.resolve(e[r]??null)};try{Object.defineProperty(e,"use",{value:t,writable:!0,configurable:!0,enumerable:!1})}catch{}}}if(k==="framed"){const e=B&&A.test(B)?S(B).catch(()=>{}):Promise.resolve(void 0),t=a=>{if(a.type==="auxclick"&&a.button!==1)return;const f=a.target,v=f&&f.closest?f.closest("a[href],area[href]"):null;if(!v)return;const b=v.getAttribute("href");if(!b)return;let l;try{l=new URL(b,document.baseURI)}catch{return}if((l.protocol==="http:"||l.protocol==="https:")&&l.origin!==location.origin){a.preventDefault();const _=(v.getAttribute("target")??"").toLowerCase(),d=a.type==="auxclick"||a.metaKey||a.ctrlKey||a.shiftKey||a.altKey||!["","_self","_top","_parent"].includes(_);y.post({__frame_nav:!0,url:l.href,newTab:d},"*")}};addEventListener("click",t,!0),addEventListener("auxclick",t,!0);const r={},n=a=>{a.isTrusted&&(r.pointer=!0)},s=a=>{a.isTrusted&&(r.click=!0)};addEventListener("pointermove",n,{capture:!0,passive:!0}),addEventListener("click",s,{capture:!0,passive:!0}),e.then(a=>{a?.wireNav&&(a.wireNav(),removeEventListener("click",t,!0),removeEventListener("auxclick",t,!0),removeEventListener("pointermove",n,!0),removeEventListener("click",s,!0),a.wireEngagement?.(r))});let o=null;try{o=ke()}catch{}ee();let i=null,c=null,h=0;const p=y.on((a,f)=>{X(f)&&_e(a)&&(i=a.__frame_init,E=f,p(),clearTimeout(h),c?.())});y.post({__frame_connect:!0},"*");const w=new Promise(a=>{c=a,h=setTimeout(()=>{p(),a()},Pe)}),m=document.readyState==="loading"?new Promise(a=>document.addEventListener("DOMContentLoaded",()=>a(),{once:!0})):Promise.resolve();m.then(()=>{try{o?.restore()}catch{}});const g={cb:null};y.on((a,f)=>{if(X(f)&&ve(a)){try{o?.promoted()}catch{}g.cb?.()}}),w.then(async()=>{if(!i||!E){F();return}Q(i.theme);const a=E;let f=!1,v=!1;y.on((u,z,C)=>{if(z!==a)return;ye(u)&&Q(u.__frame_theme.theme),he(u)&&Ce(u.__frame_patch,a,C);const H=u?.__fc_mode;H&&typeof H=="object"&&!f&&D&&A.test(D)&&(f=!0,S(D).then(K=>K.install?.(a,H.on===!0)).catch(()=>{}));const W=u?.__ft_cmd;W&&typeof W=="object"&&!v&&I&&A.test(I)&&(v=!0,S(I).then(K=>K.install?.(a,W)).catch(()=>{}))});const b=Object.keys(i.capabilities??{}).filter(u=>Object.hasOwn(R,u)).map(u=>[u,R[u]]).filter(u=>typeof u[1]=="string"&&A.test(u[1])),l=await Promise.allSettled(b.map(([,u])=>S(u))),_=await e,d=E;if(_?.buildBoot||y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},d),_?.buildBoot)try{L=_.buildBoot(i,_.TRANSFORMS??{},{shellOrigin:d,mount:x,hooks:O},u=>y.post({__frame_cap_telemetry:u},d))}catch{y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},d),L=G(i,d)}else L=G(i,d);const T=u=>y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:u}},d),Ne=L;l.forEach((u,z)=>{const C=b[z][0];if(u.status!=="fulfilled"){T(C);return}try{u.value?.install?.(Ne)}catch{T(C)}}),F(),await m,y.post({__frame_ready:!0},E),e.then(u=>u?.installSizeReporter?.(d,g))})}else N&&(ee(),Re(N,Y,S,{settle:F,mount:x}))})();</script><!-- /frame-runtime --><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Cowork 活用事例集</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --bg:#F4F5F8; --surface:#FFFFFF; --ink:#1C2128; --muted:#5A626E; --line:#D3D8E2;
+    --indigo:#574FCF; --indigo-tint:#ECEBFB;
+    --amber:#B26A1B; --amber-tint:#F6ECDC;
+    --teal:#0E8C86; --teal-tint:#DCF1EF;
+    --shadow:0 1px 2px rgba(20,25,40,.05),0 8px 26px rgba(20,25,40,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#12151B; --surface:#1A1E27; --ink:#E7EAF0; --muted:#98A2B2; --line:#2C333F;
+      --indigo:#9A93F5; --indigo-tint:#23223B;
+      --amber:#E1A45E; --amber-tint:#31271A;
+      --teal:#4FC7BE; --teal-tint:#16302E;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12151B; --surface:#1A1E27; --ink:#E7EAF0; --muted:#98A2B2; --line:#2C333F;
+    --indigo:#9A93F5; --indigo-tint:#23223B;
+    --amber:#E1A45E; --amber-tint:#31271A;
+    --teal:#4FC7BE; --teal-tint:#16302E;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+    line-height:1.72; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:56px 24px 72px}
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--teal);margin:0 0 14px;font-weight:500;
+  }
+  h1{font-size:clamp(28px,4.4vw,40px);line-height:1.2;margin:0 0 16px;font-weight:700;text-wrap:balance}
+  .dek{font-size:clamp(15px,2vw,17px);color:var(--muted);max-width:64ch;margin:0}
+  .dek b{color:var(--ink);font-weight:700}
+
+  section{margin-top:48px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;
+    border-bottom:1px solid var(--line);padding-bottom:10px}
+  .sec-head h2{font-size:19px;font-weight:700;margin:0}
+  .sec-head .num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;
+    color:var(--teal);font-weight:500}
+
+  .grid{display:grid;gap:16px}
+  @media(min-width:680px){.grid{grid-template-columns:1fr 1fr}}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:20px 20px 18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+  .card h3{margin:0;font-size:16px;font-weight:700;line-height:1.45}
+  .card p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.7}
+  .card .src{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+    color:var(--muted);opacity:.85;letter-spacing:.03em;margin-top:2px}
+  .metric{display:inline-block;font-size:12.5px;font-weight:700;color:var(--teal);
+    background:var(--teal-tint);border-radius:8px;padding:3px 9px;align-self:flex-start}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+  .tag{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.03em;
+    border:1px solid var(--line);border-radius:20px;padding:3px 9px;color:var(--muted)}
+
+  /* connect section */
+  .connect .sec-head .num{color:var(--indigo)}
+  .cats{display:grid;gap:16px}
+  @media(min-width:680px){.cats{grid-template-columns:1fr 1fr}}
+  @media(min-width:980px){.cats{grid-template-columns:1fr 1fr 1fr 1fr}}
+  .cat{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:18px 18px 20px;box-shadow:var(--shadow)}
+  .cat h3{margin:0 0 12px;font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.02em}
+  .svcs{display:flex;flex-wrap:wrap;gap:7px}
+  .svc{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;
+    border:1px solid var(--line);border-radius:8px;padding:5px 10px;color:var(--ink);
+    background:var(--surface)}
+  .legend{font-size:12.5px;color:var(--muted);margin:16px 0 0;line-height:1.7}
+
+  /* caution section */
+  .caution .sec-head .num,.caution .eyebrow{color:var(--amber)}
+  .caution .card{border-color:var(--amber);background:var(--amber-tint)}
+  .caution .card h3{color:var(--amber)}
+  .caution .metric{color:var(--amber);background:transparent;border:1px solid var(--amber)}
+
+  .note{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:16px 18px;margin-top:24px;font-size:13px;color:var(--muted);line-height:1.7}
+  .note b{color:var(--ink)}
+  .foot{margin-top:40px;font-size:12.5px;color:var(--muted);
+    border-top:1px solid var(--line);padding-top:16px}
+  .foot a{color:var(--teal)}
+  .foot a:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Claude Cowork · 活用事例集</p>
+  <h1>Cowork でうまくいく仕事、苦手な仕事</h1>
+  <p class="dek">実際に報告されている Cowork のワークフローを、<b>成功例</b>と<b>苦手な例</b>に分けて整理。各事例には <b>Cowork の強み</b>（定期実行・外部連携・ローカルファイル・成果物生成）をタグで付けています。Cowork は新しいため、出典は個人クリエイターの実践報告と国内解説記事が中心です。</p>
+
+  <section class="connect">
+    <p class="eyebrow" style="color:var(--indigo)">連携できるサービス</p>
+    <div class="sec-head"><span class="num">◎</span><h2>Cowork で繋げられる主なサービス</h2></div>
+    <div class="cats">
+      <div class="cat"><h3>コミュニケーション</h3><div class="svcs">
+        <span class="svc">Slack</span><span class="svc">Microsoft Teams</span></div></div>
+      <div class="cat"><h3>メール・カレンダー</h3><div class="svcs">
+        <span class="svc">Gmail</span><span class="svc">Google カレンダー</span><span class="svc">Outlook</span></div></div>
+      <div class="cat"><h3>ドキュメント・ストレージ</h3><div class="svcs">
+        <span class="svc">Notion</span><span class="svc">Google Drive</span><span class="svc">OneDrive / SharePoint</span><span class="svc">Box</span></div></div>
+      <div class="cat"><h3>プロジェクト管理</h3><div class="svcs">
+        <span class="svc">Jira</span><span class="svc">Asana</span><span class="svc">Linear</span><span class="svc">Monday</span><span class="svc">ClickUp</span></div></div>
+      <div class="cat"><h3>CRM・営業</h3><div class="svcs">
+        <span class="svc">HubSpot</span><span class="svc">Salesforce</span></div></div>
+      <div class="cat"><h3>データ・分析</h3><div class="svcs">
+        <span class="svc">Snowflake</span><span class="svc">BigQuery</span><span class="svc">Databricks</span><span class="svc">Amplitude</span></div></div>
+      <div class="cat"><h3>生産性スイート</h3><div class="svcs">
+        <span class="svc">Microsoft 365</span></div></div>
+      <div class="cat"><h3>ローカル／その他</h3><div class="svcs">
+        <span class="svc">ローカルフォルダ</span><span class="svc">ブラウザ操作</span><span class="svc">DocuSign</span></div></div>
+    </div>
+    <p class="legend">代表的な連携先をカテゴリ別に列挙しています（順不同）。どれが役立つかは社内で使っているツールによって変わります。ここにないサービスも、コネクタやプラグインがあれば追加で連携できます。</p>
+    <div class="note">
+      <b>組み合わせ例：</b>「Gmail ＋ Google カレンダー ＋ Notion ＋ Slack ＋ Google Drive」を束ねると “朝のブリーフィング自動生成” のようなワークフローが組めます。報告では<b>月20〜30時間の削減</b>が期待できるとされます。
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">01</span><h2>情報収集 × 定期実行</h2></div>
+    <div class="grid">
+      <div class="card">
+        <h3>デイリー・インテリジェンス・ブリーフィング</h3>
+        <p>毎朝8時に4テーマをリサーチ → Notion DB と重複排除 → 厳選10本を Slack へ配信。</p>
+        <span class="metric">ソース確認 −40分/日</span>
+        <div class="tags"><span class="tag">定期実行</span><span class="tag">Slack</span><span class="tag">Notion</span></div>
+        <span class="src">出典: buildtolaunch（creator report）</span>
+      </div>
+      <div class="card">
+        <h3>広報ニュースの自動発信</h3>
+        <p>毎朝の業界ニュース収集（ブラウザ）→ 発信テーマの提案 → Slack 通知までを一気通貫で自動化。</p>
+        <span class="metric">広報業務を自動化</span>
+        <div class="tags"><span class="tag">定期実行</span><span class="tag">ブラウザ</span><span class="tag">Slack</span></div>
+        <span class="src">出典: KDDIアイレット cloudpack</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">02</span><h2>データ・ファイル整理</h2></div>
+    <div class="grid">
+      <div class="card">
+        <h3>大量 CSV の一括整形 → Excel 集計</h3>
+        <p>複数 CSV の列名統一・重複行削除・月別集計を実行し、1つの Excel ファイルにまとめる。</p>
+        <div class="tags"><span class="tag">ローカルファイル</span><span class="tag">Excel生成</span></div>
+        <span class="src">出典: KDDIアイレット cloudpack</span>
+      </div>
+      <div class="card">
+        <h3>ファイルの自動リネーム＆振り分け</h3>
+        <p>受領ファイルを日付・取引先・種類ごとにリネームし、フォルダへ自動で振り分け。</p>
+        <div class="tags"><span class="tag">ローカルファイル</span><span class="tag">フォルダ連携</span></div>
+        <span class="src">出典: KDDIアイレット cloudpack</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">03</span><h2>営業・CRM</h2></div>
+    <div class="grid">
+      <div class="card">
+        <h3>フォローアップ・メールエンジン</h3>
+        <p>毎朝 HubSpot のフォロー対象を抽出 → 相手の履歴を調査 → 自分の文体でメール下書きを生成。</p>
+        <span class="metric">調査・作文 −30〜45分/日</span>
+        <div class="tags"><span class="tag">定期実行</span><span class="tag">HubSpot</span></div>
+        <span class="src">出典: buildtolaunch（creator report）</span>
+      </div>
+      <div class="card">
+        <h3>車購入エージェント</h3>
+        <p>複数ディーラーへ問い合わせメールを送信、在庫を追跡し、返信スレッドを並行管理。</p>
+        <span class="metric">自律的に複数交渉</span>
+        <div class="tags"><span class="tag">メール</span><span class="tag">外部連携</span><span class="tag">自律実行</span></div>
+        <span class="src">出典: buildtolaunch（creator report）</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">04</span><h2>レポート・文書生成</h2></div>
+    <div class="grid">
+      <div class="card">
+        <h3>営業週次報告の自動生成</h3>
+        <p>複数 PDF から売上・課題・ネクストアクションを抽出し、指定フォーマットの Word 文書に。</p>
+        <span class="metric">手作業数時間を短縮</span>
+        <div class="tags"><span class="tag">PDF</span><span class="tag">Word生成</span></div>
+        <span class="src">出典: KDDIアイレット cloudpack</span>
+      </div>
+      <div class="card">
+        <h3>売上デイリーレポート → Gmail 下書き</h3>
+        <p>毎朝6時台に売上を取得し Gmail の下書きを用意。人が確認してから送信する設計。</p>
+        <span class="metric">信頼性〜95%／要レビュー</span>
+        <div class="tags"><span class="tag">定期実行</span><span class="tag">Gmail</span><span class="tag">人が承認</span></div>
+        <span class="src">出典: buildtolaunch（creator report）</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">05</span><h2>コンテンツ制作</h2></div>
+    <div class="grid">
+      <div class="card">
+        <h3>コンテンツ・アイデアパイプライン</h3>
+        <p>YouTube 文字起こし抽出 → 分析 → X／Substack 向け投稿案を毎日生成し Notion へ。</p>
+        <div class="tags"><span class="tag">定期実行</span><span class="tag">Notion</span></div>
+        <span class="src">出典: buildtolaunch（creator report）</span>
+      </div>
+      <div class="card">
+        <h3>記事の推敲パイプライン</h3>
+        <p>声の一貫性編集・SEO 監査・画像生成・多形態への再利用をスラッシュコマンドで段階実行（各段階で承認を待つ）。</p>
+        <div class="tags"><span class="tag">承認フロー</span><span class="tag">スラッシュコマンド</span></div>
+        <span class="src">出典: buildtolaunch（creator report）</span>
+      </div>
+      <div class="card">
+        <h3>講座レッスンビルダー</h3>
+        <p>プロジェクトの文脈で 47本の講座の一貫性を維持し、説明の重複を自動検出。</p>
+        <div class="tags"><span class="tag">プロジェクト</span><span class="tag">メモリ</span></div>
+        <span class="src">出典: buildtolaunch（creator report）</span>
+      </div>
+      <div class="card">
+        <h3>コンテンツ・フライホイール</h3>
+        <p>フォルダ群を Claude が自動で読み書きし、アーカイブから未活用アイデアを掘り起こす。</p>
+        <span class="metric">週2時間 → 10分</span>
+        <div class="tags"><span class="tag">ローカルファイル</span><span class="tag">組織メモリ</span></div>
+        <span class="src">出典: buildtolaunch（creator report）</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">06</span><h2>個人の調べ物・トラッキング</h2></div>
+    <div class="grid">
+      <div class="card">
+        <h3>家探しトラッカー</h3>
+        <p>物件情報を保存済みの条件と照合し、Notion に構造化して登録。良い点・懸念点を提示。</p>
+        <div class="tags"><span class="tag">Notion</span><span class="tag">条件照合</span></div>
+        <span class="src">出典: buildtolaunch（creator report）</span>
+      </div>
+      <div class="card">
+        <h3>競合調査 → 比較表</h3>
+        <p>複数サービスの公式ページを巡回し、概要・料金・特徴を抽出して Excel の比較表に。</p>
+        <div class="tags"><span class="tag">ブラウザ</span><span class="tag">Excel生成</span></div>
+        <span class="src">出典: KDDIアイレット cloudpack</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="caution">
+    <p class="eyebrow">注意</p>
+    <div class="sec-head"><span class="num">✕</span><h2>苦手・不向きな例</h2></div>
+    <div class="grid">
+      <div class="card">
+        <h3>大量・多形式の領収書処理（100枚超）</h3>
+        <p>VM のオーバーヘッドやツール呼び出し上限で苦戦。並列処理も不得手。</p>
+        <span class="metric">Code:5分 vs Cowork:20分＋お守り</span>
+      </div>
+      <div class="card">
+        <h3>反復的なアプリ開発</h3>
+        <p>Next.js＋Supabase＋Vercel で RLS 等のエラーを解決できず。反復デバッグは Claude Code 向き。</p>
+        <span class="metric">デバッグ面が不足</span>
+      </div>
+    </div>
+    <div class="note">
+      <b>傾向：</b>「定期的に回る情報収集・通知」「ファイル／データ整理」「CRM・ツール連携の定型業務」「レポート・コンテンツ生成」に成功例が集中。逆に<b>反復的なアプリ開発</b>や<b>大量・並列の重い処理</b>は Claude Code のほうが速く確実。用途で使い分けるのが前提です。
+    </div>
+  </section>
+
+  <p class="foot">
+    出典（Cowork は新しいプロダクトのため、個人クリエイターの実践報告と国内解説記事が中心です）：<br>
+    <a href="https://buildtolaunch.substack.com/p/claude-cowork-use-cases-real-workflows">Claude Cowork Use Cases From 17 Creators — buildtolaunch</a> ／
+    <a href="https://cloudpack.jp/column/generative-ai/claude-cowork-explanation.html">Claude Cowork の使い方と活用事例解説 — KDDIアイレット cloudpack</a> ／
+    <a href="https://pluginsforcowork.com/guides/cowork-connectors/">Cowork Connectors &amp; Integrations Guide — pluginsforcowork</a> ／
+    <a href="https://erabi-navi.jp/ai-tools/articles/claude-cowork-plugins-guide.html">Claude Cowork プラグイン活用ガイド — AIツールナビ</a>
+  </p>
+</div>
+
+</body></html>

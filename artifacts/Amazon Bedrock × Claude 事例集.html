@@ -1,0 +1,170 @@
+<!doctype html><html><head><!-- frame-runtime --><script>window.__FRAME_PREAMBLE={"v":1,"capabilities":{"artifact":"artifact.C12lZ9DL.js","assets":"assets.8Gk803W0.js","comments":"comments.vw5vQdGA.js","db":"db.h-3sndFg.js","downloads":"downloads.Cqv48mdo.js","embed":"embed.eqL6deQM.js","endpoints":"endpoints.CfzSv5nM.js","mcp":"mcp.Bvma3qD7.js","network":"network.B5UA9Su4.js","permissions":"permissions.BNySkLV5.js","room":"room.VSdFwTE9.js","sample":"sample.BW2Uysoh.js","self":"artifact.C12lZ9DL.js","user":"user.BpKav-Rf.js"},"transforms":"_transforms.DSB5x63f.js","comments":"_comments.lsIZQbAK.js","translate":"_translate.5HCW4BJh.js"}</script><script>(function(){"use strict";var te=["light","dark","system"],re=/^[A-Za-z0-9_-]{1,64}$/,$=/^[a-zA-Z_:][a-zA-Z0-9_:.-]{0,127}$/,ne=new Set(["class","hidden","value","checked","style","title","alt","placeholder","lang","dir","role","tabindex","disabled","readonly","contenteditable","open","colspan","rowspan"]);function oe(e){const t=e.toLowerCase();return t.startsWith("data-")||t.startsWith("aria-")||ne.has(t)}var Be="http://www.w3.org/1999/xhtml",se="http://www.w3.org/2000/svg",ae=new Set(["script","style","iframe","noscript","noframes","noembed","xmp","plaintext","template","title","textarea","object","embed"]),ie=new Set(["script","style"]);function ce(e){const t=e.localName.toLowerCase();return e.namespaceURI==="http://www.w3.org/1999/xhtml"?!ae.has(t):e.namespaceURI===se?!ie.has(t):!1}function M(e,t){return e===t||(e===160||e===32)&&(t===160||t===32)}function le(e,t){const r=e.length,n=t.length;let s=0;for(;s<r&&s<n&&M(e.charCodeAt(s),t.charCodeAt(s));)s++;let o=0;for(;o<r-s&&o<n-s&&M(e.charCodeAt(r-1-o),t.charCodeAt(n-1-o));)o++;return{p:s,s:o}}function ue(e,t){const r=e.firstChild;if(e.childNodes.length!==1||r===null||r.nodeType!==Node.TEXT_NODE){e.textContent=t;return}const n=r.data,s=n.length,o=t.length,{p:i,s:c}=le(n,t);i===s&&c===0&&s===o||r.replaceData(i,s-i-c,t.slice(i,o-c));const h=r.data,p=e.ownerDocument.getSelection?.()??null,w=p!==null&&p.rangeCount>0&&(p.anchorNode===r||p.focusNode===r)?{anchor:p.anchorNode,anchorOffset:p.anchorOffset,focus:p.focusNode,focusOffset:p.focusOffset}:null;let m=-1,g=-1;for(let f=0;f<h.length&&f<t.length;f++){const v=h.charCodeAt(f),b=t.charCodeAt(f);v!==b&&M(v,b)&&(m<0&&(m=f),g=f)}const a=m>=0;if(a&&r.replaceData(m,g-m+1,t.slice(m,g+1)),a&&w!==null&&w.anchor!==null&&w.focus!==null)try{p.setBaseAndExtent(w.anchor,w.anchorOffset,w.focus,w.focusOffset)}catch{}}var fe=new Set(["html","head","body","frameset"]);function de(e){return e.namespaceURI==="http://www.w3.org/1999/xhtml"&&fe.has(e.localName)}function pe(e){if(e===null||typeof e!="object")return!1;const t=e;if(typeof t.target!="string"||!re.test(t.target)||t.text!==void 0&&typeof t.text!="string")return!1;if(t.attrsSet!==void 0){if(t.attrsSet===null||typeof t.attrsSet!="object")return!1;for(const[r,n]of Object.entries(t.attrsSet))if(!$.test(r)||typeof n!="string")return!1}if(t.attrsRemoved!==void 0){if(!Array.isArray(t.attrsRemoved))return!1;for(const r of t.attrsRemoved)if(typeof r!="string"||!$.test(r))return!1}return!0}function me(e,t){if(e===null||typeof e!="object")return!1;const{seq:r,elements:n}=e;if(typeof r!="number"||!Number.isSafeInteger(r)||!Array.isArray(n)||n.length===0||n.length>64)return!1;for(let s=0;s<n.length;s++)if(!t(n[s]))return!1;return!0}function he(e){return e===null||typeof e!="object"?!1:me(e.__frame_patch,pe)}function _e(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_init;return t!==null&&typeof t=="object"}function ve(e){return e!==null&&typeof e=="object"&&e.__frame_size_poke===!0}function ye(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_theme;if(t===null||typeof t!="object")return!1;const r=t.theme;return typeof r=="string"&&te.includes(r)}var A=/^[\w.-]+\.js$/;function we(e,t,r){return r?"inert":typeof t=="string"&&A.test(t)?e?[t]:"inert":e?"inert":"framed"}function ge(){return{post(e,t){parent.postMessage(e,t)},on(e){const t=r=>{r.source===parent&&e(r.data,r.origin,r.isTrusted)};return addEventListener("message",t),()=>removeEventListener("message",t)}}}function be(){return{post:()=>{},on:()=>()=>{}}}var j="__frame_scroll",Ee=150,Ae=310,Se=160,Te=3e4;function ke(){let e=0,t=!1,r=!1,n=!1,s=0,o=null;const i=l=>{try{sessionStorage.setItem(j,JSON.stringify({y:l}))}catch{}},c=()=>{if(clearTimeout(e),o===null)return;const l=o;o=null,i(l)},h=()=>{if(t){t=!1;return}r=!0,o=scrollY,clearTimeout(e),e=setTimeout(c,Ee)};try{addEventListener("scroll",h,{passive:!0}),addEventListener("pagehide",c)}catch{}const p=()=>{let l;try{l=sessionStorage.getItem(j)}catch{return null}if(l===null)return null;let _;try{_=JSON.parse(l)}catch{_=null}const d=_?.y;if(!(typeof d=="number"&&Number.isFinite(d)&&d>=0)){try{sessionStorage.removeItem(j)}catch{}return null}return d};let w=!1;const m=l=>{try{const _=scrollY;scrollTo({top:l,left:0,behavior:"instant"}),s=l,n=!0,clearTimeout(e),o=null,i(l);const d=scrollY;d!==_&&(t=!0),d!==l&&!w&&(w=!0,addEventListener("load",()=>{try{if(scrollY===d){const T=p();m(T!==null?T:s)}}catch{}},{once:!0}))}catch{}},g=()=>{try{return!!location.hash}catch{return!0}};let a=!1;const f=()=>{try{if(a||innerWidth>Ae||innerHeight>Se)return;a=!0;const l=Date.now(),_=()=>{try{removeEventListener("resize",_)}catch{}if(Date.now()-l>Te||r||g())return;const d=p();m(d!==null?d:s)};addEventListener("resize",_)}catch{}};let v=!1,b=!1;return{restore(){if(v||(v=!0,g()))return;const l=p();l!==null&&(m(l),f())},promoted(){if(b||(b=!0,g()))return;const l=p();l!==null?(m(l),f()):n&&m(s)}}}function Re(e,t,r,n){let s=null;try{s=window.trustedTypes?.createPolicy("frame-runtime",{createScriptURL:h=>h})??null}catch{}const o=window.Worker,i=o?.prototype,c=Object.freeze({Worker:o,workerOn:i?.addEventListener,workerPost:i?.postMessage,workerTerminate:i?.terminate,fetch:window.fetch.bind(window),preventDefault:Event.prototype.preventDefault,policy:s,origins:t});r(e).then(h=>h?.bootTopLevel?h.bootTopLevel(c,n):n.settle()).catch(()=>n.settle())}var De="modulepreload",Ie=function(e){return"/"+e},Ue={},Le=function(t,r,n){let s=Promise.resolve();function o(i){const c=new Event("vite:preloadError",{cancelable:!0});if(c.payload=i,window.dispatchEvent(c),!c.defaultPrevented)throw i}return s.then(i=>{for(const c of i||[])c.status==="rejected"&&o(c.reason);return t().catch(o)})},Oe=window===top,q=Object.getOwnPropertyDescriptor(window,"claude"),k=we(Oe,window.__FRAME_PREAMBLE?.topLevel,q?.writable===!1),N=typeof k=="object"&&k[0],y=N?be():ge();(function(){const e=Object.defineProperty,t=globalThis,r=["RTCPeerConnection","webkitRTCPeerConnection","RTCDataChannel","RTCIceCandidate","RTCSessionDescription","RTCRtpSender","RTCRtpReceiver"];let n=0;for(let s=0;s<r.length;s++){const o=r[s];try{e(t,o,{value:void 0,writable:!1,configurable:!1})}catch{try{delete t[o]}catch{}try{e(t,o,{value:void 0,writable:!1,configurable:!0})}catch{}}typeof t[o]=="function"&&n++}if(n&&k==="framed")try{y.post({__frame_rtc_lockdown_failed:n},"*")}catch{}})();var Pe=1e4,Y=Object.freeze([...window.__FRAME_PREAMBLE?.origins??["https://claude.ai","https://preview.claude.ai"]]);function X(e){for(const t of Y)if(t.endsWith(":*"))try{const r=new URL(e);if(`${r.protocol}//${r.hostname}:*`===t)return!0}catch{}else if(e===t)return!0;return!1}var R=Object.freeze({...window.__FRAME_PREAMBLE?.capabilities}),B=window.__FRAME_PREAMBLE?.transforms,D=window.__FRAME_PREAMBLE?.comments,I=window.__FRAME_PREAMBLE?.translate;function S(e){return Le(()=>import("/_runtime/"+e),void 0)}function G(e,t){return{contract:e.contract,changes:new Set(e.changes??[]),flags:new Set(e.flags??[]),capabilities:e.capabilities??{},capBudgets:e.capBudgets??{},transforms:new Map,shellOrigin:t,mount:x,hooks:O,pipe:()=>({wrap:(r,n)=>(...s)=>{try{return n(...s)}catch(o){return Promise.reject(o)}}})}}var L=null,E=null;function V(e,t,r){try{Object.defineProperty(e,t,{value:r,writable:!1,configurable:!1,enumerable:!0})}catch{try{Object.defineProperty(e,t,{value:r,writable:!1,configurable:!0,enumerable:!0})}catch{}}}var U=!1,O={editBefore:null,edit:null};function Ce(e,t,r=!1){const n=[];let s;if(r)try{O.editBefore?.(e)}catch{}for(const o of e.elements){const i=document.querySelector(`[data-id="${o.target}"]`);if(!i){s=o.target;break}if([...Object.keys(o.attrsSet??{}),...o.attrsRemoved??[]].some(c=>!oe(c))){s=o.target;break}if(o.text!==void 0&&(!ce(i)||de(i))){s=o.target;break}for(const[c,h]of Object.entries(o.attrsSet??{}))if(!J(i,c)){try{i.setAttribute(c,h)}catch{}Z(i,c,h)}for(const c of o.attrsRemoved??[])J(i,c)||(i.removeAttribute(c),Z(i,c,null));typeof o.text=="string"&&ue(i,o.text),n.push(o.target)}if(r)try{O.edit?.(e.seq,n,s)}catch{}if(s!==void 0){y.post({__frame_patch_miss:{seq:e.seq}},t);return}try{document.dispatchEvent(new CustomEvent("claude:edit",{detail:{seq:e.seq,targets:n}}))}catch{}}function Z(e,t,r){if(!(e instanceof HTMLInputElement))return;const n=t.toLowerCase();n==="checked"?e.checked=r!==null:n==="value"&&e.type!=="file"&&(e.value=r??"")}function J(e,t){const r=t.toLowerCase(),n=e;return r==="data-id"||(r==="value"||r==="checked")&&(n.__artifactSecret===!0||/^(password|hidden|file)$/.test(n.type??"")||/(^|\s)(cc-|one-time-code|current-password|new-password)/i.test(`${e.getAttribute("autocomplete")??""} ${n.autocomplete??""}`))}function Q(e){const t=document.documentElement;e==="light"||e==="dark"?(t.dataset.theme=e,t.style.colorScheme=e,U=!0):U&&(delete t.dataset.theme,t.style.colorScheme="",U=!1)}var P=new Map;function Me(){let e;const t={u:new Promise(r=>{e=r}),r:r=>{t.done=!0,e(r)},done:!1,nulled:!1};return t}function F(){for(const e of P.values())e.done||(e.nulled=!0,e.r(null))}var je=Object.freeze(Object.assign(Object.create(null),{call:Function.prototype.call,apply:Function.prototype.apply,bind:Function.prototype.bind})),x=(e,t)=>{const r=P.get(e);if(!r||r.done){r?.nulled&&E&&y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:e}},E);return}const n=typeof t=="function"?Object.setPrototypeOf(t,je):Object.assign(Object.create(null),t);typeof n.then=="function"&&delete n.then,r.r(Object.freeze(n))};function ee(){const e=q?.value??{};V(window,"claude",e);for(const t of Object.keys(R)){if(e[t]!==void 0){V(e,t,e[t]);continue}P.set(t,Me())}if(e.use===void 0){const t=r=>{if(typeof r!="string"||!Object.hasOwn(R,r))return Promise.resolve(null);const n=P.get(r);return n?n.u:Promise.resolve(e[r]??null)};try{Object.defineProperty(e,"use",{value:t,writable:!0,configurable:!0,enumerable:!1})}catch{}}}if(k==="framed"){const e=B&&A.test(B)?S(B).catch(()=>{}):Promise.resolve(void 0),t=a=>{if(a.type==="auxclick"&&a.button!==1)return;const f=a.target,v=f&&f.closest?f.closest("a[href],area[href]"):null;if(!v)return;const b=v.getAttribute("href");if(!b)return;let l;try{l=new URL(b,document.baseURI)}catch{return}if((l.protocol==="http:"||l.protocol==="https:")&&l.origin!==location.origin){a.preventDefault();const _=(v.getAttribute("target")??"").toLowerCase(),d=a.type==="auxclick"||a.metaKey||a.ctrlKey||a.shiftKey||a.altKey||!["","_self","_top","_parent"].includes(_);y.post({__frame_nav:!0,url:l.href,newTab:d},"*")}};addEventListener("click",t,!0),addEventListener("auxclick",t,!0);const r={},n=a=>{a.isTrusted&&(r.pointer=!0)},s=a=>{a.isTrusted&&(r.click=!0)};addEventListener("pointermove",n,{capture:!0,passive:!0}),addEventListener("click",s,{capture:!0,passive:!0}),e.then(a=>{a?.wireNav&&(a.wireNav(),removeEventListener("click",t,!0),removeEventListener("auxclick",t,!0),removeEventListener("pointermove",n,!0),removeEventListener("click",s,!0),a.wireEngagement?.(r))});let o=null;try{o=ke()}catch{}ee();let i=null,c=null,h=0;const p=y.on((a,f)=>{X(f)&&_e(a)&&(i=a.__frame_init,E=f,p(),clearTimeout(h),c?.())});y.post({__frame_connect:!0},"*");const w=new Promise(a=>{c=a,h=setTimeout(()=>{p(),a()},Pe)}),m=document.readyState==="loading"?new Promise(a=>document.addEventListener("DOMContentLoaded",()=>a(),{once:!0})):Promise.resolve();m.then(()=>{try{o?.restore()}catch{}});const g={cb:null};y.on((a,f)=>{if(X(f)&&ve(a)){try{o?.promoted()}catch{}g.cb?.()}}),w.then(async()=>{if(!i||!E){F();return}Q(i.theme);const a=E;let f=!1,v=!1;y.on((u,z,C)=>{if(z!==a)return;ye(u)&&Q(u.__frame_theme.theme),he(u)&&Ce(u.__frame_patch,a,C);const H=u?.__fc_mode;H&&typeof H=="object"&&!f&&D&&A.test(D)&&(f=!0,S(D).then(K=>K.install?.(a,H.on===!0)).catch(()=>{}));const W=u?.__ft_cmd;W&&typeof W=="object"&&!v&&I&&A.test(I)&&(v=!0,S(I).then(K=>K.install?.(a,W)).catch(()=>{}))});const b=Object.keys(i.capabilities??{}).filter(u=>Object.hasOwn(R,u)).map(u=>[u,R[u]]).filter(u=>typeof u[1]=="string"&&A.test(u[1])),l=await Promise.allSettled(b.map(([,u])=>S(u))),_=await e,d=E;if(_?.buildBoot||y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},d),_?.buildBoot)try{L=_.buildBoot(i,_.TRANSFORMS??{},{shellOrigin:d,mount:x,hooks:O},u=>y.post({__frame_cap_telemetry:u},d))}catch{y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},d),L=G(i,d)}else L=G(i,d);const T=u=>y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:u}},d),Ne=L;l.forEach((u,z)=>{const C=b[z][0];if(u.status!=="fulfilled"){T(C);return}try{u.value?.install?.(Ne)}catch{T(C)}}),F(),await m,y.post({__frame_ready:!0},E),e.then(u=>u?.installSizeReporter?.(d,g))})}else N&&(ee(),Re(N,Y,S,{settle:F,mount:x}))})();</script><!-- /frame-runtime --><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Amazon Bedrock × Claude 事例集</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --bg:#F4F5F8; --surface:#FFFFFF; --ink:#1C2128; --muted:#5A626E; --line:#D3D8E2;
+    --indigo:#574FCF; --indigo-tint:#ECEBFB;
+    --amber:#B26A1B; --amber-tint:#F6ECDC;
+    --teal:#0E8C86; --teal-tint:#DCF1EF;
+    --shadow:0 1px 2px rgba(20,25,40,.05),0 8px 26px rgba(20,25,40,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#12151B; --surface:#1A1E27; --ink:#E7EAF0; --muted:#98A2B2; --line:#2C333F;
+      --indigo:#9A93F5; --indigo-tint:#23223B;
+      --amber:#E1A45E; --amber-tint:#31271A;
+      --teal:#4FC7BE; --teal-tint:#16302E;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12151B; --surface:#1A1E27; --ink:#E7EAF0; --muted:#98A2B2; --line:#2C333F;
+    --indigo:#9A93F5; --indigo-tint:#23223B;
+    --amber:#E1A45E; --amber-tint:#31271A;
+    --teal:#4FC7BE; --teal-tint:#16302E;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+    line-height:1.72;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:56px 24px 72px}
+  .eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--indigo);margin:0 0 14px;font-weight:500}
+  h1{font-size:clamp(27px,4.2vw,40px);line-height:1.2;margin:0 0 16px;font-weight:700;text-wrap:balance}
+  .dek{font-size:clamp(15px,2vw,17px);color:var(--muted);max-width:66ch;margin:0}
+  .dek b{color:var(--ink);font-weight:700}
+
+  section{margin-top:46px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;
+    border-bottom:1px solid var(--line);padding-bottom:10px}
+  .sec-head h2{font-size:18px;font-weight:700;margin:0}
+  .sec-head .num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;color:var(--teal);font-weight:500}
+
+  .grid{display:grid;gap:16px}
+  @media(min-width:680px){.grid{grid-template-columns:1fr 1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:20px 20px 18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:9px}
+  .card.wide{grid-column:1 / -1}
+  .co{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.06em;
+    color:var(--indigo);font-weight:500}
+  .card h3{margin:0;font-size:16px;font-weight:700;line-height:1.45}
+  .card p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.7}
+  .metrics{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px}
+  .metric{font-size:12px;font-weight:700;color:var(--teal);
+    background:var(--teal-tint);border-radius:8px;padding:4px 10px}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+  .tag{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.03em;
+    border:1px solid var(--line);border-radius:20px;padding:3px 9px;color:var(--muted)}
+  .src{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;color:var(--muted);opacity:.85;margin-top:2px}
+
+  .flag{border-color:var(--teal)}
+  .flag .co{color:var(--teal)}
+
+  .note{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:16px 18px;margin-top:24px;font-size:13px;color:var(--muted);line-height:1.7}
+  .note b{color:var(--ink)}
+  .foot{margin-top:40px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+  .foot a{color:var(--teal)}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Amazon Bedrock ✕ Claude · 事例集</p>
+  <h1>Claude を自社 AWS の中で使う導入事例</h1>
+  <p class="dek">Amazon Bedrock で Claude を活用した実事例のまとめ。いずれも<b>自社の AWS 環境（統制下）で Claude を組み込む</b>パターンです。冒頭の NEC は、<b>Cowork（Claude Desktop）の推論バックエンドを Bedrock にした</b>全社導入の代表例です。</p>
+
+  <section>
+    <div class="sec-head"><span class="num">01</span><h2>全社 AI 基盤（Cowork on Bedrock）</h2></div>
+    <div class="grid">
+      <div class="card wide flag">
+        <span class="co">NEC</span>
+        <h3>2週間で最大12万人規模のセキュアな全社 AI 環境</h3>
+        <p>Claude Desktop（Cowork）の推論バックエンドを Amazon Bedrock にし、全社員向けの AI 環境を構築。最優先要件は「推論とデータを国内に閉じる」こと。国内リージョン間で完結、Microsoft Entra ID で ID 管理、監査証跡・コスト管理を完備。外部接続では MCP サーバーの OAuth 実装差を吸収する独自の認可中継サーバーを構築。</p>
+        <div class="metrics"><span class="metric">最大12万人規模</span><span class="metric">設計〜全社リリース2週間</span><span class="metric">推論・データ国内完結</span></div>
+        <div class="tags"><span class="tag">Cowork on Bedrock</span><span class="tag">データレジデンシー</span><span class="tag">Entra ID</span><span class="tag">監査</span></div>
+        <span class="src">出典: AWS 公式ブログ（NEC 事例）</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">02</span><h2>カスタマーサポート・コンタクトセンター</h2></div>
+    <div class="grid">
+      <div class="card">
+        <span class="co">DoorDash</span>
+        <h3>配達員向け 音声 AI コンタクトセンター</h3>
+        <p>Bedrock 上の Claude（Claude 3 Haiku）＋ Knowledge Bases（RAG）でヘルプ情報を参照し、Dasher の一般問い合わせに音声で自動対応。SageMaker で大規模自動テスト基盤も構築。</p>
+        <div class="metrics"><span class="metric">開発時間 −50%</span><span class="metric">応答遅延 2.5秒以下</span><span class="metric">1日 数十万件の通話</span><span class="metric">テスト容量 50倍</span></div>
+        <div class="tags"><span class="tag">RAG / Knowledge Bases</span><span class="tag">Amazon Connect</span><span class="tag">音声</span></div>
+        <span class="src">出典: AWS case study（DoorDash）</span>
+      </div>
+      <div class="card">
+        <span class="co">HappyFox</span>
+        <h3>サポート応答の自動生成</h3>
+        <p>Claude in Amazon Bedrock を用い、サポートエージェントの回答案を自動生成。問い合わせ対応の効率化・一貫性向上を実現。</p>
+        <div class="tags"><span class="tag">サポート自動化</span><span class="tag">回答ドラフト</span></div>
+        <span class="src">出典: AWS case study（HappyFox）</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">03</span><h2>自律エージェント（Bedrock AgentCore ＋ Claude）</h2></div>
+    <div class="grid">
+      <div class="card">
+        <span class="co">Druva（サイバーセキュリティ）</span>
+        <h3>DruAI マルチエージェントで障害対応を自律化</h3>
+        <p>複数のエージェントが協調し、テレメトリ分析・脅威調査・修復を自動実行。3,000社以上・1万ユーザーが利用。</p>
+        <div class="metrics"><span class="metric">解決時間 −58%</span><span class="metric">63% を人手なしで解決</span></div>
+        <div class="tags"><span class="tag">AgentCore</span><span class="tag">マルチエージェント</span></div>
+        <span class="src">出典: AWS 公式ブログ（AgentCore ＋ Claude）</span>
+      </div>
+      <div class="card">
+        <span class="co">Cox Automotive（自動車）</span>
+        <h3>エンタープライズ規模のエージェント展開</h3>
+        <p>本番で17の主要 PoC を展開、7つの変革ソリューションを開発中。消費者向け仮想アシスタント、ディーラー向けオムニチャネル、購買を効率化するエージェント型マーケットプレイスを構築。Claude 選定理由は「レイテンシ・コスト・精度」。</p>
+        <div class="metrics"><span class="metric">本番 17 PoC</span><span class="metric">7 ソリューション開発中</span></div>
+        <div class="tags"><span class="tag">AgentCore</span><span class="tag">仮想アシスタント</span></div>
+        <span class="src">出典: AWS 公式ブログ（AgentCore ＋ Claude）</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">04</span><h2>業務特化（営業支援・文書処理）</h2></div>
+    <div class="grid">
+      <div class="card">
+        <span class="co">Showpad</span>
+        <h3>セールスイネーブルメントの高度化</h3>
+        <p>Amazon Bedrock 上の Claude モデルを活用し、営業支援コンテンツ・体験を強化。</p>
+        <div class="tags"><span class="tag">営業支援</span><span class="tag">コンテンツ生成</span></div>
+        <span class="src">出典: AWS case study（Showpad）</span>
+      </div>
+      <div class="card">
+        <span class="co">Affinda</span>
+        <h3>文書 AI 処理の変革</h3>
+        <p>Amazon Bedrock で帳票・ドキュメントの抽出・処理を高度化。文書 AI パイプラインを刷新。</p>
+        <div class="tags"><span class="tag">文書処理</span><span class="tag">情報抽出</span></div>
+        <span class="src">出典: AWS case study（Affinda）</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="note">
+    <b>事例に見る"型"：</b>「自社 AWS の統制下で Claude を使う」用途は、大きく <b>①全社 AI 基盤（Cowork on Bedrock）</b>、<b>②カスタマーサポート／コンタクトセンター（RAG 併用）</b>、<b>③自律エージェント（AgentCore）</b>、<b>④業務特化（営業・文書処理）</b> に分かれます。共通する採用理由は、データレジデンシー・ガバナンス・レイテンシ／コスト／精度、そして既存 AWS への統合のしやすさです。
+  </div>
+
+  <p class="foot">
+    出典：
+    <a href="https://aws.amazon.com/jp/blogs/news/nec-claude-desktop-bedrock-120k-users-2-weeks/">NEC — Claude Desktop on Amazon Bedrock（AWS 公式ブログ）</a> ／
+    <a href="https://aws.amazon.com/solutions/case-studies/doordash-bedrock-case-study/">DoorDash</a> ／
+    <a href="https://aws.amazon.com/solutions/case-studies/happyfox/">HappyFox</a> ／
+    <a href="https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-agentcore-and-claude-transforming-business-with-agentic-ai/">Bedrock AgentCore ＋ Claude（Druva / Cox Automotive）</a> ／
+    <a href="https://aws.amazon.com/solutions/case-studies/showpad-bedrock-case-study/">Showpad</a> ／
+    <a href="https://aws.amazon.com/solutions/case-studies/affinda-case-study/">Affinda</a>
+  </p>
+</div>
+
+</body></html>

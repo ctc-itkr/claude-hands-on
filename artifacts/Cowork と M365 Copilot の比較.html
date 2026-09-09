@@ -1,0 +1,194 @@
+<!doctype html><html><head><!-- frame-runtime --><script>window.__FRAME_PREAMBLE={"v":1,"capabilities":{"artifact":"artifact.C12lZ9DL.js","assets":"assets.8Gk803W0.js","comments":"comments.vw5vQdGA.js","db":"db.h-3sndFg.js","downloads":"downloads.Cqv48mdo.js","embed":"embed.eqL6deQM.js","endpoints":"endpoints.CfzSv5nM.js","mcp":"mcp.Bvma3qD7.js","network":"network.B5UA9Su4.js","permissions":"permissions.BNySkLV5.js","room":"room.VSdFwTE9.js","sample":"sample.BW2Uysoh.js","self":"artifact.C12lZ9DL.js","user":"user.BpKav-Rf.js"},"transforms":"_transforms.DSB5x63f.js","comments":"_comments.lsIZQbAK.js","translate":"_translate.5HCW4BJh.js"}</script><script>(function(){"use strict";var te=["light","dark","system"],re=/^[A-Za-z0-9_-]{1,64}$/,$=/^[a-zA-Z_:][a-zA-Z0-9_:.-]{0,127}$/,ne=new Set(["class","hidden","value","checked","style","title","alt","placeholder","lang","dir","role","tabindex","disabled","readonly","contenteditable","open","colspan","rowspan"]);function oe(e){const t=e.toLowerCase();return t.startsWith("data-")||t.startsWith("aria-")||ne.has(t)}var Be="http://www.w3.org/1999/xhtml",se="http://www.w3.org/2000/svg",ae=new Set(["script","style","iframe","noscript","noframes","noembed","xmp","plaintext","template","title","textarea","object","embed"]),ie=new Set(["script","style"]);function ce(e){const t=e.localName.toLowerCase();return e.namespaceURI==="http://www.w3.org/1999/xhtml"?!ae.has(t):e.namespaceURI===se?!ie.has(t):!1}function M(e,t){return e===t||(e===160||e===32)&&(t===160||t===32)}function le(e,t){const r=e.length,n=t.length;let s=0;for(;s<r&&s<n&&M(e.charCodeAt(s),t.charCodeAt(s));)s++;let o=0;for(;o<r-s&&o<n-s&&M(e.charCodeAt(r-1-o),t.charCodeAt(n-1-o));)o++;return{p:s,s:o}}function ue(e,t){const r=e.firstChild;if(e.childNodes.length!==1||r===null||r.nodeType!==Node.TEXT_NODE){e.textContent=t;return}const n=r.data,s=n.length,o=t.length,{p:i,s:c}=le(n,t);i===s&&c===0&&s===o||r.replaceData(i,s-i-c,t.slice(i,o-c));const h=r.data,p=e.ownerDocument.getSelection?.()??null,w=p!==null&&p.rangeCount>0&&(p.anchorNode===r||p.focusNode===r)?{anchor:p.anchorNode,anchorOffset:p.anchorOffset,focus:p.focusNode,focusOffset:p.focusOffset}:null;let m=-1,g=-1;for(let f=0;f<h.length&&f<t.length;f++){const v=h.charCodeAt(f),b=t.charCodeAt(f);v!==b&&M(v,b)&&(m<0&&(m=f),g=f)}const a=m>=0;if(a&&r.replaceData(m,g-m+1,t.slice(m,g+1)),a&&w!==null&&w.anchor!==null&&w.focus!==null)try{p.setBaseAndExtent(w.anchor,w.anchorOffset,w.focus,w.focusOffset)}catch{}}var fe=new Set(["html","head","body","frameset"]);function de(e){return e.namespaceURI==="http://www.w3.org/1999/xhtml"&&fe.has(e.localName)}function pe(e){if(e===null||typeof e!="object")return!1;const t=e;if(typeof t.target!="string"||!re.test(t.target)||t.text!==void 0&&typeof t.text!="string")return!1;if(t.attrsSet!==void 0){if(t.attrsSet===null||typeof t.attrsSet!="object")return!1;for(const[r,n]of Object.entries(t.attrsSet))if(!$.test(r)||typeof n!="string")return!1}if(t.attrsRemoved!==void 0){if(!Array.isArray(t.attrsRemoved))return!1;for(const r of t.attrsRemoved)if(typeof r!="string"||!$.test(r))return!1}return!0}function me(e,t){if(e===null||typeof e!="object")return!1;const{seq:r,elements:n}=e;if(typeof r!="number"||!Number.isSafeInteger(r)||!Array.isArray(n)||n.length===0||n.length>64)return!1;for(let s=0;s<n.length;s++)if(!t(n[s]))return!1;return!0}function he(e){return e===null||typeof e!="object"?!1:me(e.__frame_patch,pe)}function _e(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_init;return t!==null&&typeof t=="object"}function ve(e){return e!==null&&typeof e=="object"&&e.__frame_size_poke===!0}function ye(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_theme;if(t===null||typeof t!="object")return!1;const r=t.theme;return typeof r=="string"&&te.includes(r)}var A=/^[\w.-]+\.js$/;function we(e,t,r){return r?"inert":typeof t=="string"&&A.test(t)?e?[t]:"inert":e?"inert":"framed"}function ge(){return{post(e,t){parent.postMessage(e,t)},on(e){const t=r=>{r.source===parent&&e(r.data,r.origin,r.isTrusted)};return addEventListener("message",t),()=>removeEventListener("message",t)}}}function be(){return{post:()=>{},on:()=>()=>{}}}var j="__frame_scroll",Ee=150,Ae=310,Se=160,Te=3e4;function ke(){let e=0,t=!1,r=!1,n=!1,s=0,o=null;const i=l=>{try{sessionStorage.setItem(j,JSON.stringify({y:l}))}catch{}},c=()=>{if(clearTimeout(e),o===null)return;const l=o;o=null,i(l)},h=()=>{if(t){t=!1;return}r=!0,o=scrollY,clearTimeout(e),e=setTimeout(c,Ee)};try{addEventListener("scroll",h,{passive:!0}),addEventListener("pagehide",c)}catch{}const p=()=>{let l;try{l=sessionStorage.getItem(j)}catch{return null}if(l===null)return null;let _;try{_=JSON.parse(l)}catch{_=null}const d=_?.y;if(!(typeof d=="number"&&Number.isFinite(d)&&d>=0)){try{sessionStorage.removeItem(j)}catch{}return null}return d};let w=!1;const m=l=>{try{const _=scrollY;scrollTo({top:l,left:0,behavior:"instant"}),s=l,n=!0,clearTimeout(e),o=null,i(l);const d=scrollY;d!==_&&(t=!0),d!==l&&!w&&(w=!0,addEventListener("load",()=>{try{if(scrollY===d){const T=p();m(T!==null?T:s)}}catch{}},{once:!0}))}catch{}},g=()=>{try{return!!location.hash}catch{return!0}};let a=!1;const f=()=>{try{if(a||innerWidth>Ae||innerHeight>Se)return;a=!0;const l=Date.now(),_=()=>{try{removeEventListener("resize",_)}catch{}if(Date.now()-l>Te||r||g())return;const d=p();m(d!==null?d:s)};addEventListener("resize",_)}catch{}};let v=!1,b=!1;return{restore(){if(v||(v=!0,g()))return;const l=p();l!==null&&(m(l),f())},promoted(){if(b||(b=!0,g()))return;const l=p();l!==null?(m(l),f()):n&&m(s)}}}function Re(e,t,r,n){let s=null;try{s=window.trustedTypes?.createPolicy("frame-runtime",{createScriptURL:h=>h})??null}catch{}const o=window.Worker,i=o?.prototype,c=Object.freeze({Worker:o,workerOn:i?.addEventListener,workerPost:i?.postMessage,workerTerminate:i?.terminate,fetch:window.fetch.bind(window),preventDefault:Event.prototype.preventDefault,policy:s,origins:t});r(e).then(h=>h?.bootTopLevel?h.bootTopLevel(c,n):n.settle()).catch(()=>n.settle())}var De="modulepreload",Ie=function(e){return"/"+e},Ue={},Le=function(t,r,n){let s=Promise.resolve();function o(i){const c=new Event("vite:preloadError",{cancelable:!0});if(c.payload=i,window.dispatchEvent(c),!c.defaultPrevented)throw i}return s.then(i=>{for(const c of i||[])c.status==="rejected"&&o(c.reason);return t().catch(o)})},Oe=window===top,q=Object.getOwnPropertyDescriptor(window,"claude"),k=we(Oe,window.__FRAME_PREAMBLE?.topLevel,q?.writable===!1),N=typeof k=="object"&&k[0],y=N?be():ge();(function(){const e=Object.defineProperty,t=globalThis,r=["RTCPeerConnection","webkitRTCPeerConnection","RTCDataChannel","RTCIceCandidate","RTCSessionDescription","RTCRtpSender","RTCRtpReceiver"];let n=0;for(let s=0;s<r.length;s++){const o=r[s];try{e(t,o,{value:void 0,writable:!1,configurable:!1})}catch{try{delete t[o]}catch{}try{e(t,o,{value:void 0,writable:!1,configurable:!0})}catch{}}typeof t[o]=="function"&&n++}if(n&&k==="framed")try{y.post({__frame_rtc_lockdown_failed:n},"*")}catch{}})();var Pe=1e4,Y=Object.freeze([...window.__FRAME_PREAMBLE?.origins??["https://claude.ai","https://preview.claude.ai"]]);function X(e){for(const t of Y)if(t.endsWith(":*"))try{const r=new URL(e);if(`${r.protocol}//${r.hostname}:*`===t)return!0}catch{}else if(e===t)return!0;return!1}var R=Object.freeze({...window.__FRAME_PREAMBLE?.capabilities}),B=window.__FRAME_PREAMBLE?.transforms,D=window.__FRAME_PREAMBLE?.comments,I=window.__FRAME_PREAMBLE?.translate;function S(e){return Le(()=>import("/_runtime/"+e),void 0)}function G(e,t){return{contract:e.contract,changes:new Set(e.changes??[]),flags:new Set(e.flags??[]),capabilities:e.capabilities??{},capBudgets:e.capBudgets??{},transforms:new Map,shellOrigin:t,mount:x,hooks:O,pipe:()=>({wrap:(r,n)=>(...s)=>{try{return n(...s)}catch(o){return Promise.reject(o)}}})}}var L=null,E=null;function V(e,t,r){try{Object.defineProperty(e,t,{value:r,writable:!1,configurable:!1,enumerable:!0})}catch{try{Object.defineProperty(e,t,{value:r,writable:!1,configurable:!0,enumerable:!0})}catch{}}}var U=!1,O={editBefore:null,edit:null};function Ce(e,t,r=!1){const n=[];let s;if(r)try{O.editBefore?.(e)}catch{}for(const o of e.elements){const i=document.querySelector(`[data-id="${o.target}"]`);if(!i){s=o.target;break}if([...Object.keys(o.attrsSet??{}),...o.attrsRemoved??[]].some(c=>!oe(c))){s=o.target;break}if(o.text!==void 0&&(!ce(i)||de(i))){s=o.target;break}for(const[c,h]of Object.entries(o.attrsSet??{}))if(!J(i,c)){try{i.setAttribute(c,h)}catch{}Z(i,c,h)}for(const c of o.attrsRemoved??[])J(i,c)||(i.removeAttribute(c),Z(i,c,null));typeof o.text=="string"&&ue(i,o.text),n.push(o.target)}if(r)try{O.edit?.(e.seq,n,s)}catch{}if(s!==void 0){y.post({__frame_patch_miss:{seq:e.seq}},t);return}try{document.dispatchEvent(new CustomEvent("claude:edit",{detail:{seq:e.seq,targets:n}}))}catch{}}function Z(e,t,r){if(!(e instanceof HTMLInputElement))return;const n=t.toLowerCase();n==="checked"?e.checked=r!==null:n==="value"&&e.type!=="file"&&(e.value=r??"")}function J(e,t){const r=t.toLowerCase(),n=e;return r==="data-id"||(r==="value"||r==="checked")&&(n.__artifactSecret===!0||/^(password|hidden|file)$/.test(n.type??"")||/(^|\s)(cc-|one-time-code|current-password|new-password)/i.test(`${e.getAttribute("autocomplete")??""} ${n.autocomplete??""}`))}function Q(e){const t=document.documentElement;e==="light"||e==="dark"?(t.dataset.theme=e,t.style.colorScheme=e,U=!0):U&&(delete t.dataset.theme,t.style.colorScheme="",U=!1)}var P=new Map;function Me(){let e;const t={u:new Promise(r=>{e=r}),r:r=>{t.done=!0,e(r)},done:!1,nulled:!1};return t}function F(){for(const e of P.values())e.done||(e.nulled=!0,e.r(null))}var je=Object.freeze(Object.assign(Object.create(null),{call:Function.prototype.call,apply:Function.prototype.apply,bind:Function.prototype.bind})),x=(e,t)=>{const r=P.get(e);if(!r||r.done){r?.nulled&&E&&y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:e}},E);return}const n=typeof t=="function"?Object.setPrototypeOf(t,je):Object.assign(Object.create(null),t);typeof n.then=="function"&&delete n.then,r.r(Object.freeze(n))};function ee(){const e=q?.value??{};V(window,"claude",e);for(const t of Object.keys(R)){if(e[t]!==void 0){V(e,t,e[t]);continue}P.set(t,Me())}if(e.use===void 0){const t=r=>{if(typeof r!="string"||!Object.hasOwn(R,r))return Promise.resolve(null);const n=P.get(r);return n?n.u:Promise.resolve(e[r]??null)};try{Object.defineProperty(e,"use",{value:t,writable:!0,configurable:!0,enumerable:!1})}catch{}}}if(k==="framed"){const e=B&&A.test(B)?S(B).catch(()=>{}):Promise.resolve(void 0),t=a=>{if(a.type==="auxclick"&&a.button!==1)return;const f=a.target,v=f&&f.closest?f.closest("a[href],area[href]"):null;if(!v)return;const b=v.getAttribute("href");if(!b)return;let l;try{l=new URL(b,document.baseURI)}catch{return}if((l.protocol==="http:"||l.protocol==="https:")&&l.origin!==location.origin){a.preventDefault();const _=(v.getAttribute("target")??"").toLowerCase(),d=a.type==="auxclick"||a.metaKey||a.ctrlKey||a.shiftKey||a.altKey||!["","_self","_top","_parent"].includes(_);y.post({__frame_nav:!0,url:l.href,newTab:d},"*")}};addEventListener("click",t,!0),addEventListener("auxclick",t,!0);const r={},n=a=>{a.isTrusted&&(r.pointer=!0)},s=a=>{a.isTrusted&&(r.click=!0)};addEventListener("pointermove",n,{capture:!0,passive:!0}),addEventListener("click",s,{capture:!0,passive:!0}),e.then(a=>{a?.wireNav&&(a.wireNav(),removeEventListener("click",t,!0),removeEventListener("auxclick",t,!0),removeEventListener("pointermove",n,!0),removeEventListener("click",s,!0),a.wireEngagement?.(r))});let o=null;try{o=ke()}catch{}ee();let i=null,c=null,h=0;const p=y.on((a,f)=>{X(f)&&_e(a)&&(i=a.__frame_init,E=f,p(),clearTimeout(h),c?.())});y.post({__frame_connect:!0},"*");const w=new Promise(a=>{c=a,h=setTimeout(()=>{p(),a()},Pe)}),m=document.readyState==="loading"?new Promise(a=>document.addEventListener("DOMContentLoaded",()=>a(),{once:!0})):Promise.resolve();m.then(()=>{try{o?.restore()}catch{}});const g={cb:null};y.on((a,f)=>{if(X(f)&&ve(a)){try{o?.promoted()}catch{}g.cb?.()}}),w.then(async()=>{if(!i||!E){F();return}Q(i.theme);const a=E;let f=!1,v=!1;y.on((u,z,C)=>{if(z!==a)return;ye(u)&&Q(u.__frame_theme.theme),he(u)&&Ce(u.__frame_patch,a,C);const H=u?.__fc_mode;H&&typeof H=="object"&&!f&&D&&A.test(D)&&(f=!0,S(D).then(K=>K.install?.(a,H.on===!0)).catch(()=>{}));const W=u?.__ft_cmd;W&&typeof W=="object"&&!v&&I&&A.test(I)&&(v=!0,S(I).then(K=>K.install?.(a,W)).catch(()=>{}))});const b=Object.keys(i.capabilities??{}).filter(u=>Object.hasOwn(R,u)).map(u=>[u,R[u]]).filter(u=>typeof u[1]=="string"&&A.test(u[1])),l=await Promise.allSettled(b.map(([,u])=>S(u))),_=await e,d=E;if(_?.buildBoot||y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},d),_?.buildBoot)try{L=_.buildBoot(i,_.TRANSFORMS??{},{shellOrigin:d,mount:x,hooks:O},u=>y.post({__frame_cap_telemetry:u},d))}catch{y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},d),L=G(i,d)}else L=G(i,d);const T=u=>y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:u}},d),Ne=L;l.forEach((u,z)=>{const C=b[z][0];if(u.status!=="fulfilled"){T(C);return}try{u.value?.install?.(Ne)}catch{T(C)}}),F(),await m,y.post({__frame_ready:!0},E),e.then(u=>u?.installSizeReporter?.(d,g))})}else N&&(ee(),Re(N,Y,S,{settle:F,mount:x}))})();</script><!-- /frame-runtime --><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Cowork と M365 Copilot の比較</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --bg:#F4F5F8; --surface:#FFFFFF; --ink:#1C2128; --muted:#5A626E; --line:#D3D8E2;
+    --indigo:#574FCF; --indigo-tint:#ECEBFB;
+    --amber:#B26A1B; --amber-tint:#F6ECDC;
+    --teal:#0E8C86; --teal-tint:#DCF1EF;
+    --shadow:0 1px 2px rgba(20,25,40,.05),0 8px 26px rgba(20,25,40,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#12151B; --surface:#1A1E27; --ink:#E7EAF0; --muted:#98A2B2; --line:#2C333F;
+      --indigo:#9A93F5; --indigo-tint:#23223B;
+      --amber:#E1A45E; --amber-tint:#31271A;
+      --teal:#4FC7BE; --teal-tint:#16302E;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12151B; --surface:#1A1E27; --ink:#E7EAF0; --muted:#98A2B2; --line:#2C333F;
+    --indigo:#9A93F5; --indigo-tint:#23223B;
+    --amber:#E1A45E; --amber-tint:#31271A;
+    --teal:#4FC7BE; --teal-tint:#16302E;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+    line-height:1.72;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:56px 24px 72px}
+  .eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--indigo);margin:0 0 14px;font-weight:500}
+  h1{font-size:clamp(27px,4.2vw,38px);line-height:1.2;margin:0 0 16px;font-weight:700;text-wrap:balance}
+  .dek{font-size:clamp(15px,2vw,17px);color:var(--muted);max-width:66ch;margin:0}
+  .dek b{color:var(--ink);font-weight:700}
+
+  .colkey{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 8px}
+  .colkey span{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:700;
+    border-radius:8px;padding:5px 12px}
+  .colkey .cw{background:var(--teal-tint);color:var(--teal);border:1px solid var(--teal)}
+  .colkey .cp{background:var(--indigo-tint);color:var(--indigo);border:1px solid var(--indigo)}
+
+  .row{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:18px 18px 20px;box-shadow:var(--shadow);margin-top:16px}
+  .row-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    flex-wrap:wrap;margin-bottom:14px}
+  .row-head h2{margin:0;font-size:16.5px;font-weight:700}
+  .row-head .ax{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);
+    letter-spacing:.06em;margin-right:8px}
+  .verdict{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;
+    border-radius:20px;padding:4px 12px;white-space:nowrap}
+  .v-cw{background:var(--teal-tint);color:var(--teal);border:1px solid var(--teal)}
+  .v-cp{background:var(--indigo-tint);color:var(--indigo);border:1px solid var(--indigo)}
+  .v-eq{background:var(--amber-tint);color:var(--amber);border:1px solid var(--amber)}
+
+  .cells{display:grid;gap:12px}
+  @media(min-width:660px){.cells{grid-template-columns:1fr 1fr}}
+  .cell{border:1px solid var(--line);border-radius:11px;padding:13px 14px;background:var(--bg)}
+  .cell .lab{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;
+    letter-spacing:.04em;margin-bottom:6px;display:inline-block}
+  .cell.cw{border-left:3px solid var(--teal)} .cell.cw .lab{color:var(--teal)}
+  .cell.cp{border-left:3px solid var(--indigo)} .cell.cp .lab{color:var(--indigo)}
+  .cell p{margin:0;font-size:13.5px;color:var(--ink);line-height:1.68}
+
+  .note{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:16px 18px;margin-top:16px;font-size:13px;color:var(--muted);line-height:1.7}
+  .note b{color:var(--ink)}
+
+  .summary{margin-top:40px;display:grid;gap:16px}
+  @media(min-width:660px){.summary{grid-template-columns:1fr 1fr}}
+  .scard{border-radius:14px;padding:20px;box-shadow:var(--shadow)}
+  .scard.cw{background:var(--teal-tint);border:1px solid var(--teal)}
+  .scard.cp{background:var(--indigo-tint);border:1px solid var(--indigo)}
+  .scard h3{margin:0 0 10px;font-size:16px}
+  .scard.cw h3{color:var(--teal)} .scard.cp h3{color:var(--indigo)}
+  .scard ul{margin:0;padding-left:18px}
+  .scard li{font-size:13.5px;margin-bottom:6px;color:var(--ink);line-height:1.6}
+
+  .foot{margin-top:40px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+  .foot a{color:var(--teal)}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Claude Cowork ✕ Microsoft 365 Copilot</p>
+  <h1>Cowork と Microsoft 365 Copilot、どこが違う？</h1>
+  <p class="dek">評価軸ごとに両者を並べ、<b>どちらが有利か</b>を示した比較表です。どちらも一長一短で、社内の環境次第で最適解が変わります。前提として <b>Microsoft と Anthropic は提携関係</b>にあり、Copilot 側でも Claude モデルを選べるため、純粋な二者択一ではありません。</p>
+
+  <div class="colkey">
+    <span class="cw">■ Cowork</span>
+    <span class="cp">■ M365 Copilot</span>
+  </div>
+
+  <div class="row">
+    <div class="row-head"><h2><span class="ax">01</span>位置づけ・思想</h2><span class="verdict v-eq">用途次第</span></div>
+    <div class="cells">
+      <div class="cell cw"><span class="lab">Cowork</span><p>クラウド常駐の自律エージェント。指示を投げて任せる「同僚型」。</p></div>
+      <div class="cell cp"><span class="lab">M365 Copilot</span><p>M365 に組み込まれたアシスタント。アプリ内で人を支援する「相棒型」（＋Studio でエージェント化も可）。</p></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-head"><h2><span class="ax">02</span>定期実行（単純なプロンプト）</h2><span class="verdict v-eq">ほぼ互角</span></div>
+    <div class="cells">
+      <div class="cell cw"><span class="lab">Cowork</span><p>自然言語のスケジュールタスク。発火ごとに新セッションが立ち、完了通知も可能。</p></div>
+      <div class="cell cp"><span class="lab">M365 Copilot</span><p>ネイティブの「スケジュールされたプロンプト」（Teams / Outlook / Office）。工夫はほぼ不要。</p></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-head"><h2><span class="ax">03</span>自律的な多段処理の定期実行</h2><span class="verdict v-cw">Cowork 有利</span></div>
+    <div class="cells">
+      <div class="cell cw"><span class="lab">Cowork</span><p>発火時にフルのエージェントが複数ツールを横断し、成果物まで生成。低い設定コスト。</p></div>
+      <div class="cell cp"><span class="lab">M365 Copilot</span><p>Copilot Studio でのエージェント構築が必要（トリガー設計・公開・課金・テスト）。作り込みの工夫が前提。</p></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-head"><h2><span class="ax">04</span>連携先・エコシステム</h2><span class="verdict v-eq">用途次第</span></div>
+    <div class="cells">
+      <div class="cell cw"><span class="lab">Cowork</span><p>Slack / Notion / Google / 各 SaaS / ローカルフォルダを横断。マルチベンダー環境向き。</p></div>
+      <div class="cell cp"><span class="lab">M365 Copilot</span><p>Outlook / Teams / Word / Excel / SharePoint など M365 内で最強。エコシステム外はやや弱い。</p></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-head"><h2><span class="ax">05</span>自社データの文脈（グラウンディング）</h2><span class="verdict v-cp">Copilot 有利</span></div>
+    <div class="cells">
+      <div class="cell cw"><span class="lab">Cowork</span><p>コネクタで接続したデータを参照。つないだ範囲が文脈になる。</p></div>
+      <div class="cell cp"><span class="lab">M365 Copilot</span><p>Graph / Work IQ で社内メール・予定・ファイル・チャットを自動的に文脈化。</p></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-head"><h2><span class="ax">06</span>実行環境・成果物生成</h2><span class="verdict v-cw">Cowork 有利</span></div>
+    <div class="cells">
+      <div class="cell cw"><span class="lab">Cowork</span><p>コード実行・ファイル処理・スプレッドシート／文書／ダッシュボード／アプリを生成・永続化・共有（Artifact）。</p></div>
+      <div class="cell cp"><span class="lab">M365 Copilot</span><p>Office 文書内のコンテンツ生成が主戦場。実行環境で作り込む用途は弱め。</p></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-head"><h2><span class="ax">07</span>ガバナンス・監査・コンプライアンス</h2><span class="verdict v-cp">Copilot 有利</span></div>
+    <div class="cells">
+      <div class="cell cw"><span class="lab">Cowork</span><p>管理機能はあるが、端末側実行のため集中管理の粒度で差が出やすい。</p></div>
+      <div class="cell cp"><span class="lab">M365 Copilot</span><p>テナントの ID 管理・データ保護ポリシー・監査ログをそのまま継承。規制業種向き。</p></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row-head"><h2><span class="ax">08</span>導入・ライセンス</h2><span class="verdict v-eq">用途次第</span></div>
+    <div class="cells">
+      <div class="cell cw"><span class="lab">Cowork</span><p>個人・部門から始めやすい（Anthropic サブスク）。スモールスタート向き。</p></div>
+      <div class="cell cp"><span class="lab">M365 Copilot</span><p>上位ライセンスや IT 承認が絡むことがある一方、既に M365 全社導入なら追加コストは小さい。</p></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>モデル・提携について：</b>Microsoft と Anthropic は提携関係にあり、Copilot 側でも Claude モデルを選択できるようになっています。したがって「Claude が使えるか」ではなく、<b>実行環境・連携範囲・ガバナンス・作り込みの手間</b>で選ぶのが実態に合っています。
+  </div>
+
+  <div class="summary">
+    <div class="scard cw">
+      <h3>Cowork が向くケース</h3>
+      <ul>
+        <li>非 Microsoft も含めてツールを横断連携したい</li>
+        <li>低い設定コストで自律・多段の定期処理を任せたい</li>
+        <li>実行して成果物（ファイル・ダッシュボード等）まで作りたい</li>
+        <li>部門単位でスモールスタートしたい</li>
+      </ul>
+    </div>
+    <div class="scard cp">
+      <h3>M365 Copilot が向くケース</h3>
+      <ul>
+        <li>社内が Microsoft 365 中心で、対象データも M365 内に閉じている</li>
+        <li>自社データの文脈とガバナンス・監査を最重視</li>
+        <li>既存の M365 ライセンス・審査基盤を活用したい</li>
+        <li>単純な定期プロンプトを手軽に回したい</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="foot">
+    出典：
+    <a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/scheduled-prompts">Manage Scheduled Prompts for Microsoft Copilot — Microsoft Learn</a> ／
+    <a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-triggers-about">Event triggers overview — Copilot Studio — Microsoft Learn</a> ／
+    <a href="https://www.microsoft.com/en-us/microsoft-365-copilot/copilot-vs-claude-enterprise">Compare Copilot vs. Claude Enterprise — Microsoft（公式）</a> ／
+    <a href="https://datasciencedojo.com/blog/claude-cowork-vs-copilot-cowork/">Claude Cowork vs. Copilot Cowork — Data Science Dojo</a>
+  </p>
+</div>
+
+</body></html>

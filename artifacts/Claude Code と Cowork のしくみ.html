@@ -1,0 +1,268 @@
+<!doctype html><html><head><!-- frame-runtime --><script>window.__FRAME_PREAMBLE={"v":1,"capabilities":{"artifact":"artifact.C12lZ9DL.js","assets":"assets.8Gk803W0.js","comments":"comments.vw5vQdGA.js","db":"db.h-3sndFg.js","downloads":"downloads.Cqv48mdo.js","embed":"embed.eqL6deQM.js","endpoints":"endpoints.CfzSv5nM.js","mcp":"mcp.Bvma3qD7.js","network":"network.B5UA9Su4.js","permissions":"permissions.BNySkLV5.js","room":"room.VSdFwTE9.js","sample":"sample.BW2Uysoh.js","self":"artifact.C12lZ9DL.js","user":"user.BpKav-Rf.js"},"transforms":"_transforms.DSB5x63f.js","comments":"_comments.lsIZQbAK.js","translate":"_translate.5HCW4BJh.js"}</script><script>(function(){"use strict";var te=["light","dark","system"],re=/^[A-Za-z0-9_-]{1,64}$/,$=/^[a-zA-Z_:][a-zA-Z0-9_:.-]{0,127}$/,ne=new Set(["class","hidden","value","checked","style","title","alt","placeholder","lang","dir","role","tabindex","disabled","readonly","contenteditable","open","colspan","rowspan"]);function oe(e){const t=e.toLowerCase();return t.startsWith("data-")||t.startsWith("aria-")||ne.has(t)}var Be="http://www.w3.org/1999/xhtml",se="http://www.w3.org/2000/svg",ae=new Set(["script","style","iframe","noscript","noframes","noembed","xmp","plaintext","template","title","textarea","object","embed"]),ie=new Set(["script","style"]);function ce(e){const t=e.localName.toLowerCase();return e.namespaceURI==="http://www.w3.org/1999/xhtml"?!ae.has(t):e.namespaceURI===se?!ie.has(t):!1}function M(e,t){return e===t||(e===160||e===32)&&(t===160||t===32)}function le(e,t){const r=e.length,n=t.length;let s=0;for(;s<r&&s<n&&M(e.charCodeAt(s),t.charCodeAt(s));)s++;let o=0;for(;o<r-s&&o<n-s&&M(e.charCodeAt(r-1-o),t.charCodeAt(n-1-o));)o++;return{p:s,s:o}}function ue(e,t){const r=e.firstChild;if(e.childNodes.length!==1||r===null||r.nodeType!==Node.TEXT_NODE){e.textContent=t;return}const n=r.data,s=n.length,o=t.length,{p:i,s:c}=le(n,t);i===s&&c===0&&s===o||r.replaceData(i,s-i-c,t.slice(i,o-c));const h=r.data,p=e.ownerDocument.getSelection?.()??null,w=p!==null&&p.rangeCount>0&&(p.anchorNode===r||p.focusNode===r)?{anchor:p.anchorNode,anchorOffset:p.anchorOffset,focus:p.focusNode,focusOffset:p.focusOffset}:null;let m=-1,g=-1;for(let f=0;f<h.length&&f<t.length;f++){const v=h.charCodeAt(f),b=t.charCodeAt(f);v!==b&&M(v,b)&&(m<0&&(m=f),g=f)}const a=m>=0;if(a&&r.replaceData(m,g-m+1,t.slice(m,g+1)),a&&w!==null&&w.anchor!==null&&w.focus!==null)try{p.setBaseAndExtent(w.anchor,w.anchorOffset,w.focus,w.focusOffset)}catch{}}var fe=new Set(["html","head","body","frameset"]);function de(e){return e.namespaceURI==="http://www.w3.org/1999/xhtml"&&fe.has(e.localName)}function pe(e){if(e===null||typeof e!="object")return!1;const t=e;if(typeof t.target!="string"||!re.test(t.target)||t.text!==void 0&&typeof t.text!="string")return!1;if(t.attrsSet!==void 0){if(t.attrsSet===null||typeof t.attrsSet!="object")return!1;for(const[r,n]of Object.entries(t.attrsSet))if(!$.test(r)||typeof n!="string")return!1}if(t.attrsRemoved!==void 0){if(!Array.isArray(t.attrsRemoved))return!1;for(const r of t.attrsRemoved)if(typeof r!="string"||!$.test(r))return!1}return!0}function me(e,t){if(e===null||typeof e!="object")return!1;const{seq:r,elements:n}=e;if(typeof r!="number"||!Number.isSafeInteger(r)||!Array.isArray(n)||n.length===0||n.length>64)return!1;for(let s=0;s<n.length;s++)if(!t(n[s]))return!1;return!0}function he(e){return e===null||typeof e!="object"?!1:me(e.__frame_patch,pe)}function _e(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_init;return t!==null&&typeof t=="object"}function ve(e){return e!==null&&typeof e=="object"&&e.__frame_size_poke===!0}function ye(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_theme;if(t===null||typeof t!="object")return!1;const r=t.theme;return typeof r=="string"&&te.includes(r)}var A=/^[\w.-]+\.js$/;function we(e,t,r){return r?"inert":typeof t=="string"&&A.test(t)?e?[t]:"inert":e?"inert":"framed"}function ge(){return{post(e,t){parent.postMessage(e,t)},on(e){const t=r=>{r.source===parent&&e(r.data,r.origin,r.isTrusted)};return addEventListener("message",t),()=>removeEventListener("message",t)}}}function be(){return{post:()=>{},on:()=>()=>{}}}var j="__frame_scroll",Ee=150,Ae=310,Se=160,Te=3e4;function ke(){let e=0,t=!1,r=!1,n=!1,s=0,o=null;const i=l=>{try{sessionStorage.setItem(j,JSON.stringify({y:l}))}catch{}},c=()=>{if(clearTimeout(e),o===null)return;const l=o;o=null,i(l)},h=()=>{if(t){t=!1;return}r=!0,o=scrollY,clearTimeout(e),e=setTimeout(c,Ee)};try{addEventListener("scroll",h,{passive:!0}),addEventListener("pagehide",c)}catch{}const p=()=>{let l;try{l=sessionStorage.getItem(j)}catch{return null}if(l===null)return null;let _;try{_=JSON.parse(l)}catch{_=null}const d=_?.y;if(!(typeof d=="number"&&Number.isFinite(d)&&d>=0)){try{sessionStorage.removeItem(j)}catch{}return null}return d};let w=!1;const m=l=>{try{const _=scrollY;scrollTo({top:l,left:0,behavior:"instant"}),s=l,n=!0,clearTimeout(e),o=null,i(l);const d=scrollY;d!==_&&(t=!0),d!==l&&!w&&(w=!0,addEventListener("load",()=>{try{if(scrollY===d){const T=p();m(T!==null?T:s)}}catch{}},{once:!0}))}catch{}},g=()=>{try{return!!location.hash}catch{return!0}};let a=!1;const f=()=>{try{if(a||innerWidth>Ae||innerHeight>Se)return;a=!0;const l=Date.now(),_=()=>{try{removeEventListener("resize",_)}catch{}if(Date.now()-l>Te||r||g())return;const d=p();m(d!==null?d:s)};addEventListener("resize",_)}catch{}};let v=!1,b=!1;return{restore(){if(v||(v=!0,g()))return;const l=p();l!==null&&(m(l),f())},promoted(){if(b||(b=!0,g()))return;const l=p();l!==null?(m(l),f()):n&&m(s)}}}function Re(e,t,r,n){let s=null;try{s=window.trustedTypes?.createPolicy("frame-runtime",{createScriptURL:h=>h})??null}catch{}const o=window.Worker,i=o?.prototype,c=Object.freeze({Worker:o,workerOn:i?.addEventListener,workerPost:i?.postMessage,workerTerminate:i?.terminate,fetch:window.fetch.bind(window),preventDefault:Event.prototype.preventDefault,policy:s,origins:t});r(e).then(h=>h?.bootTopLevel?h.bootTopLevel(c,n):n.settle()).catch(()=>n.settle())}var De="modulepreload",Ie=function(e){return"/"+e},Ue={},Le=function(t,r,n){let s=Promise.resolve();function o(i){const c=new Event("vite:preloadError",{cancelable:!0});if(c.payload=i,window.dispatchEvent(c),!c.defaultPrevented)throw i}return s.then(i=>{for(const c of i||[])c.status==="rejected"&&o(c.reason);return t().catch(o)})},Oe=window===top,q=Object.getOwnPropertyDescriptor(window,"claude"),k=we(Oe,window.__FRAME_PREAMBLE?.topLevel,q?.writable===!1),N=typeof k=="object"&&k[0],y=N?be():ge();(function(){const e=Object.defineProperty,t=globalThis,r=["RTCPeerConnection","webkitRTCPeerConnection","RTCDataChannel","RTCIceCandidate","RTCSessionDescription","RTCRtpSender","RTCRtpReceiver"];let n=0;for(let s=0;s<r.length;s++){const o=r[s];try{e(t,o,{value:void 0,writable:!1,configurable:!1})}catch{try{delete t[o]}catch{}try{e(t,o,{value:void 0,writable:!1,configurable:!0})}catch{}}typeof t[o]=="function"&&n++}if(n&&k==="framed")try{y.post({__frame_rtc_lockdown_failed:n},"*")}catch{}})();var Pe=1e4,Y=Object.freeze([...window.__FRAME_PREAMBLE?.origins??["https://claude.ai","https://preview.claude.ai"]]);function X(e){for(const t of Y)if(t.endsWith(":*"))try{const r=new URL(e);if(`${r.protocol}//${r.hostname}:*`===t)return!0}catch{}else if(e===t)return!0;return!1}var R=Object.freeze({...window.__FRAME_PREAMBLE?.capabilities}),B=window.__FRAME_PREAMBLE?.transforms,D=window.__FRAME_PREAMBLE?.comments,I=window.__FRAME_PREAMBLE?.translate;function S(e){return Le(()=>import("/_runtime/"+e),void 0)}function G(e,t){return{contract:e.contract,changes:new Set(e.changes??[]),flags:new Set(e.flags??[]),capabilities:e.capabilities??{},capBudgets:e.capBudgets??{},transforms:new Map,shellOrigin:t,mount:x,hooks:O,pipe:()=>({wrap:(r,n)=>(...s)=>{try{return n(...s)}catch(o){return Promise.reject(o)}}})}}var L=null,E=null;function V(e,t,r){try{Object.defineProperty(e,t,{value:r,writable:!1,configurable:!1,enumerable:!0})}catch{try{Object.defineProperty(e,t,{value:r,writable:!1,configurable:!0,enumerable:!0})}catch{}}}var U=!1,O={editBefore:null,edit:null};function Ce(e,t,r=!1){const n=[];let s;if(r)try{O.editBefore?.(e)}catch{}for(const o of e.elements){const i=document.querySelector(`[data-id="${o.target}"]`);if(!i){s=o.target;break}if([...Object.keys(o.attrsSet??{}),...o.attrsRemoved??[]].some(c=>!oe(c))){s=o.target;break}if(o.text!==void 0&&(!ce(i)||de(i))){s=o.target;break}for(const[c,h]of Object.entries(o.attrsSet??{}))if(!J(i,c)){try{i.setAttribute(c,h)}catch{}Z(i,c,h)}for(const c of o.attrsRemoved??[])J(i,c)||(i.removeAttribute(c),Z(i,c,null));typeof o.text=="string"&&ue(i,o.text),n.push(o.target)}if(r)try{O.edit?.(e.seq,n,s)}catch{}if(s!==void 0){y.post({__frame_patch_miss:{seq:e.seq}},t);return}try{document.dispatchEvent(new CustomEvent("claude:edit",{detail:{seq:e.seq,targets:n}}))}catch{}}function Z(e,t,r){if(!(e instanceof HTMLInputElement))return;const n=t.toLowerCase();n==="checked"?e.checked=r!==null:n==="value"&&e.type!=="file"&&(e.value=r??"")}function J(e,t){const r=t.toLowerCase(),n=e;return r==="data-id"||(r==="value"||r==="checked")&&(n.__artifactSecret===!0||/^(password|hidden|file)$/.test(n.type??"")||/(^|\s)(cc-|one-time-code|current-password|new-password)/i.test(`${e.getAttribute("autocomplete")??""} ${n.autocomplete??""}`))}function Q(e){const t=document.documentElement;e==="light"||e==="dark"?(t.dataset.theme=e,t.style.colorScheme=e,U=!0):U&&(delete t.dataset.theme,t.style.colorScheme="",U=!1)}var P=new Map;function Me(){let e;const t={u:new Promise(r=>{e=r}),r:r=>{t.done=!0,e(r)},done:!1,nulled:!1};return t}function F(){for(const e of P.values())e.done||(e.nulled=!0,e.r(null))}var je=Object.freeze(Object.assign(Object.create(null),{call:Function.prototype.call,apply:Function.prototype.apply,bind:Function.prototype.bind})),x=(e,t)=>{const r=P.get(e);if(!r||r.done){r?.nulled&&E&&y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:e}},E);return}const n=typeof t=="function"?Object.setPrototypeOf(t,je):Object.assign(Object.create(null),t);typeof n.then=="function"&&delete n.then,r.r(Object.freeze(n))};function ee(){const e=q?.value??{};V(window,"claude",e);for(const t of Object.keys(R)){if(e[t]!==void 0){V(e,t,e[t]);continue}P.set(t,Me())}if(e.use===void 0){const t=r=>{if(typeof r!="string"||!Object.hasOwn(R,r))return Promise.resolve(null);const n=P.get(r);return n?n.u:Promise.resolve(e[r]??null)};try{Object.defineProperty(e,"use",{value:t,writable:!0,configurable:!0,enumerable:!1})}catch{}}}if(k==="framed"){const e=B&&A.test(B)?S(B).catch(()=>{}):Promise.resolve(void 0),t=a=>{if(a.type==="auxclick"&&a.button!==1)return;const f=a.target,v=f&&f.closest?f.closest("a[href],area[href]"):null;if(!v)return;const b=v.getAttribute("href");if(!b)return;let l;try{l=new URL(b,document.baseURI)}catch{return}if((l.protocol==="http:"||l.protocol==="https:")&&l.origin!==location.origin){a.preventDefault();const _=(v.getAttribute("target")??"").toLowerCase(),d=a.type==="auxclick"||a.metaKey||a.ctrlKey||a.shiftKey||a.altKey||!["","_self","_top","_parent"].includes(_);y.post({__frame_nav:!0,url:l.href,newTab:d},"*")}};addEventListener("click",t,!0),addEventListener("auxclick",t,!0);const r={},n=a=>{a.isTrusted&&(r.pointer=!0)},s=a=>{a.isTrusted&&(r.click=!0)};addEventListener("pointermove",n,{capture:!0,passive:!0}),addEventListener("click",s,{capture:!0,passive:!0}),e.then(a=>{a?.wireNav&&(a.wireNav(),removeEventListener("click",t,!0),removeEventListener("auxclick",t,!0),removeEventListener("pointermove",n,!0),removeEventListener("click",s,!0),a.wireEngagement?.(r))});let o=null;try{o=ke()}catch{}ee();let i=null,c=null,h=0;const p=y.on((a,f)=>{X(f)&&_e(a)&&(i=a.__frame_init,E=f,p(),clearTimeout(h),c?.())});y.post({__frame_connect:!0},"*");const w=new Promise(a=>{c=a,h=setTimeout(()=>{p(),a()},Pe)}),m=document.readyState==="loading"?new Promise(a=>document.addEventListener("DOMContentLoaded",()=>a(),{once:!0})):Promise.resolve();m.then(()=>{try{o?.restore()}catch{}});const g={cb:null};y.on((a,f)=>{if(X(f)&&ve(a)){try{o?.promoted()}catch{}g.cb?.()}}),w.then(async()=>{if(!i||!E){F();return}Q(i.theme);const a=E;let f=!1,v=!1;y.on((u,z,C)=>{if(z!==a)return;ye(u)&&Q(u.__frame_theme.theme),he(u)&&Ce(u.__frame_patch,a,C);const H=u?.__fc_mode;H&&typeof H=="object"&&!f&&D&&A.test(D)&&(f=!0,S(D).then(K=>K.install?.(a,H.on===!0)).catch(()=>{}));const W=u?.__ft_cmd;W&&typeof W=="object"&&!v&&I&&A.test(I)&&(v=!0,S(I).then(K=>K.install?.(a,W)).catch(()=>{}))});const b=Object.keys(i.capabilities??{}).filter(u=>Object.hasOwn(R,u)).map(u=>[u,R[u]]).filter(u=>typeof u[1]=="string"&&A.test(u[1])),l=await Promise.allSettled(b.map(([,u])=>S(u))),_=await e,d=E;if(_?.buildBoot||y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},d),_?.buildBoot)try{L=_.buildBoot(i,_.TRANSFORMS??{},{shellOrigin:d,mount:x,hooks:O},u=>y.post({__frame_cap_telemetry:u},d))}catch{y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},d),L=G(i,d)}else L=G(i,d);const T=u=>y.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:u}},d),Ne=L;l.forEach((u,z)=>{const C=b[z][0];if(u.status!=="fulfilled"){T(C);return}try{u.value?.install?.(Ne)}catch{T(C)}}),F(),await m,y.post({__frame_ready:!0},E),e.then(u=>u?.installSizeReporter?.(d,g))})}else N&&(ee(),Re(N,Y,S,{settle:F,mount:x}))})();</script><!-- /frame-runtime --><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Claude Code と Cowork のしくみ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --bg:#F4F5F8; --surface:#FFFFFF; --ink:#1C2128; --muted:#5A626E; --line:#D3D8E2;
+    --indigo:#574FCF; --indigo-tint:#ECEBFB;
+    --amber:#B26A1B; --amber-tint:#F6ECDC;
+    --teal:#0E8C86; --teal-tint:#DCF1EF;
+    --shadow:0 1px 2px rgba(20,25,40,.05),0 8px 28px rgba(20,25,40,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#12151B; --surface:#1A1E27; --ink:#E7EAF0; --muted:#98A2B2; --line:#2C333F;
+      --indigo:#9A93F5; --indigo-tint:#23223B;
+      --amber:#E1A45E; --amber-tint:#31271A;
+      --teal:#4FC7BE; --teal-tint:#16302E;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12151B; --surface:#1A1E27; --ink:#E7EAF0; --muted:#98A2B2; --line:#2C333F;
+    --indigo:#9A93F5; --indigo-tint:#23223B;
+    --amber:#E1A45E; --amber-tint:#31271A;
+    --teal:#4FC7BE; --teal-tint:#16302E;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+    line-height:1.75; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:56px 24px 72px}
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--indigo);margin:0 0 14px;font-weight:500;
+  }
+  h1{
+    font-size:clamp(28px,4.4vw,42px);line-height:1.18;margin:0 0 16px;
+    font-weight:700;letter-spacing:.01em;text-wrap:balance;
+  }
+  .dek{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:64ch;margin:0}
+  .dek b{color:var(--ink);font-weight:700}
+
+  figure{margin:44px 0 40px}
+  .figframe{
+    background:var(--surface);border:1px solid var(--line);border-radius:18px;
+    padding:24px 20px 20px;box-shadow:var(--shadow);overflow-x:auto;
+  }
+  svg{display:block;width:100%;height:auto;min-width:640px;color:var(--ink)}
+  figcaption{
+    margin-top:14px;font-size:13.5px;color:var(--muted);
+    max-width:74ch;line-height:1.7;
+  }
+
+  /* svg color classes -> theme tokens */
+  .s-indigo{fill:var(--indigo)} .s-amber{fill:var(--amber)} .s-teal{fill:var(--teal)}
+  .s-ink{fill:var(--ink)} .s-muted{fill:var(--muted)}
+  .box-server{fill:var(--indigo-tint);stroke:var(--indigo)}
+  .box-code{fill:var(--amber-tint);stroke:var(--amber)}
+  .box-cowork{fill:var(--teal-tint);stroke:var(--teal)}
+  .box-plain{fill:var(--surface);stroke:var(--line)}
+  .band{fill:var(--bg);stroke:var(--line)}
+  .stroke-indigo{stroke:var(--indigo)} .stroke-teal{stroke:var(--teal)}
+  .stroke-line{stroke:var(--line)} .stroke-muted{stroke:var(--muted)}
+  .fill-indigo{fill:var(--indigo)} .fill-teal{fill:var(--teal)}
+  .lbl{font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em}
+
+  .read{display:grid;gap:22px;margin:40px 0 8px}
+  @media(min-width:720px){.read{grid-template-columns:1fr 1fr}}
+  @media(min-width:1000px){.read{grid-template-columns:1fr 1fr 1fr 1fr}}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:20px 20px 22px;box-shadow:var(--shadow);
+  }
+  .card .tag{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;font-weight:500;
+    display:inline-block;margin-bottom:10px;
+  }
+  .card.k-indigo .tag{color:var(--indigo)}
+  .card.k-amber .tag{color:var(--amber)}
+  .card.k-teal .tag{color:var(--teal)}
+  .card h3{margin:0 0 8px;font-size:16px;font-weight:700;line-height:1.4}
+  .card p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.7}
+
+  .extra{margin-top:44px}
+  .extra .eyebrow{color:var(--teal)}
+  .grid2{display:grid;gap:14px;margin-top:18px}
+  @media(min-width:640px){.grid2{grid-template-columns:1fr 1fr}}
+  .row{
+    display:flex;gap:14px;align-items:flex-start;
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:12px;padding:16px 18px;
+  }
+  .row .dot{flex:0 0 auto;width:9px;height:9px;border-radius:50%;
+    background:var(--teal);margin-top:8px}
+  .row b{display:block;font-size:15px;margin-bottom:3px}
+  .row span{font-size:13.5px;color:var(--muted);line-height:1.65}
+  .foot{margin-top:40px;font-size:12.5px;color:var(--muted);
+    border-top:1px solid var(--line);padding-top:16px}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">しくみの比較 · Code / Cowork / Bedrock</p>
+  <h1>「考える」はいつもクラウド。<br>違いは「実処理」の場所。</h1>
+  <p class="dek"><b>「モデルが考える」（推論）は常にクラウド</b>（Anthropic か、自社の Bedrock）で、そこは共通です。分かれるのは<b>「実処理（手足）」をどこで・どう隔離して動かすか</b>。ここに <b>Claude Code・Cowork（2つの実行モード）</b> の違いがあります。</p>
+
+  <figure>
+    <div class="figframe">
+      <svg viewBox="0 0 940 405" role="img" aria-label="実処理がどこで動くかの比較。モデル推論は常にクラウド（Anthropic または自社Bedrock）。実処理は3通り：Claude Code は手元PCのホストOS上で直接実行、Cowork ローカル実行は手元PC上の隔離VM内で実行、Cowork クラウド実行は Anthropic クラウドの隔離サンドボックスで実行。">
+        <defs>
+          <marker id="ah-i" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" class="fill-indigo"/>
+          </marker>
+        </defs>
+
+        <!-- model box (always cloud) -->
+        <rect x="230" y="18" width="480" height="60" rx="14" class="box-server" stroke-width="1.4"/>
+        <text x="470" y="44" text-anchor="middle" class="lbl s-ink" font-size="14.5" font-weight="700">考える（モデル推論）</text>
+        <text x="470" y="64" text-anchor="middle" class="lbl s-muted" font-size="11">クラウド：Anthropic または 自社 Bedrock</text>
+
+        <!-- fan-out arrows -->
+        <line x1="470" y1="78" x2="163" y2="134" class="stroke-indigo" stroke-width="1.6" marker-end="url(#ah-i)"/>
+        <line x1="470" y1="78" x2="455" y2="134" class="stroke-indigo" stroke-width="1.6" marker-end="url(#ah-i)"/>
+        <line x1="470" y1="78" x2="779" y2="134" class="stroke-indigo" stroke-width="1.6" marker-end="url(#ah-i)"/>
+
+        <!-- bands -->
+        <rect x="12" y="104" width="606" height="250" rx="14" class="band" stroke-width="1.2"/>
+        <rect x="630" y="104" width="298" height="250" rx="14" class="band" stroke-width="1.2"/>
+        <text x="28" y="126" class="mono s-muted" font-size="11">あなたの PC 側（ローカル）</text>
+        <text x="646" y="126" class="mono s-muted" font-size="11">Anthropic クラウド側</text>
+
+        <!-- headers -->
+        <rect x="28" y="138" width="270" height="40" rx="11" class="box-code" stroke-width="1.5"/>
+        <text x="163" y="163" text-anchor="middle" class="lbl s-amber" font-size="15" font-weight="700">Claude Code</text>
+        <rect x="320" y="138" width="270" height="40" rx="11" class="box-cowork" stroke-width="1.5"/>
+        <text x="455" y="163" text-anchor="middle" class="lbl s-teal" font-size="13.5" font-weight="700">Cowork（ローカル実行）</text>
+        <rect x="646" y="138" width="266" height="40" rx="11" class="box-cowork" stroke-width="1.5"/>
+        <text x="779" y="163" text-anchor="middle" class="lbl s-teal" font-size="13.5" font-weight="700">Cowork（クラウド実行）</text>
+
+        <!-- execution boxes -->
+        <rect x="28" y="192" width="270" height="146" rx="12" class="box-code" stroke-width="1.5"/>
+        <text x="163" y="228" text-anchor="middle" class="lbl s-amber" font-size="14" font-weight="700">ホスト OS 上で直接実行</text>
+        <text x="163" y="256" text-anchor="middle" class="lbl s-muted" font-size="11.5">実ファイル・git にそのまま</text>
+        <text x="163" y="278" text-anchor="middle" class="lbl s-muted" font-size="11.5">隔離なし（手元環境に直結）</text>
+
+        <rect x="320" y="192" width="270" height="146" rx="12" class="box-cowork" stroke-width="1.5"/>
+        <text x="455" y="228" text-anchor="middle" class="lbl s-teal" font-size="14" font-weight="700">隔離 VM の中で実行</text>
+        <text x="455" y="256" text-anchor="middle" class="lbl s-muted" font-size="11.5">デバイス上の専用 Linux VM</text>
+        <text x="455" y="278" text-anchor="middle" class="lbl s-muted" font-size="11">接続フォルダのみ／ホストを汚さない</text>
+
+        <rect x="646" y="192" width="266" height="146" rx="12" class="box-cowork" stroke-width="1.5"/>
+        <text x="779" y="228" text-anchor="middle" class="lbl s-teal" font-size="14" font-weight="700">隔離サンドボックスで実行</text>
+        <text x="779" y="256" text-anchor="middle" class="lbl s-muted" font-size="11.5">Anthropic クラウド上・使い捨て</text>
+        <text x="779" y="278" text-anchor="middle" class="lbl s-muted" font-size="11">PC を閉じても継続・デバイス横断</text>
+
+        <text x="28" y="384" class="lbl s-muted" font-size="12.5">「考える」は常にクラウド。違いは『実処理』の場所と隔離のされ方（ホスト直接／ローカル VM／クラウド）。</text>
+      </svg>
+    </div>
+    <figcaption><b>「考える（モデル推論）」は常にクラウド側</b>（Anthropic か、自社の Bedrock）。分かれるのは『実処理』を<b>どこで・どう隔離して動かすか</b>。<b style="color:var(--amber)">Claude Code は手元 PC のホスト上で直接</b>（実ファイル・git に直結）、<b style="color:var(--teal)">Cowork は手元 PC の隔離 VM（ローカル実行）</b> か <b style="color:var(--teal)">Anthropic クラウドの隔離サンドボックス（クラウド実行）</b> で動く。「PC を閉じても継続・デバイス横断」はクラウド実行モードの性質。ローカル実行でも Cowork は VM で隔離するため、ホストに直接は触れない（＝Code との違い）。</figcaption>
+  </figure>
+
+  <p class="eyebrow" style="margin-top:48px">Bedrock を加えると</p>
+  <p style="font-size:clamp(20px,3vw,27px);font-weight:700;margin:0 0 14px;line-height:1.3;text-wrap:balance">Bedrock の使われ方は2通り</p>
+  <p class="dek">Bedrock は <b>①「素の API」で考える箱だけを使い自前でアプリを作る</b> 使い方と、<b>② Cowork / Claude Code の "推論バックエンド" にする</b>（製品はそのまま、推論とデータだけ自社 AWS に向ける）使い方があります。下表の「Bedrock」列は<b>①（素材として使う）</b>を示しています。</p>
+
+  <figure>
+    <div class="figframe">
+      <svg viewBox="0 0 960 392" role="img" aria-label="Cowork・Claude Code・素のBedrock の構成要素の比較。3者ともモデル推論は持つ。Cowork と Claude Code は実処理と製品UXが付属する完成品。Cowork の実処理はクラウドまたはローカルVM、Claude Code の実処理はホストOS上で直接。素のBedrockは考える箱だけで、実処理も製品UXも付属せず自作する。">
+        <text x="24" y="46" class="mono s-muted" font-size="11">構成要素 ＼ 製品</text>
+        <text x="24" y="113" class="lbl s-ink" font-size="13" font-weight="700">モデル推論</text>
+        <text x="24" y="131" class="lbl s-muted" font-size="11">（考える箱）</text>
+        <text x="24" y="193" class="lbl s-ink" font-size="13" font-weight="700">実処理</text>
+        <text x="24" y="211" class="lbl s-muted" font-size="11">（手足・実行環境）</text>
+        <text x="24" y="273" class="lbl s-ink" font-size="13" font-weight="700">製品UX</text>
+        <text x="24" y="291" class="lbl s-muted" font-size="11">（定期実行・共有 等）</text>
+
+        <!-- headers -->
+        <rect x="160" y="22" width="246" height="46" rx="11" class="box-cowork" stroke-width="1.5"/>
+        <text x="283" y="51" text-anchor="middle" class="lbl s-teal" font-size="16" font-weight="700">Cowork</text>
+        <rect x="426" y="22" width="246" height="46" rx="11" class="box-code" stroke-width="1.5"/>
+        <text x="549" y="51" text-anchor="middle" class="lbl s-amber" font-size="16" font-weight="700">Claude Code</text>
+        <rect x="692" y="22" width="246" height="46" rx="11" class="box-plain" stroke-width="1.5"/>
+        <text x="815" y="47" text-anchor="middle" class="lbl s-ink" font-size="16" font-weight="700">Bedrock</text>
+        <text x="815" y="62" text-anchor="middle" class="lbl s-muted" font-size="10">＝素材（素の API）</text>
+
+        <!-- Row A : モデル推論 -->
+        <rect x="160" y="84" width="246" height="68" rx="11" class="box-server" stroke-width="1.4"/>
+        <text x="283" y="118" text-anchor="middle" class="lbl s-ink" font-size="13.5" font-weight="700">あり</text>
+        <text x="283" y="138" text-anchor="middle" class="lbl s-muted" font-size="10.5">クラウド（Anthropic/自社Bedrock）</text>
+        <rect x="426" y="84" width="246" height="68" rx="11" class="box-server" stroke-width="1.4"/>
+        <text x="549" y="118" text-anchor="middle" class="lbl s-ink" font-size="13.5" font-weight="700">あり</text>
+        <text x="549" y="138" text-anchor="middle" class="lbl s-muted" font-size="10.5">クラウド（Anthropic/自社Bedrock）</text>
+        <rect x="692" y="84" width="246" height="68" rx="11" class="box-server" stroke-width="2.2"/>
+        <text x="815" y="118" text-anchor="middle" class="lbl s-ink" font-size="13.5" font-weight="700">あり</text>
+        <text x="815" y="138" text-anchor="middle" class="lbl s-indigo" font-size="10.5" font-weight="700">あなたの AWS 内</text>
+
+        <!-- Row B : 実処理 -->
+        <rect x="160" y="164" width="246" height="68" rx="11" class="box-cowork" stroke-width="1.5"/>
+        <text x="283" y="192" text-anchor="middle" class="lbl s-teal" font-size="13" font-weight="700">クラウド or ローカルVM</text>
+        <text x="283" y="212" text-anchor="middle" class="lbl s-muted" font-size="10.5">実行モードで選択（隔離あり）</text>
+        <rect x="426" y="164" width="246" height="68" rx="11" class="box-code" stroke-width="1.5"/>
+        <text x="549" y="192" text-anchor="middle" class="lbl s-amber" font-size="13" font-weight="700">ホスト OS 上で直接</text>
+        <text x="549" y="212" text-anchor="middle" class="lbl s-muted" font-size="10.5">実ファイルに直結（隔離なし）</text>
+        <rect x="692" y="164" width="246" height="68" rx="11" class="box-plain" stroke-width="1.4" stroke-dasharray="6 5"/>
+        <text x="815" y="198" text-anchor="middle" class="lbl s-muted" font-size="13" font-weight="700">自作</text>
+        <text x="815" y="218" text-anchor="middle" class="lbl s-muted" font-size="10.5">（付属しない）</text>
+
+        <!-- Row C : 製品UX -->
+        <rect x="160" y="244" width="246" height="68" rx="11" class="box-cowork" stroke-width="1.5"/>
+        <text x="283" y="278" text-anchor="middle" class="lbl s-teal" font-size="13.5" font-weight="700">あり</text>
+        <text x="283" y="298" text-anchor="middle" class="lbl s-muted" font-size="10.5">定期実行・共有 等</text>
+        <rect x="426" y="244" width="246" height="68" rx="11" class="box-code" stroke-width="1.5"/>
+        <text x="549" y="278" text-anchor="middle" class="lbl s-amber" font-size="13.5" font-weight="700">あり</text>
+        <text x="549" y="298" text-anchor="middle" class="lbl s-muted" font-size="10.5">開発者向け</text>
+        <rect x="692" y="244" width="246" height="68" rx="11" class="box-plain" stroke-width="1.4" stroke-dasharray="6 5"/>
+        <text x="815" y="278" text-anchor="middle" class="lbl s-muted" font-size="13" font-weight="700">なし ／ 自作</text>
+
+        <text x="24" y="344" class="lbl s-muted" font-size="11">■ 塗り＝製品に付属　／　▢ 破線＝自分で作る（付属しない）</text>
+        <text x="24" y="363" class="lbl s-muted" font-size="10.5">※ 「Cowork / Code を Bedrock で動かす」構成は別物＝製品（手足・UX）はそのまま、推論だけ自社 Bedrock。</text>
+        <text x="24" y="381" class="lbl s-muted" font-size="10.5">※ Cowork を Bedrock で動かす場合は「ローカル実行モード＋推論を自社 Bedrock」の形になる。</text>
+      </svg>
+    </div>
+    <figcaption>3者とも「考える箱」は持つ。差は<b>その下がセットで付いてくるか</b>——<b style="color:var(--teal)">Cowork</b>（実処理はクラウド or ローカル VM）と <b style="color:var(--amber)">Claude Code</b>（実処理はホスト上で直接）は完成品。<b>素の Bedrock は考える箱だけ</b>の素材で、実処理も UX も自作。なお <b>「Cowork / Code のバックエンドを Bedrock にする」構成は別</b>で、その場合は製品はそのまま、推論とデータだけ自社 AWS（Bedrock）に向く。</figcaption>
+  </figure>
+
+  <div class="read">
+    <div class="card k-indigo">
+      <span class="tag">共通</span>
+      <h3>考えるのはクラウド</h3>
+      <p>「次に何をするか」を決めるモデル推論は常にクラウド上（Anthropic、または自社の Bedrock）。モデル本体がローカルに落ちて動くわけではない。</p>
+    </div>
+    <div class="card k-amber">
+      <span class="tag">Claude Code</span>
+      <h3>手足はホスト直接</h3>
+      <p>コード・コマンドを手元 PC のホスト OS 上で直接実行。実ファイル・git にそのまま触れ、低遅延で密結合できるのが武器（隔離なし）。</p>
+    </div>
+    <div class="card k-teal">
+      <span class="tag">Cowork</span>
+      <h3>手足は隔離環境（2モード）</h3>
+      <p>実処理は、Anthropic クラウドの隔離サンドボックス（クラウド実行）か、手元 PC 上の隔離 VM（ローカル実行）で動く。Code と違いホストに直接は触れない。</p>
+    </div>
+    <div class="card k-indigo">
+      <span class="tag">Bedrock</span>
+      <h3>考える箱を自社 AWS に</h3>
+      <p>素の API なら「考える箱」だけの素材（手足・UX は自作）。または Cowork / Code の推論バックエンドにして、製品はそのまま推論とデータを自社 AWS 内に閉じる。</p>
+    </div>
+  </div>
+
+  <section class="extra">
+    <p class="eyebrow">Cowork ならでは（クラウド実行モード）</p>
+    <p class="dek" style="max-width:66ch">手足を<b>クラウドの隔離サンドボックス</b>で動かす「クラウド実行モード」から派生する性質。ここが Claude Code との実用上の差になる（ローカル実行モードでは PC の稼働が前提になる点に注意）。</p>
+    <div class="grid2">
+      <div class="row"><span class="dot"></span><div><b>PC を閉じても継続</b><span>長い処理を投げてノート PC を閉じても、クラウド側で走り続ける。</span></div></div>
+      <div class="row"><span class="dot"></span><div><b>定期実行・予約（cron 的）</b><span>「毎朝まとめて通知」「1時間後に確認」を自然言語の指示で。発火ごとに新セッションが立つ。</span></div></div>
+      <div class="row"><span class="dot"></span><div><b>デバイス横断</b><span>デスクトップで始めてスマホから続きを確認、といった横断ができる。</span></div></div>
+      <div class="row"><span class="dot"></span><div><b>成果物の永続化・共有</b><span>スライドやシート等が claude.ai 上に残り、後から開き直す・更新する・共有できる。</span></div></div>
+    </div>
+    <p class="foot">※ 「PC を閉じても継続／デバイス横断」はクラウド実行モードの性質。ローカル実行モード（デスクトップ VM）や Bedrock バックエンド構成では、実処理が手元で動くため PC の稼働が前提になる。正式提案では採用構成（クラウド／ローカル／Bedrock）ごとに挙動を要確認。</p>
+  </section>
+</div>
+
+</body></html>
