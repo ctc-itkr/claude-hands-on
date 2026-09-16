@@ -1,0 +1,156 @@
+{
+  "generated": "2026-09-16T18:24:33",
+  "found": {
+    "6857": {
+      "docID": "S100YKTA",
+      "secCode": "68570",
+      "edinetCode": "E01950",
+      "filerName": "株式会社アドバンテスト",
+      "date": "2026-06-26",
+      "periodEnd": "2026-03-31",
+      "label": "ADVANTEST",
+      "folder": "./data/ADVANTEST_E01950"
+    },
+    "285A": {
+      "docID": "S100YJ18",
+      "secCode": "285A0",
+      "edinetCode": "E35948",
+      "filerName": "キオクシアホールディングス株式会社",
+      "date": "2026-06-24",
+      "periodEnd": "2026-03-31",
+      "label": "KIOXIA",
+      "folder": "./data/KIOXIA_E35948"
+    },
+    "8306": {
+      "docID": "S100YJQO",
+      "secCode": "83060",
+      "edinetCode": "E03606",
+      "filerName": "株式会社三菱ＵＦＪフィナンシャル・グループ",
+      "date": "2026-06-24",
+      "periodEnd": "2026-03-31",
+      "label": "MUFG",
+      "folder": "./data/MUFG_E03606"
+    },
+    "8035": {
+      "docID": "S100YEOO",
+      "secCode": "80350",
+      "edinetCode": "E02652",
+      "filerName": "東京エレクトロン株式会社",
+      "date": "2026-06-22",
+      "periodEnd": "2026-03-31",
+      "label": "TEL",
+      "folder": "./data/TEL_E02652"
+    },
+    "9984": {
+      "docID": "S100YGH5",
+      "secCode": "99840",
+      "edinetCode": "E02778",
+      "filerName": "ソフトバンクグループ株式会社",
+      "date": "2026-06-22",
+      "periodEnd": "2026-03-31",
+      "label": "SBG",
+      "folder": "./data/SBG_E02778"
+    },
+    "6501": {
+      "docID": "S100YGBO",
+      "secCode": "65010",
+      "edinetCode": "E01737",
+      "filerName": "株式会社日立製作所",
+      "date": "2026-06-22",
+      "periodEnd": "2026-03-31",
+      "label": "HITACHI",
+      "folder": "./data/HITACHI_E01737"
+    },
+    "8411": {
+      "docID": "S100YF8Y",
+      "secCode": "84110",
+      "edinetCode": "E03615",
+      "filerName": "株式会社みずほフィナンシャルグループ",
+      "date": "2026-06-19",
+      "periodEnd": "2026-03-31",
+      "label": "MIZUHO",
+      "folder": "./data/MIZUHO_E03615"
+    },
+    "8316": {
+      "docID": "S100YERK",
+      "secCode": "83160",
+      "edinetCode": "E03614",
+      "filerName": "株式会社三井住友フィナンシャルグループ",
+      "date": "2026-06-19",
+      "periodEnd": "2026-03-31",
+      "label": "SMFG",
+      "folder": "./data/SMFG_E03614"
+    },
+    "6098": {
+      "docID": "S100YDHL",
+      "secCode": "60980",
+      "edinetCode": "E07801",
+      "filerName": "株式会社リクルートホールディングス",
+      "date": "2026-06-19",
+      "periodEnd": "2026-03-31",
+      "label": "RECRUIT",
+      "folder": "./data/RECRUIT_E07801"
+    },
+    "6758": {
+      "docID": "S100YE2C",
+      "secCode": "67580",
+      "edinetCode": "E01777",
+      "filerName": "ソニーグループ株式会社",
+      "date": "2026-06-18",
+      "periodEnd": "2026-03-31",
+      "label": "SONY",
+      "folder": "./data/SONY_E01777"
+    },
+    "6861": {
+      "docID": "S100YAHE",
+      "secCode": "68610",
+      "edinetCode": "E01967",
+      "filerName": "株式会社キーエンス",
+      "date": "2026-06-15",
+      "periodEnd": "2026-03-20",
+      "label": "KEYENCE",
+      "folder": "./data/KEYENCE_E01967"
+    },
+    "8001": {
+      "docID": "S100YA6H",
+      "secCode": "80010",
+      "edinetCode": "E02497",
+      "filerName": "伊藤忠商事株式会社",
+      "date": "2026-06-12",
+      "periodEnd": "2026-03-31",
+      "label": "ITOCHU",
+      "folder": "./data/ITOCHU_E02497"
+    },
+    "8058": {
+      "docID": "S100YB25",
+      "secCode": "80580",
+      "edinetCode": "E02529",
+      "filerName": "三菱商事株式会社",
+      "date": "2026-06-12",
+      "periodEnd": "2026-03-31",
+      "label": "MITSUBISHI",
+      "folder": "./data/MITSUBISHI_E02529"
+    },
+    "7203": {
+      "docID": "S100Y8NY",
+      "secCode": "72030",
+      "edinetCode": "E02144",
+      "filerName": "トヨタ自動車株式会社",
+      "date": "2026-06-10",
+      "periodEnd": "2026-03-31",
+      "label": "TOYOTA",
+      "folder": "./data/TOYOTA_E02144"
+    },
+    "9983": {
+      "docID": "S100X6X6",
+      "secCode": "99830",
+      "edinetCode": "E03217",
+      "filerName": "株式会社ファーストリテイリング",
+      "date": "2025-11-28",
+      "periodEnd": "2025-08-31",
+      "label": "FASTRETAILING",
+      "folder": "./data/FASTRETAILING_E03217"
+    }
+  },
+  "missing": []
+}
