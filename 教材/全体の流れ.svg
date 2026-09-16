@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif">
+  <rect x="0" y="0" width="1200" height="560" fill="#faf8f3"/>
+  <text x="40" y="46" font-size="24" font-weight="700" fill="#241f17">ハンズオン 全体の流れ</text>
+  <text x="40" y="72" font-size="13.5" fill="#6a6353">EDINETの有報データ → Claude Codeで財務ダッシュボード → スキル化して別企業へ横展開</text>
+
+  <defs>
+    <marker id="chev" markerWidth="12" markerHeight="12" refX="4" refY="6" orient="auto">
+      <path d="M1,2 L7,6 L1,10" fill="none" stroke="#b08a3a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- ===== 5 stage cards ===== -->
+  <!-- card geometry: w=210, gap=18, x = 36,264,492,720,948 ; y=100 h=300 -->
+  <g>
+    <!-- helper styles inline per element -->
+    <!-- Card 1 -->
+    <rect x="36" y="100" width="210" height="300" rx="12" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="36" y="100" width="210" height="7" rx="3.5" fill="#9a6a12"/>
+    <circle cx="66" cy="140" r="16" fill="#9a6a12"/>
+    <text x="66" y="146" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+    <text x="92" y="146" font-size="16" font-weight="700" fill="#241f17">ゴール共有</text>
+    <g font-size="12" fill="#3a352a">
+      <text x="56" y="184">・EDINET →</text>
+      <text x="66" y="202">ダッシュボード作成</text>
+      <text x="56" y="228">・なぜ？人には複雑な</text>
+      <text x="66" y="246">データをAIで解決</text>
+    </g>
+
+    <!-- Card 2 -->
+    <rect x="264" y="100" width="210" height="300" rx="12" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="264" y="100" width="210" height="7" rx="3.5" fill="#9a6a12"/>
+    <circle cx="294" cy="140" r="16" fill="#9a6a12"/>
+    <text x="294" y="146" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+    <text x="320" y="146" font-size="16" font-weight="700" fill="#241f17">説明と準備</text>
+    <g font-size="12" fill="#3a352a">
+      <text x="284" y="180">・EDINETとは</text>
+      <text x="284" y="204">・取得/配布</text>
+      <text x="294" y="222" font-size="11" fill="#6a6353">Web中心・APIは補足</text>
+      <text x="284" y="248">・XBRLと周辺用語</text>
+      <text x="294" y="266" font-size="11" fill="#6a6353">実コードを見せる</text>
+      <text x="284" y="292">・ゴール例を見せる</text>
+      <text x="294" y="310" font-size="11" fill="#6a6353">完成品／バフェットコード像</text>
+    </g>
+
+    <!-- Card 3 -->
+    <rect x="492" y="100" width="210" height="300" rx="12" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="492" y="100" width="210" height="7" rx="3.5" fill="#c79433"/>
+    <circle cx="522" cy="140" r="16" fill="#c79433"/>
+    <text x="522" y="146" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+    <text x="548" y="146" font-size="16" font-weight="700" fill="#241f17">作る（1社目）</text>
+    <g font-size="12" fill="#3a352a">
+      <text x="512" y="184">・フォルダを指定</text>
+      <text x="512" y="210">・プロンプトの書き方</text>
+      <text x="512" y="236">・対話でカスタマイズ</text>
+      <text x="512" y="262" font-size="11" fill="#a8471f" font-weight="600">＝試行錯誤で仕上げる</text>
+    </g>
+
+    <!-- Card 4 -->
+    <rect x="720" y="100" width="210" height="300" rx="12" fill="#fbf4e6" stroke="#d8ab4f" stroke-width="2"/>
+    <rect x="720" y="100" width="210" height="7" rx="3.5" fill="#9a6a12"/>
+    <circle cx="750" cy="140" r="16" fill="#9a6a12"/>
+    <text x="750" y="146" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+    <text x="776" y="146" font-size="15.5" font-weight="700" fill="#241f17">スキル化→2社目</text>
+    <g font-size="12" fill="#3a352a">
+      <text x="740" y="182">・毎回同じ指示は大変</text>
+      <text x="750" y="200" font-size="11" fill="#6a6353">→手順をスキルに固める</text>
+      <text x="740" y="226">・Claude周辺の用語</text>
+      <text x="740" y="252">・好きな企業で2社目</text>
+      <text x="750" y="270" font-size="11" fill="#1f7d4a" font-weight="600">＝数分で再現できる</text>
+    </g>
+
+    <!-- Card 5 -->
+    <rect x="948" y="100" width="210" height="300" rx="12" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="948" y="100" width="210" height="7" rx="3.5" fill="#3a4653"/>
+    <circle cx="978" cy="140" r="16" fill="#3a4653"/>
+    <text x="978" y="146" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">5</text>
+    <text x="1004" y="146" font-size="16" font-weight="700" fill="#241f17">今後</text>
+    <g font-size="12" fill="#3a352a">
+      <text x="968" y="184">・APIで多数の企業へ</text>
+      <text x="968" y="210">・バフェットコード</text>
+      <text x="978" y="228">簡易版を自作可能</text>
+    </g>
+  </g>
+
+  <!-- arrows between cards -->
+  <line x1="248" y1="250" x2="262" y2="250" stroke="#b08a3a" stroke-width="2.2" marker-end="url(#chev)"/>
+  <line x1="476" y1="250" x2="490" y2="250" stroke="#b08a3a" stroke-width="2.2" marker-end="url(#chev)"/>
+  <line x1="704" y1="250" x2="718" y2="250" stroke="#b08a3a" stroke-width="2.2" marker-end="url(#chev)"/>
+  <line x1="932" y1="250" x2="946" y2="250" stroke="#b08a3a" stroke-width="2.2" marker-end="url(#chev)"/>
+
+  <!-- ===== payoff ribbon ===== -->
+  <rect x="36" y="430" width="1122" height="86" rx="12" fill="#f1ece0" stroke="#e0d6bf" stroke-width="1.5"/>
+  <text x="60" y="462" font-size="13" font-weight="700" fill="#9a6a12">体感のヤマ場</text>
+  <text x="60" y="484" font-size="12" fill="#6a6353">再利用でこれだけ短縮</text>
+
+  <!-- pill 1社目 -->
+  <rect x="250" y="452" width="196" height="42" rx="21" fill="#ffffff" stroke="#c79433" stroke-width="1.5"/>
+  <text x="348" y="472" font-size="13" font-weight="700" fill="#a8471f" text-anchor="middle">1社目：試行錯誤で完成</text>
+  <text x="348" y="488" font-size="10.5" fill="#94886f" text-anchor="middle">プロンプトを直しながら</text>
+
+  <line x1="456" y1="473" x2="486" y2="473" stroke="#b08a3a" stroke-width="2.5" marker-end="url(#chev)"/>
+
+  <!-- pill 2社目 -->
+  <rect x="496" y="452" width="220" height="42" rx="21" fill="#fbf4e6" stroke="#9a6a12" stroke-width="2"/>
+  <text x="606" y="472" font-size="13" font-weight="700" fill="#1f7d4a" text-anchor="middle">2社目：数分で再現</text>
+  <text x="606" y="488" font-size="10.5" fill="#7a6a48" text-anchor="middle">スキルを適用（好きな企業でOK）</text>
+
+  <line x1="726" y1="473" x2="756" y2="473" stroke="#b08a3a" stroke-width="2.5" marker-end="url(#chev)"/>
+
+  <!-- pill 展開 -->
+  <rect x="766" y="452" width="368" height="42" rx="21" fill="#ffffff" stroke="#cdd5dd" stroke-width="1.5"/>
+  <text x="950" y="478" font-size="13" font-weight="600" fill="#3a4653" text-anchor="middle">API活用で、いろんな企業へ横展開できる</text>
+</svg>

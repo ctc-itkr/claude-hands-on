@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>金 買取概算計算ツール</title>
+  <style>
+    :root {
+      --bg: #f7f5f0;
+      --card: #ffffff;
+      --gold: #c9a227;
+      --gold-dark: #9c7c15;
+      --text: #2b2b2b;
+      --muted: #6b6b6b;
+      --border: #e2ddd0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 440px;
+      width: 100%;
+      padding: 28px 24px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+    }
+    h1 {
+      font-size: 1.35rem;
+      margin: 0 0 4px;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin: 0 0 20px;
+    }
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin: 16px 0 6px;
+    }
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+    }
+    input:focus { border-color: var(--gold); }
+    .hint { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+    button {
+      margin-top: 22px;
+      width: 100%;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--gold);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover { background: var(--gold-dark); }
+    .result {
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #faf6e8;
+      border: 1px solid #efe4c0;
+      text-align: center;
+      display: none;
+    }
+    .result.show { display: block; }
+    .result .amount {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold-dark);
+    }
+    .result .breakdown {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .error { color: #c0392b; font-size: 0.85rem; margin-top: 12px; min-height: 1em; }
+    .unit-price {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 20px;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>金 買取概算計算ツール</h1>
+    <p class="sub">重量と純度を入力すると、買取のおおよその金額を計算します。</p>
+
+    <label for="weight">重量 (g)</label>
+    <input id="weight" type="number" inputmode="decimal" min="0" step="0.01" placeholder="例: 10.5">
+    <div class="hint">グラム単位で入力してください</div>
+
+    <label for="purity">純度 (%)</label>
+    <input id="purity" type="number" inputmode="decimal" min="0" max="100" step="0.1" placeholder="例: 75 (K18相当)">
+    <div class="hint">K24=100%, K18≈75%, K14≈58.5%</div>
+
+    <button id="calcBtn">概算額を計算する</button>
+
+    <div class="error" id="error"></div>
+
+    <div class="result" id="result">
+      <div>買取概算額</div>
+      <div class="amount" id="amount">¥0</div>
+      <div class="breakdown" id="breakdown"></div>
+    </div>
+
+    <div class="unit-price">適用単価: <span id="unitPriceLabel"></span>/g</div>
+  </div>
+
+  <script>
+    // ===== 設定 =====
+    // グラム単価（円/g）。相場に応じてこの数値を変更してください。
+    // ※あくまで仮の値です。実際の買取単価は日々変動します。
+    const PRICE_PER_GRAM = 9000;
+    // ================
+
+    const yen = (n) => '¥' + Math.round(n).toLocaleString('ja-JP');
+
+    document.getElementById('unitPriceLabel').textContent = yen(PRICE_PER_GRAM);
+
+    const weightEl = document.getElementById('weight');
+    const purityEl = document.getElementById('purity');
+    const errorEl = document.getElementById('error');
+    const resultEl = document.getElementById('result');
+    const amountEl = document.getElementById('amount');
+    const breakdownEl = document.getElementById('breakdown');
+
+    function calculate() {
+      errorEl.textContent = '';
+      resultEl.classList.remove('show');
+
+      const weight = parseFloat(weightEl.value);
+      const purity = parseFloat(purityEl.value);
+
+      if (isNaN(weight) || weight <= 0) {
+        errorEl.textContent = '重量には0より大きい数値を入力してください。';
+        return;
+      }
+      if (isNaN(purity) || purity <= 0 || purity > 100) {
+        errorEl.textContent = '純度は0〜100(%)の範囲で入力してください。';
+        return;
+      }
+
+      // 純金換算重量 = 重量 × 純度
+      const pureGold = weight * (purity / 100);
+      const amount = pureGold * PRICE_PER_GRAM;
+
+      amountEl.textContent = yen(amount);
+      breakdownEl.textContent =
+        `${weight}g × ${purity}% × ${yen(PRICE_PER_GRAM)}/g ` +
+        `(純金換算 ${pureGold.toFixed(2)}g)`;
+      resultEl.classList.add('show');
+    }
+
+    document.getElementById('calcBtn').addEventListener('click', calculate);
+    [weightEl, purityEl].forEach(el =>
+      el.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); })
+    );
+  </script>
+</body>
+</html>
