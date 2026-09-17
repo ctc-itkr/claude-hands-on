@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XBRL入門 ── EDINET取得ファイルと用語</title>
+<style>
+:root{--bg:#ffffff;--fg:#1f2937;--muted:#6b7280;--card:#f8fafc;--border:#e5e7eb;
+--code-bg:#f1f5f9;--code-fg:#0f172a;--accent:#2563eb;--quote:#f1f5f9;--quote-bd:#94a3b8;--th:#f1f5f9;}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1220;--fg:#e5e7eb;--muted:#94a3b8;--card:#111a2e;
+--border:#334155;--code-bg:#0f172a;--code-fg:#e2e8f0;--accent:#60a5fa;--quote:#111a2e;--quote-bd:#475569;--th:#1e293b;}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);
+font-family:'Hiragino Sans','Noto Sans JP','Yu Gothic','Meiryo',system-ui,sans-serif;
+line-height:1.75;font-size:16px}
+.wrap{max-width:840px;margin:0 auto;padding:40px 20px 96px}
+h1,h2,h3,h4{line-height:1.35;font-weight:700}
+h1{font-size:1.8rem;margin:.2em 0 .6em;padding-bottom:.3em;border-bottom:2px solid var(--border)}
+h2{font-size:1.4rem;margin:1.8em 0 .5em;padding-bottom:.2em;border-bottom:1px solid var(--border)}
+h3{font-size:1.15rem;margin:1.4em 0 .4em}
+h4{font-size:1rem;margin:1.2em 0 .3em}
+p{margin:.6em 0}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+ul,ol{padding-left:1.4em;margin:.5em 0}li{margin:.25em 0}
+code{background:var(--code-bg);color:var(--code-fg);padding:.12em .4em;border-radius:5px;
+font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,'Noto Sans Mono',monospace;font-size:.9em}
+pre{background:var(--code-bg);color:var(--code-fg);padding:14px 16px;border-radius:10px;overflow:auto;
+border:1px solid var(--border)}
+pre code{background:none;padding:0;font-size:.86em;line-height:1.55}
+blockquote{margin:1em 0;padding:.6em 1em;background:var(--quote);
+border-left:4px solid var(--quote-bd);border-radius:0 8px 8px 0;color:var(--fg)}
+blockquote p{margin:.3em 0}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.95em;display:block;overflow-x:auto}
+th,td{border:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--th);font-weight:700}
+hr{border:none;border-top:1px solid var(--border);margin:2em 0}
+figure.fig{margin:1.2em 0;text-align:center}
+figure.fig svg{max-width:100%;height:auto}
+figure.fig figcaption{color:var(--muted);font-size:.85em;margin-top:.4em}
+.doc-foot{margin-top:64px;color:var(--muted);font-size:.8em;border-top:1px solid var(--border);padding-top:16px}
+</style></head>
+<body><main class="wrap">
+<h1 id="xbrl-edinet">XBRL入門 ── EDINET取得ファイルと用語</h1>
+<blockquote>
+<p>EDINETの有価証券報告書XBRLが「どんなファイルで・どんな用語でできているか」の入門資料。実例はすべて <strong>ＡＲＥホールディングス（有価証券報告書 第17期 / docID S100YBFP）</strong> から。</p>
+</blockquote>
+<hr />
+<h2 id="_1">全体像</h2>
+<blockquote>
+<p><strong>タクソノミ（辞書・型）＋ インスタンス（実データ）＝ XBRL</strong>
+「勘定科目マスタ（タクソノミ）に沿って、今期の数値（インスタンス）を記録したもの」とイメージすると掴みやすい。</p>
+</blockquote>
+<p><figure class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 690" font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif">
+  <rect x="0" y="0" width="1000" height="690" fill="#faf8f3"/>
+  <!-- title -->
+  <text x="40" y="40" font-size="22" font-weight="700" fill="#241f17">XBRLの構成 ── タクソノミ（辞書・型） × インスタンス（実データ）</text>
+  <text x="40" y="64" font-size="13" fill="#6a6353">「勘定科目マスタ（タクソノミ）に沿って今期の数値（インスタンス）を記録したもの」がXBRL</text>
+
+  <!-- ===== TAXONOMY BOX ===== -->
+  <rect x="40" y="88" width="430" height="228" rx="12" fill="#eef1f4" stroke="#cdd5dd" stroke-width="1.5"/>
+  <rect x="40" y="88" width="430" height="34" rx="12" fill="#3a4653"/>
+  <rect x="40" y="104" width="430" height="18" fill="#3a4653"/>
+  <text x="60" y="111" font-size="15" font-weight="700" fill="#ffffff">タクソノミ（辞書・型）</text>
+  <text x="452" y="111" font-size="11" fill="#c9d2db" text-anchor="end">どう読むか</text>
+
+  <g font-size="12.5">
+    <rect x="60" y="136" width="72" height="22" rx="5" fill="#dbe3ea" stroke="#b9c4ce"/>
+    <text x="96" y="151" text-anchor="middle" font-family="monospace" fill="#2c3742">.xsd</text>
+    <text x="144" y="151" fill="#2c3742">スキーマ ｜ 要素（項目）の定義・型</text>
+
+    <rect x="60" y="168" width="72" height="22" rx="5" fill="#dbe3ea" stroke="#b9c4ce"/>
+    <text x="96" y="183" text-anchor="middle" font-family="monospace" fill="#2c3742">_pre</text>
+    <text x="144" y="183" fill="#2c3742">表示リンクベース ｜ 並び順・階層</text>
+
+    <rect x="60" y="200" width="72" height="22" rx="5" fill="#dbe3ea" stroke="#b9c4ce"/>
+    <text x="96" y="215" text-anchor="middle" font-family="monospace" fill="#2c3742">_cal</text>
+    <text x="144" y="215" fill="#2c3742">計算リンクベース ｜ 合計＝内訳の加算</text>
+
+    <rect x="60" y="232" width="72" height="22" rx="5" fill="#dbe3ea" stroke="#b9c4ce"/>
+    <text x="96" y="247" text-anchor="middle" font-family="monospace" fill="#2c3742">_def</text>
+    <text x="144" y="247" fill="#2c3742">定義リンクベース ｜ 軸（ディメンション）</text>
+
+    <rect x="60" y="264" width="72" height="22" rx="5" fill="#dbe3ea" stroke="#b9c4ce"/>
+    <text x="96" y="279" text-anchor="middle" font-family="monospace" fill="#2c3742">_lab</text>
+    <text x="144" y="279" fill="#2c3742">ラベルリンクベース ｜ 日本語/英語名</text>
+  </g>
+
+  <!-- ===== INSTANCE BOX ===== -->
+  <rect x="530" y="88" width="430" height="228" rx="12" fill="#f6efe0" stroke="#e0cfa6" stroke-width="1.5"/>
+  <rect x="530" y="88" width="430" height="34" rx="12" fill="#9a6a12"/>
+  <rect x="530" y="104" width="430" height="18" fill="#9a6a12"/>
+  <text x="550" y="111" font-size="15" font-weight="700" fill="#ffffff">インスタンス（.xbrl）</text>
+  <text x="942" y="111" font-size="11" fill="#f0e2c2" text-anchor="end">何がいくつか＝実データ</text>
+
+  <g font-size="12.5">
+    <rect x="550" y="140" width="96" height="22" rx="5" fill="#ecdcbb" stroke="#d8c199"/>
+    <text x="598" y="155" text-anchor="middle" fill="#6b4a10">ファクト</text>
+    <text x="658" y="155" fill="#4a3a20">値そのもの（多数）</text>
+
+    <rect x="550" y="176" width="96" height="22" rx="5" fill="#ecdcbb" stroke="#d8c199"/>
+    <text x="598" y="191" text-anchor="middle" fill="#6b4a10">コンテキスト</text>
+    <text x="658" y="191" fill="#4a3a20">いつ・連結/個別</text>
+
+    <rect x="550" y="212" width="96" height="22" rx="5" fill="#ecdcbb" stroke="#d8c199"/>
+    <text x="598" y="227" text-anchor="middle" fill="#6b4a10">ユニット</text>
+    <text x="658" y="227" fill="#4a3a20">単位（円・株・％）</text>
+
+    <rect x="550" y="248" width="96" height="22" rx="5" fill="#ecdcbb" stroke="#d8c199"/>
+    <text x="598" y="263" text-anchor="middle" fill="#6b4a10">DEI</text>
+    <text x="658" y="263" fill="#4a3a20">会社情報・会計基準（IFRS/日本基準）</text>
+  </g>
+
+  <!-- reference arrow instance -> taxonomy -->
+  <defs>
+    <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#9a6a12"/>
+    </marker>
+  </defs>
+  <line x1="548" y1="150" x2="474" y2="150" stroke="#9a6a12" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="511" y="142" font-size="10.5" fill="#9a6a12" text-anchor="middle" font-weight="600">参照</text>
+  <text x="511" y="172" font-size="9.5" fill="#8a7a5c" text-anchor="middle">各ファクトは</text>
+  <text x="511" y="184" font-size="9.5" fill="#8a7a5c" text-anchor="middle">要素定義を指す</text>
+
+  <!-- ===== FACT ANATOMY ===== -->
+  <text x="40" y="360" font-size="16" font-weight="700" fill="#241f17">1ファクトの分解（ＡＲＥホールディングス 実例）</text>
+
+  <rect x="40" y="374" width="920" height="72" rx="8" fill="#20221f"/>
+  <text x="60" y="404" font-family="monospace" font-size="14">
+    <tspan fill="#e6e2d8">&lt;</tspan><tspan fill="#d8ab4f" font-weight="700">jpcrp_cor:RevenueIFRSSummaryOfBusinessResults</tspan>
+  </text>
+  <text x="60" y="428" font-family="monospace" font-size="14">
+    <tspan fill="#e6e2d8">  </tspan><tspan fill="#6fc0bd">contextRef="CurrentYearDuration"</tspan><tspan fill="#e6e2d8"> </tspan><tspan fill="#b39ce0">unitRef="JPY"</tspan><tspan fill="#e6e2d8">&gt;</tspan><tspan fill="#7ecb9a" font-weight="700">569992000000</tspan><tspan fill="#e6e2d8">&lt;/…&gt;</tspan>
+  </text>
+
+  <!-- four cards -->
+  <g font-size="12">
+    <!-- element -->
+    <rect x="40" y="470" width="220" height="196" rx="9" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="40" y="470" width="220" height="6" rx="3" fill="#d8ab4f"/>
+    <text x="56" y="498" font-size="13.5" font-weight="700" fill="#8a6410">要素（コンセプト）</text>
+    <text x="56" y="518" fill="#6a6353">何の項目か</text>
+    <text x="56" y="540" font-size="11" font-family="monospace" fill="#3a352a">Revenue…</text>
+    <text x="56" y="556" font-size="11" font-family="monospace" fill="#3a352a">SummaryOf</text>
+    <text x="56" y="572" font-size="11" font-family="monospace" fill="#3a352a">BusinessResults</text>
+    <text x="56" y="596" fill="#241f17" font-weight="600">＝ IFRS売上収益</text>
+    <text x="56" y="616" font-size="10.5" fill="#94886f">（経営指標等）</text>
+    <text x="56" y="646" font-size="10.5" fill="#94886f">名前空間 jpcrp_cor で</text>
+    <text x="56" y="660" font-size="10.5" fill="#94886f">辞書上の定義に紐づく</text>
+
+    <!-- context -->
+    <rect x="272" y="470" width="220" height="196" rx="9" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="272" y="470" width="220" height="6" rx="3" fill="#2f8f8a"/>
+    <text x="288" y="498" font-size="13.5" font-weight="700" fill="#1f6b67">コンテキスト</text>
+    <text x="288" y="518" fill="#6a6353">いつ・連結/個別</text>
+    <text x="288" y="540" font-size="11" font-family="monospace" fill="#3a352a">CurrentYear</text>
+    <text x="288" y="556" font-size="11" font-family="monospace" fill="#3a352a">Duration</text>
+    <text x="288" y="582" fill="#241f17" font-weight="600">＝ 当期（期間）</text>
+    <text x="288" y="602" font-size="10.5" fill="#94886f">2025/4–2026/3・連結</text>
+    <text x="288" y="632" font-size="10.5" fill="#94886f">Instant=時点／</text>
+    <text x="288" y="646" font-size="10.5" fill="#94886f">Prior1Year=前期／</text>
+    <text x="288" y="660" font-size="10.5" fill="#94886f">_NonConsolidated=個別</text>
+
+    <!-- unit -->
+    <rect x="504" y="470" width="220" height="196" rx="9" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="504" y="470" width="220" height="6" rx="3" fill="#7a5fc0"/>
+    <text x="520" y="498" font-size="13.5" font-weight="700" fill="#5a44a0">ユニット</text>
+    <text x="520" y="518" fill="#6a6353">単位</text>
+    <text x="520" y="540" font-size="11" font-family="monospace" fill="#3a352a">JPY</text>
+    <text x="520" y="564" fill="#241f17" font-weight="600">＝ 円</text>
+    <text x="520" y="592" font-size="10.5" fill="#94886f">ほかに pure（比率・株数）</text>
+    <text x="520" y="606" font-size="10.5" fill="#94886f">JPYPerShares（円/株）</text>
+
+    <!-- value -->
+    <rect x="736" y="470" width="224" height="196" rx="9" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="736" y="470" width="224" height="6" rx="3" fill="#2f9d63"/>
+    <text x="752" y="498" font-size="13.5" font-weight="700" fill="#1f7d4a">値（ファクト本体）</text>
+    <text x="752" y="518" fill="#6a6353">数値そのもの</text>
+    <text x="752" y="542" font-size="12.5" font-family="monospace" fill="#3a352a">569992000000</text>
+    <text x="752" y="568" fill="#241f17" font-weight="600">＝ 5,699.92 億円</text>
+    <text x="752" y="596" font-size="10.5" fill="#94886f">decimals="-6" は</text>
+    <text x="752" y="610" font-size="10.5" fill="#94886f">百万円未満を丸める意</text>
+    <text x="752" y="640" font-size="10.5" fill="#94886f">値は円単位で格納。</text>
+    <text x="752" y="654" font-size="10.5" fill="#94886f">表示時に÷1億</text>
+  </g>
+</svg><figcaption>XBRLの構成とファクトの分解</figcaption></figure></p>
+<hr />
+<h2 id="1-edinet">1. EDINETから取得したファイル</h2>
+<p>有価証券報告書のダウンロード種別（EDINET API v2 の <code>type</code>）：</p>
+<table>
+<thead>
+<tr>
+<th>種別</th>
+<th><code>type</code></th>
+<th>中身</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>XBRL</strong></td>
+<td><code>1</code></td>
+<td>XBRL一式のZIP（本体）。下記構成</td>
+</tr>
+<tr>
+<td><strong>CSV</strong></td>
+<td><code>5</code></td>
+<td>XBRLを表形式に変換したCSVのZIP（<code>XBRL_TO_CSV/</code>、UTF-16タブ区切り）</td>
+</tr>
+<tr>
+<td>PDF</td>
+<td><code>2</code></td>
+<td>人が読む用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="xbrl-zipare">XBRL ZIPの中身（ARE実物）</h3>
+<pre><code>XBRL/
+├─ PublicDoc/                         ← 有価証券報告書の本体（メイン）
+│   ├─ jpcrp030000-asr-001_E21187-000_2026-03-31_01_2026-06-15.xbrl   ← ① インスタンス（数値の実体）
+│   ├─ ...-.xsd                        ← ② スキーマ（この書類専用の要素定義の入口）
+│   ├─ ..._pre.xml                     ← ③ 表示リンクベース（項目の並び順）
+│   ├─ ..._cal.xml                     ← ④ 計算リンクベース（合計＝内訳の加算関係）
+│   ├─ ..._def.xml                     ← ⑤ 定義リンクベース（軸＝ディメンションの構造）
+│   ├─ ..._lab.xml / ..._lab-en.xml    ← ⑥ ラベルリンクベース（要素の日本語/英語名）
+│   ├─ 0101010_honbun_..._ixbrl.htm 〜 ← ⑦ 本文（iXBRL）
+│   └─ images/                          ← 図表画像
+├─ AuditDoc/                           ← 監査報告書（同じ構成の別セット）
+└─ manifest_PublicDoc.xml              ← ⑧ 目録（どのファイルが一束か）
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>ファイル</th>
+<th>役割</th>
+<th>ダッシュボード化での使い所</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>①</td>
+<td><code>.xbrl</code></td>
+<td><strong>数値の実体</strong>（ファクトの集合）</td>
+<td>★これだけ読めば主要数値は取れる</td>
+</tr>
+<tr>
+<td>②</td>
+<td><code>.xsd</code></td>
+<td>この書類のスキーマ（要素定義の入口）</td>
+<td>通常は直接触らない</td>
+</tr>
+<tr>
+<td>③</td>
+<td><code>_pre.xml</code></td>
+<td>表示順・階層</td>
+<td>帳票の並びを再現するとき</td>
+</tr>
+<tr>
+<td>④</td>
+<td><code>_cal.xml</code></td>
+<td>合計＝内訳の加算関係</td>
+<td>検算・整合チェック</td>
+</tr>
+<tr>
+<td>⑤</td>
+<td><code>_def.xml</code></td>
+<td>軸（ディメンション）の構造</td>
+<td>セグメント等を分解するとき</td>
+</tr>
+<tr>
+<td>⑥</td>
+<td><code>_lab.xml</code></td>
+<td>要素の日本語/英語名</td>
+<td>表示名を出すとき</td>
+</tr>
+<tr>
+<td>⑦</td>
+<td><code>_ixbrl.htm</code></td>
+<td>人が読む本文＋数値タグ</td>
+<td>原文確認</td>
+</tr>
+<tr>
+<td>⑧</td>
+<td><code>manifest</code></td>
+<td>ファイルの束の目録</td>
+<td>ローダーが参照</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>要点</strong>：数値が入っているのは ① だけ。②〜⑥は「その数値をどう読むか」の取扱説明書（＝タクソノミ）。本スキルは ① のインスタンスから「経営指標等」を直接抽出する方針。</p>
+</blockquote>
+<hr />
+<h2 id="2-are">2. 用語集（ARE実例つき）</h2>
+<h3 id="taxonomy">タクソノミ（Taxonomy）</h3>
+<p>数値の「辞書・スキーマ」。どんな要素が存在し、名前・型・並び・計算関係は何かを定義する。<code>.xsd</code> ＋各種リンクベースの総称。EDINETが毎年版を公開（AREは <code>jpcrp 2025-11-01</code> 版）。</p>
+<h3 id="instance">インスタンス（Instance）</h3>
+<p>実際の数値が入った本体（<code>.xbrl</code>）。中身は<strong>ファクト</strong>の集まり。</p>
+<h3 id="element-concept">要素／コンセプト（Element / Concept）</h3>
+<p>項目の定義。例：<code>jpcrp_cor:RevenueIFRSSummaryOfBusinessResults</code>（IFRS売上収益・経営指標等）。</p>
+<h3 id="fact">ファクト（Fact）</h3>
+<p>「ある要素の、ある文脈での1つの値」。ARE実例：</p>
+<pre><code class="language-xml">&lt;jpcrp_cor:RevenueIFRSSummaryOfBusinessResults
+    contextRef=&quot;CurrentYearDuration&quot; unitRef=&quot;JPY&quot; decimals=&quot;-6&quot;&gt;569992000000&lt;/...&gt;
+</code></pre>
+<p>= 「当期の売上収益 ＝ 569,992,000,000円（5,699.92億円）」。</p>
+<h3 id="context">コンテキスト（Context）</h3>
+<p>そのファクトが「<strong>いつ・誰の・連結か個別か</strong>」を示す文脈。<code>contextRef</code> で紐づく。ARE実例：</p>
+<table>
+<thead>
+<tr>
+<th>コンテキストID</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CurrentYearDuration</code></td>
+<td>当期・期間（2025-04-01〜2026-03-31）＝フロー項目（売上・利益・CF）</td>
+</tr>
+<tr>
+<td><code>CurrentYearInstant</code></td>
+<td>当期・時点（2026-03-31）＝ストック項目（総資産・純資産）</td>
+</tr>
+<tr>
+<td><code>Prior1YearDuration</code></td>
+<td>前期</td>
+</tr>
+<tr>
+<td><code>..._NonConsolidatedMember</code></td>
+<td>個別（下記ディメンション付き）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="unit">ユニット（Unit）</h3>
+<p>単位。<code>JPY</code>（円）、<code>pure</code>（比率・株数）、<code>JPYPerShares</code>（円/株）など。</p>
+<h3 id="dimension-member">ディメンション／メンバー（Dimension / Member）＝軸</h3>
+<p>数値を多面的に切る「軸」と選択肢。AREの個別値はこう表現される：</p>
+<pre><code class="language-xml">&lt;xbrldi:explicitMember dimension=&quot;jppfs_cor:ConsolidatedOrNonConsolidatedAxis&quot;&gt;
+    jppfs_cor:NonConsolidatedMember&lt;/xbrldi:explicitMember&gt;
+</code></pre>
+<p>= 「連結／個別の軸」で「個別」を選択。セグメント軸・提出者別軸などもある。
+<strong>XBRLを難しくする最大要因</strong>。うっかり内訳や個別を拾って二重計上する事故が起きやすい（本スキルは連結を優先し、個別はフォールバックにして回避）。</p>
+<h3 id="linkbase">リンクベース（Linkbase）＝要素どうしの関係定義</h3>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>ファイル</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>表示 Presentation</td>
+<td><code>_pre.xml</code></td>
+<td>並び順・階層</td>
+</tr>
+<tr>
+<td>計算 Calculation</td>
+<td><code>_cal.xml</code></td>
+<td>合計＝内訳の加算（検算）</td>
+</tr>
+<tr>
+<td>定義 Definition</td>
+<td><code>_def.xml</code></td>
+<td>ディメンション（軸）の構造</td>
+</tr>
+<tr>
+<td>ラベル Label</td>
+<td><code>_lab.xml</code></td>
+<td>日本語/英語名</td>
+</tr>
+</tbody>
+</table>
+<h3 id="namespace-prefix">名前空間／プレフィックス（Namespace / Prefix）</h3>
+<p>要素名の衝突を防ぐ「所属」。AREに登場するEDINET標準タクソノミ：</p>
+<table>
+<thead>
+<tr>
+<th>プレフィックス</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>jpdei_cor</code></td>
+<td><strong>DEI</strong>（書類・提出者の基本情報）</td>
+</tr>
+<tr>
+<td><code>jpcrp_cor</code></td>
+<td>企業内容開示（有価証券報告書の様式・経営指標等）</td>
+</tr>
+<tr>
+<td><code>jppfs_cor</code></td>
+<td>日本基準の財務諸表本表</td>
+</tr>
+<tr>
+<td><code>jpigp_cor</code></td>
+<td>IFRSの財務諸表本表</td>
+</tr>
+<tr>
+<td><code>jpcrp030000-asr</code></td>
+<td>この書類＝<strong>有価証券報告書（asr）</strong> の様式番号</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deidocument-and-entity-information">DEI（Document and Entity Information）</h3>
+<p>書類・会社の基本情報のかたまり。ここから会社名・コード・会計基準を取得。ARE実値：</p>
+<pre><code>EDINETCodeDEI           = E21187
+SecurityCodeDEI         = 58570
+FilerNameInJapaneseDEI  = ＡＲＥホールディングス株式会社
+AccountingStandardsDEI  = IFRS
+CurrentFiscalYearEndDateDEI = 2026-03-31
+</code></pre>
+<p>（本スキルはこれで会社情報とIFRS/日本基準の自動判定を行う）</p>
+<h3 id="ixbrlinline-xbrl">iXBRL（Inline XBRL）</h3>
+<p>人が読むHTML（<code>_ixbrl.htm</code>）の中に機械可読のXBRLタグを埋め込んだ形式。1ファイルで「見た目」と「数値」を兼ねる。</p>
+<h3 id="decimals-scale">decimals / scale（桁の扱い）</h3>
+<p><code>decimals="-6"</code> は「百万円未満は丸め」の意。値自体は円単位（569,992,000,000円）。ダッシュボードでは÷1億して「億円」表示にする。</p>
+<hr />
+<h2 id="3-ai">3. なぜ「複雑」なのか（＝AIを使う理由）</h2>
+<ol>
+<li><strong>数値・型・関係が別ファイルに分離</strong>（インスタンスとタクソノミ）。</li>
+<li><strong>同じ「売上」でも会計基準で要素名が違う</strong>（<code>RevenueIFRS…</code> vs <code>NetSales…</code>）。</li>
+<li><strong>軸（ディメンション）で連結/個別/セグメントが多重化</strong>し、目的の1値を取り違えやすい。</li>
+<li>コンテキストID命名を理解しないと「どれが当期・連結か」を判別しづらい。</li>
+</ol>
+<p>→ この「人手だと辛い構造」を、Claude Code に解かせてまとめて可視化するのが今回の主眼。</p>
+<h3 id="claude-code">会計基準の違い：本来は大変 → Claude Codeなら簡単</h3>
+<p><figure class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" font-family="'Hiragino Sans','Noto Sans JP','Yu Gothic',sans-serif">
+<style>
+.bg{fill:#fff}.card{fill:#f1f5f9;stroke:#334155;stroke-width:1.5}.ifrs{fill:#ecfdf5;stroke:#059669;stroke-width:1.5}.jp{fill:#fff7ed;stroke:#ea580c;stroke-width:1.5}.goal{fill:#eef2ff;stroke:#4f46e5;stroke-width:1.5}
+.t{fill:#0f172a}.sub{fill:#475569}.arw{stroke:#2563eb;stroke-width:2;fill:none;marker-end:url(#a)}
+@media (prefers-color-scheme:dark){.bg{fill:#0b1220}.card{fill:#1e293b;stroke:#94a3b8}.ifrs{fill:#064e3b;stroke:#6ee7b7}.jp{fill:#7c2d12;stroke:#fdba74}.goal{fill:#312e81;stroke:#a5b4fc}.t{fill:#e2e8f0}.sub{fill:#94a3b8}.arw{stroke:#60a5fa}}
+</style>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker></defs>
+<rect class="bg" width="880" height="300"/>
+<rect class="card" x="20" y="120" width="130" height="60" rx="8"/>
+<text class="t" x="85" y="146" text-anchor="middle" font-size="13" font-weight="bold">有価証券報告書</text><text class="t" x="85" y="165" text-anchor="middle" font-size="13">XBRL</text>
+<rect class="card" x="200" y="112" width="190" height="76" rx="8"/>
+<text class="t" x="295" y="140" text-anchor="middle" font-size="13" font-weight="bold">基準を自動判定</text>
+<text class="sub" x="295" y="163" text-anchor="middle" font-size="12">AccountingStandardsDEI</text>
+<rect class="ifrs" x="440" y="45" width="220" height="60" rx="8"/>
+<text class="t" x="550" y="70" text-anchor="middle" font-size="13" font-weight="bold">IFRS</text>
+<text class="sub" x="550" y="91" text-anchor="middle" font-size="12">RevenueIFRS… / 税引前利益…</text>
+<rect class="jp" x="440" y="195" width="220" height="60" rx="8"/>
+<text class="t" x="550" y="220" text-anchor="middle" font-size="13" font-weight="bold">日本基準</text>
+<text class="sub" x="550" y="241" text-anchor="middle" font-size="12">NetSales… / 経常利益…</text>
+<rect class="goal" x="710" y="118" width="150" height="64" rx="8"/>
+<text class="t" x="785" y="145" text-anchor="middle" font-size="13" font-weight="bold">同じ</text>
+<text class="t" x="785" y="166" text-anchor="middle" font-size="13" font-weight="bold">ダッシュボード</text>
+<path class="arw" d="M150,150 L196,150"/>
+<path class="arw" d="M392,140 L438,90"/>
+<path class="arw" d="M392,160 L438,215"/>
+<path class="arw" d="M660,80 L706,135"/>
+<path class="arw" d="M660,220 L706,165"/>
+<text class="sub" x="440" y="290" text-anchor="middle" font-size="12">同じ入口・同じ操作。基準ごとの分岐はスキルが引き受ける</text>
+</svg><figcaption>会計基準の自動判定と分岐</figcaption></figure></p>
+<p>有価証券報告書には <strong>IFRS と 日本基準（Japan GAAP）</strong> が混在する。手で実装するなら、<code>AccountingStandardsDEI</code> で基準を判定し、基準ごとに拾う要素を分岐し（IFRS <code>RevenueIFRS…</code> ／ 日本基準 <code>NetSales…</code>）、さらに銀行など様式の違う業種まで面倒を見る必要がある——ここが本来いちばん手間のかかる部分。Claude Code はこの「調べて・分岐を書いて・スキルにまとめる」までを自走し、<strong>難しさをエージェントが一度だけ担い、スキルの中に収める</strong>。結果、使う側から見れば「どの会社を指しても同じ一言で動く」体験になる。これが"本来は大変→簡単"の中身であり、<strong>違いが消えるのではなく、複雑さの担い手が人からエージェントへ移る</strong>点がポイント。</p>
+<p>配布データ17社（時価総額上位15社＋既存サンプル2社）の内訳は <strong>IFRS 11／日本基準 6</strong>。基準で変わる主なラベル：</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>IFRS勢（例：トヨタ・ソニー・ファストリ）</th>
+<th>日本基準勢（例：キーエンス・銀行3行）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>収益</td>
+<td>売上収益（IFRS）</td>
+<td>売上高</td>
+</tr>
+<tr>
+<td>段階利益</td>
+<td>税引前利益（IFRS）</td>
+<td>経常利益</td>
+</tr>
+<tr>
+<td>純利益</td>
+<td>当期利益（親会社帰属）（IFRS）</td>
+<td>当期純利益</td>
+</tr>
+<tr>
+<td>資本</td>
+<td>親会社所有者持分（IFRS）</td>
+<td>純資産</td>
+</tr>
+<tr>
+<td>収益性</td>
+<td>ROE（持分利益率）（IFRS）</td>
+<td>自己資本利益率</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>日本基準6社＝三菱UFJ・三井住友・みずほ（銀行）／キーエンス／東京エレクトロン／松田産業、残り11社はIFRS。銀行は「売上高＝経常収益」「自己資本比率＝BIS規制比率ではない」等、業種特有の読み替えが要る点に注意（誤読しやすい）。スクリプトは基準を自動判定して分岐するので、この複雑さを意識せず同じ操作で扱える。</p>
+</blockquote>
+<div class="doc-foot">Claude Code 研修 配布資料 — XBRL入門.md</div>
+</main></body></html>

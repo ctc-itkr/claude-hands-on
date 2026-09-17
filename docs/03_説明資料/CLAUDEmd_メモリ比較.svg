@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 270" font-family="'Hiragino Sans','Noto Sans JP','Yu Gothic',sans-serif">
+<style>
+.bg{fill:#fff}.a{fill:#eff6ff;stroke:#2563eb;stroke-width:1.5}.b{fill:#f0fdf4;stroke:#16a34a;stroke-width:1.5}
+.t{fill:#0f172a}.sub{fill:#475569}.k{fill:#64748b}
+@media (prefers-color-scheme:dark){.bg{fill:#0b1220}.a{fill:#1e3a8a;stroke:#93c5fd}.b{fill:#14532d;stroke:#86efac}.t{fill:#e2e8f0}.sub{fill:#cbd5e1}.k{fill:#94a3b8}}
+</style>
+<rect class="bg" width="740" height="270"/>
+<rect class="a" x="30" y="30" width="320" height="210" rx="10"/>
+<rect class="b" x="390" y="30" width="320" height="210" rx="10"/>
+<text class="t" x="190" y="62" text-anchor="middle" font-size="16" font-weight="bold">CLAUDE.md</text>
+<text class="t" x="550" y="62" text-anchor="middle" font-size="16" font-weight="bold">メモリ（Auto Memory）</text>
+<text class="k" x="50" y="105" font-size="12">書き手</text><text class="sub" x="150" y="105" font-size="13">人が書く</text>
+<text class="k" x="410" y="105" font-size="12">書き手</text><text class="sub" x="510" y="105" font-size="13">Claudeが貯める</text>
+<text class="k" x="50" y="140" font-size="12">中身</text><text class="sub" x="150" y="140" font-size="13">前提・ルール</text>
+<text class="k" x="410" y="140" font-size="12">中身</text><text class="sub" x="510" y="140" font-size="13">学習・好み</text>
+<text class="k" x="50" y="175" font-size="12">性質</text><text class="sub" x="150" y="175" font-size="13">gitで共有・再現</text>
+<text class="k" x="410" y="175" font-size="12">性質</text><text class="sub" x="510" y="175" font-size="13">マシンローカル・自動</text>
+<text class="sub" x="190" y="215" text-anchor="middle" font-size="12">＝ 共有できる「憲法」</text>
+<text class="sub" x="550" y="215" text-anchor="middle" font-size="12">＝ 個人に馴染む「経験」</text>
+<text class="k" x="370" y="262" text-anchor="middle" font-size="12">再現性は CLAUDE.md＋スキル、快適さはメモリ</text>
+</svg>
