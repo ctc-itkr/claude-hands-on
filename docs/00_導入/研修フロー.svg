@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif">
   <rect x="0" y="0" width="1200" height="560" fill="#faf8f3"/>
   <text x="40" y="46" font-size="24" font-weight="700" fill="#241f17">ハンズオン 全体の流れ</text>
-  <text x="40" y="72" font-size="13.5" fill="#6a6353">EDINETの有報データ → Claude Codeで財務ダッシュボード → スキル化して別企業へ横展開</text>
+  <text x="40" y="72" font-size="13.5" fill="#6a6353">EDINETの有価証券報告書データ → Claude Codeで財務ダッシュボード → スキル化して別企業へ横展開</text>
 
   <defs>
     <marker id="chev" markerWidth="12" markerHeight="12" refX="4" refY="6" orient="auto">
@@ -90,7 +90,7 @@
 
   <!-- ===== payoff ribbon ===== -->
   <rect x="36" y="430" width="1122" height="86" rx="12" fill="#f1ece0" stroke="#e0d6bf" stroke-width="1.5"/>
-  <text x="60" y="462" font-size="13" font-weight="700" fill="#9a6a12">体感のヤマ場</text>
+  <text x="60" y="462" font-size="13" font-weight="700" fill="#9a6a12">重要ポイント</text>
   <text x="60" y="484" font-size="12" fill="#6a6353">再利用でこれだけ短縮</text>
 
   <!-- pill 1社目 -->

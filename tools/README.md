@@ -40,3 +40,19 @@ python3 tools/fetch_edinet_xbrl.py --out ./data --list data/時価総額上位.t
   11月提出（本リポジトリでは `data/ファーストリテイリング_E03217` として取得済み）。
 - 見つからない場合は `--max-days` を増やす（既定500）。
 - 285A（キオクシア）等の英字入りコードにも対応。
+
+---
+
+## 配布資料の変換運用（md → HTML / PDF）
+
+資料フォルダは **形式ごとにサブフォルダで分ける**運用：
+
+- ソース … `<フォルダ>/md/*.md`（図SVGは資料フォルダ直下に置く＝共有アセット）
+- HTML … `<フォルダ>/html/*.html`（`tools/md2html.py`。図SVGとCSSを内包した自己完結HTML）
+- PDF（スライド）… `<フォルダ>/pdf/*.pdf`（`tools/slide2pdf.py`。A4横・`##`見出し＝スライド境界）
+
+例）`docs/03_説明資料/md/用語集.md` → `docs/03_説明資料/html/用語集.html`、
+`docs/00_導入/md/研修スライド.md` → `docs/00_導入/pdf/研修スライド.pdf`。
+
+スクリプトは `markdown`／`cairosvg`／`playwright(chromium)` に依存するため、
+再変換は原則このクラウドセッション（Claude）側で実行する。出力は必ず上記サブフォルダへ。

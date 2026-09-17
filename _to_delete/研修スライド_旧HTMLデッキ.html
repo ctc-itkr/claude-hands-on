@@ -1,0 +1,461 @@
+<!DOCTYPE html><html lang=ja><head><meta charset=utf-8><style>
+@page{size:1280px 720px;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f6f1e8;--panel:#fff;--ink:#232830;--muted:#6f7683;--gold:#a97c37;--gold-d:#8a6326;
+--blue:#2f6df6;--blue-soft:#e8f0ff;--line:#e6ddcd;--code:#2b2f37;--codebg:#f3ede1;}
+body{font-family:'Noto Sans CJK JP','Hiragino Sans','Noto Sans JP',sans-serif;color:var(--ink)}
+.slide{width:1280px;height:720px;background:var(--bg);padding:52px 64px 60px;position:relative;overflow:hidden;page-break-after:always;display:flex;flex-direction:column}
+.slide:last-child{page-break-after:auto}
+.kicker{font-size:14px;font-weight:800;letter-spacing:.1em;color:var(--gold);text-transform:uppercase}
+.title{font-size:36px;font-weight:800;margin-top:4px}
+.title .bar{display:block;width:60px;height:5px;background:var(--gold);border-radius:3px;margin-top:12px}
+.pageno{position:absolute;right:64px;bottom:24px;font-size:12px;color:var(--muted);letter-spacing:.05em}
+.foot{position:absolute;left:64px;bottom:24px;font-size:12px;color:var(--muted)}
+.body{flex:1;margin-top:22px;min-height:0}
+.lead{font-size:21px;line-height:1.7;color:#333a45}
+.lead b{color:var(--ink)}
+b.g{color:var(--gold-d)} b.bl{color:var(--blue)}
+ul.pts{list-style:none;font-size:20px;line-height:1.95;margin-top:6px}
+ul.pts li{padding-left:2px}
+ul.pts li::before{content:"—  ";color:var(--gold);font-weight:800}
+.figwrap{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 26px rgba(120,100,60,.10);padding:20px;display:flex;align-items:center;justify-content:center;height:100%}
+.figwrap svg{max-width:100%;max-height:100%;height:auto}
+table{border-collapse:separate;border-spacing:0;width:100%;background:var(--panel);border-radius:14px;overflow:hidden;box-shadow:0 8px 22px rgba(120,100,60,.10);font-size:19px}
+th,td{padding:14px 20px;text-align:left;border-bottom:1px solid var(--line)}
+thead th{background:var(--gold);color:#fff;font-size:17px;letter-spacing:.02em}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:#faf6ef}
+td.k{color:var(--muted);font-weight:800;width:24%}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--blue);font-size:.92em}
+.code{background:var(--codebg);border:1px solid var(--line);border-radius:12px;padding:16px 20px;
+font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;line-height:1.6;color:#333;white-space:pre;overflow:hidden}
+.code .c{color:#8a6326} .code .b{color:var(--blue)}
+.grid2{display:flex;gap:26px;height:100%}
+.card{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;box-shadow:0 8px 22px rgba(120,100,60,.08);display:flex;flex-direction:column}
+.card .h{font-size:22px;font-weight:800;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.card .s{color:var(--muted);font-size:15px;margin-bottom:12px}
+.card ul{list-style:none;font-size:18px;line-height:1.85}
+.card ul li::before{content:"—  ";color:var(--gold);font-weight:800}
+.pill{display:inline-block;background:var(--blue-soft);color:#1b3a8a;border-radius:999px;padding:4px 12px;font-size:14px;font-weight:800}
+.note{background:#fff8ec;border:1px solid #ecdcbf;border-left:5px solid var(--gold);border-radius:0 12px 12px 0;
+padding:14px 18px;font-size:17px;color:#4a4131;margin-top:14px}
+.cap{margin-top:10px;text-align:center;color:var(--muted);font-size:13px}
+.split{display:flex;gap:30px;height:100%}
+.split>.col{flex:1;display:flex;flex-direction:column;min-width:0}
+.h2row{display:flex;align-items:baseline;gap:12px}
+/* cover / divider */
+.cover{justify-content:center}
+.cover .rule{width:120px;height:8px;background:linear-gradient(90deg,var(--gold),#d8c090);border-radius:4px;margin-bottom:18px}
+.cover .big{font-size:56px;font-weight:900;line-height:1.16}
+.cover .sub{font-size:22px;color:#4a5160;margin-top:18px;font-weight:700}
+.cover .tags{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+.cover .tag{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-size:15px;font-weight:800;color:#3a414d}
+.cover .tag b{color:var(--gold-d)}
+.divider{justify-content:center;align-items:flex-start}
+.divider .num{font-size:20px;font-weight:900;color:var(--gold)}
+.divider .dt{font-size:52px;font-weight:900;margin-top:6px}
+.small{font-size:16px;color:var(--muted)}
+</style></head><body><section class="slide cover"><div class="body cover" style="flex-direction:column">
+<div class="kicker">Amazon Bedrock ／ デスクトップアプリの Claude Code</div>
+<div class="rule" style="margin-top:12px"></div>
+<div class="big">複雑な有価証券報告書データを、<br>AIで数分でダッシュボードに</div>
+<div class="sub">Claude Code ハンズオン研修</div>
+<div class="tags"><span class="tag">題材：<b>EDINET の XBRL</b></span>
+<span class="tag">ゴール：<b>財務ダッシュボード</b></span>
+<span class="tag">体験：<b>スキル化 → 横展開</b></span></div></div></section><section class="slide "><div class="kicker">Agenda</div><div class="title">全体の流れ<span class="bar"></span></div><div class="body"><div class="figwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif">
+  <rect x="0" y="0" width="1200" height="560" fill="#faf8f3"/>
+  <text x="40" y="46" font-size="24" font-weight="700" fill="#241f17">ハンズオン 全体の流れ</text>
+  <text x="40" y="72" font-size="13.5" fill="#6a6353">EDINETの有報データ → Claude Codeで財務ダッシュボード → スキル化して別企業へ横展開</text>
+
+  <defs>
+    <marker id="chev" markerWidth="12" markerHeight="12" refX="4" refY="6" orient="auto">
+      <path d="M1,2 L7,6 L1,10" fill="none" stroke="#b08a3a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- ===== 5 stage cards ===== -->
+  <!-- card geometry: w=210, gap=18, x = 36,264,492,720,948 ; y=100 h=300 -->
+  <g>
+    <!-- helper styles inline per element -->
+    <!-- Card 1 -->
+    <rect x="36" y="100" width="210" height="300" rx="12" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="36" y="100" width="210" height="7" rx="3.5" fill="#9a6a12"/>
+    <circle cx="66" cy="140" r="16" fill="#9a6a12"/>
+    <text x="66" y="146" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+    <text x="92" y="146" font-size="16" font-weight="700" fill="#241f17">ゴール共有</text>
+    <g font-size="12" fill="#3a352a">
+      <text x="56" y="184">・EDINET →</text>
+      <text x="66" y="202">ダッシュボード作成</text>
+      <text x="56" y="228">・なぜ？人には複雑な</text>
+      <text x="66" y="246">データをAIで解決</text>
+    </g>
+
+    <!-- Card 2 -->
+    <rect x="264" y="100" width="210" height="300" rx="12" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="264" y="100" width="210" height="7" rx="3.5" fill="#9a6a12"/>
+    <circle cx="294" cy="140" r="16" fill="#9a6a12"/>
+    <text x="294" y="146" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+    <text x="320" y="146" font-size="16" font-weight="700" fill="#241f17">説明と準備</text>
+    <g font-size="12" fill="#3a352a">
+      <text x="284" y="180">・EDINETとは</text>
+      <text x="284" y="204">・取得/配布</text>
+      <text x="294" y="222" font-size="11" fill="#6a6353">Web中心・APIは補足</text>
+      <text x="284" y="248">・XBRLと周辺用語</text>
+      <text x="294" y="266" font-size="11" fill="#6a6353">実コードを見せる</text>
+      <text x="284" y="292">・ゴール例を見せる</text>
+      <text x="294" y="310" font-size="11" fill="#6a6353">完成品／バフェットコード像</text>
+    </g>
+
+    <!-- Card 3 -->
+    <rect x="492" y="100" width="210" height="300" rx="12" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="492" y="100" width="210" height="7" rx="3.5" fill="#c79433"/>
+    <circle cx="522" cy="140" r="16" fill="#c79433"/>
+    <text x="522" y="146" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+    <text x="548" y="146" font-size="16" font-weight="700" fill="#241f17">作る（1社目）</text>
+    <g font-size="12" fill="#3a352a">
+      <text x="512" y="184">・フォルダを指定</text>
+      <text x="512" y="210">・プロンプトの書き方</text>
+      <text x="512" y="236">・対話でカスタマイズ</text>
+      <text x="512" y="262" font-size="11" fill="#a8471f" font-weight="600">＝試行錯誤で仕上げる</text>
+    </g>
+
+    <!-- Card 4 -->
+    <rect x="720" y="100" width="210" height="300" rx="12" fill="#fbf4e6" stroke="#d8ab4f" stroke-width="2"/>
+    <rect x="720" y="100" width="210" height="7" rx="3.5" fill="#9a6a12"/>
+    <circle cx="750" cy="140" r="16" fill="#9a6a12"/>
+    <text x="750" y="146" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+    <text x="776" y="146" font-size="15.5" font-weight="700" fill="#241f17">スキル化→2社目</text>
+    <g font-size="12" fill="#3a352a">
+      <text x="740" y="182">・毎回同じ指示は大変</text>
+      <text x="750" y="200" font-size="11" fill="#6a6353">→手順をスキルに固める</text>
+      <text x="740" y="226">・Claude周辺の用語</text>
+      <text x="740" y="252">・好きな企業で2社目</text>
+      <text x="750" y="270" font-size="11" fill="#1f7d4a" font-weight="600">＝数分で再現できる</text>
+    </g>
+
+    <!-- Card 5 -->
+    <rect x="948" y="100" width="210" height="300" rx="12" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="948" y="100" width="210" height="7" rx="3.5" fill="#3a4653"/>
+    <circle cx="978" cy="140" r="16" fill="#3a4653"/>
+    <text x="978" y="146" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">5</text>
+    <text x="1004" y="146" font-size="16" font-weight="700" fill="#241f17">今後</text>
+    <g font-size="12" fill="#3a352a">
+      <text x="968" y="184">・APIで多数の企業へ</text>
+      <text x="968" y="210">・バフェットコード</text>
+      <text x="978" y="228">簡易版を自作可能</text>
+    </g>
+  </g>
+
+  <!-- arrows between cards -->
+  <line x1="248" y1="250" x2="262" y2="250" stroke="#b08a3a" stroke-width="2.2" marker-end="url(#chev)"/>
+  <line x1="476" y1="250" x2="490" y2="250" stroke="#b08a3a" stroke-width="2.2" marker-end="url(#chev)"/>
+  <line x1="704" y1="250" x2="718" y2="250" stroke="#b08a3a" stroke-width="2.2" marker-end="url(#chev)"/>
+  <line x1="932" y1="250" x2="946" y2="250" stroke="#b08a3a" stroke-width="2.2" marker-end="url(#chev)"/>
+
+  <!-- ===== payoff ribbon ===== -->
+  <rect x="36" y="430" width="1122" height="86" rx="12" fill="#f1ece0" stroke="#e0d6bf" stroke-width="1.5"/>
+  <text x="60" y="462" font-size="13" font-weight="700" fill="#9a6a12">体感のヤマ場</text>
+  <text x="60" y="484" font-size="12" fill="#6a6353">再利用でこれだけ短縮</text>
+
+  <!-- pill 1社目 -->
+  <rect x="250" y="452" width="196" height="42" rx="21" fill="#ffffff" stroke="#c79433" stroke-width="1.5"/>
+  <text x="348" y="472" font-size="13" font-weight="700" fill="#a8471f" text-anchor="middle">1社目：試行錯誤で完成</text>
+  <text x="348" y="488" font-size="10.5" fill="#94886f" text-anchor="middle">プロンプトを直しながら</text>
+
+  <line x1="456" y1="473" x2="486" y2="473" stroke="#b08a3a" stroke-width="2.5" marker-end="url(#chev)"/>
+
+  <!-- pill 2社目 -->
+  <rect x="496" y="452" width="220" height="42" rx="21" fill="#fbf4e6" stroke="#9a6a12" stroke-width="2"/>
+  <text x="606" y="472" font-size="13" font-weight="700" fill="#1f7d4a" text-anchor="middle">2社目：数分で再現</text>
+  <text x="606" y="488" font-size="10.5" fill="#7a6a48" text-anchor="middle">スキルを適用（好きな企業でOK）</text>
+
+  <line x1="726" y1="473" x2="756" y2="473" stroke="#b08a3a" stroke-width="2.5" marker-end="url(#chev)"/>
+
+  <!-- pill 展開 -->
+  <rect x="766" y="452" width="368" height="42" rx="21" fill="#ffffff" stroke="#cdd5dd" stroke-width="1.5"/>
+  <text x="950" y="478" font-size="13" font-weight="600" fill="#3a4653" text-anchor="middle">API活用で、いろんな企業へ横展開できる</text>
+</svg></div></div><div class="foot">Claude Code 研修</div><div class="pageno">02</div></section><section class="slide "><div class="kicker">00 ・ 前提</div><div class="title">今回の目的と環境<span class="bar"></span></div>
+<div class="body" style="display:flex;flex-direction:column;gap:18px">
+<ul class="pts"><li><b>目的</b>：日常業務を Claude で効率化し、<b>複雑な処理はAIに任せる</b>感覚を持ち帰る。</li></ul>
+<div class="grid2" style="height:auto">
+<div class="card"><div class="h">🧠 考える</div><div class="s">クラウドのモデル</div>
+<ul><li>Amazon Bedrock（東京リージョン）</li><li>認証は Entra ID 連携</li></ul></div>
+<div class="card"><div class="h">🛠 動かす</div><div class="s">手元PC</div>
+<ul><li>デスクトップアプリの Claude Code</li><li>ファイル操作・コマンド実行</li></ul></div></div>
+<div class="note"><b>制約</b>：MCP を利用した外部サービス連携は不可（<span class="mono">pip</span>やデータ取得は手元PCの通信次第で別問題）。</div>
+</div><div class="foot">Claude Code 研修</div><div class="pageno">03</div></section><section class="slide divider"><div class="body divider" style="flex-direction:column;justify-content:center">
+<div class="num">01</div><div class="dt">自己紹介</div>
+<div class="small" style="margin-top:16px">お名前 ／ 普段の業務 ／ Claude・生成AIの利用経験（軽く）</div></div><div class="foot">Claude Code 研修</div><div class="pageno">04</div></section><section class="slide "><div class="kicker">02 ・ ウォームアップ</div><div class="title">まず触ってみる<span class="bar"></span></div>
+<div class="body split">
+<div class="col"><div class="small" style="margin-bottom:8px">軽いお題で1回動かす（コピペ用）：</div>
+<div class="code">金の重量(g)と純度(%)を入力すると買取概算額を
+計算できる、<span class="b">単一HTML</span>のツールを作ってください。
+・外部ライブラリは使わず、1ファイルで完結
+・入力はフォーム、計算はその場で表示
+・グラム単価は仮に 9,000円/g を定数に
+作成後、ローカルで開いて確認する手順も教えて。</div></div>
+<div class="col"><div class="card" style="flex:1"><div class="h">困った時の助け舟</div>
+<ul><li><b>まず Claude に聞いてみる</b></li>
+<li><b>完璧なプロンプトを目指さない</b>（対話で育てる）</li>
+<li><b>確認が入ることがある</b> ← AIの時代でも<b>人間が判断</b>する場面</li></ul>
+<div class="note" style="margin-top:auto">全課題のコピペ用プロンプトは配布のサンプル集に。</div></div></div>
+</div><div class="foot">Claude Code 研修</div><div class="pageno">05</div></section><section class="slide "><div class="kicker">03 ・ ゴール</div><div class="title">今回のゴール<span class="bar"></span></div>
+<div class="body" style="display:flex;flex-direction:column;gap:16px">
+<div class="lead"><b>有価証券報告書の XBRL → 財務ダッシュボード</b> を作る。</div>
+<ul class="pts">
+<li>完成イメージ：作成済みサンプル（ＡＲＥホールディングス 財務ダッシュボード）</li>
+<li>商用イメージの参照：<b>バフェットコード</b>（今日作るのはその簡易版）</li>
+<li>なぜこのテーマか：<b>人が扱うには複雑すぎる XBRL</b> を、AIでまとめて可視化＝Claude Code の得意領域</li></ul>
+<div class="note"><b>Copilot との住み分け</b>：市民開発・Office 連携は Copilot ／ 自律エージェント・複雑データ処理・コード生成は Claude Code。</div>
+</div><div class="foot">Claude Code 研修</div><div class="pageno">06</div></section><section class="slide "><div class="kicker">04 ・ 準備</div><div class="title">課題の説明と準備<span class="bar"></span></div>
+<div class="body split">
+<div class="col"><div class="card" style="flex:1"><div class="h">配布物</div>
+<ul><li>各社の有価証券報告書 XBRL<br><span class="mono">data/&lt;社名&gt;_&lt;EDINETコード&gt;/</span></li>
+<li>コピペ用プロンプト集</li></ul>
+<div class="note" style="margin-top:auto"><b>準備</b>：作業フォルダ（データの場所）を Claude Code に教える。</div></div></div>
+<div class="col"><div class="small" style="margin-bottom:8px">モデルの想定（Bedrock 東京で使える範囲で相対的に）</div>
+<table><thead><tr><th>向いている作業</th><th>使うモデル</th></tr></thead><tbody>
+<tr><td class="k">構築（作り込み）</td><td>上位モデル（Opus 系）</td></tr>
+<tr><td class="k">実行・横展開</td><td>中位（Sonnet 系）→ 安定後は軽量（Haiku 系）</td></tr>
+</tbody></table></div>
+</div><div class="foot">Claude Code 研修</div><div class="pageno">07</div></section><section class="slide "><div class="kicker">05 ・ XBRL の説明（覚えなくてよい）</div><div class="title">XBRL の構成<span class="bar"></span></div>
+<div class="body split">
+<div class="col" style="flex:1.4"><div class="figwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 690" font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif">
+  <rect x="0" y="0" width="1000" height="690" fill="#faf8f3"/>
+  <!-- title -->
+  <text x="40" y="40" font-size="22" font-weight="700" fill="#241f17">XBRLの構成 ── タクソノミ（辞書・型） × インスタンス（実データ）</text>
+  <text x="40" y="64" font-size="13" fill="#6a6353">「勘定科目マスタ（タクソノミ）に沿って今期の数値（インスタンス）を記録したもの」がXBRL</text>
+
+  <!-- ===== TAXONOMY BOX ===== -->
+  <rect x="40" y="88" width="430" height="228" rx="12" fill="#eef1f4" stroke="#cdd5dd" stroke-width="1.5"/>
+  <rect x="40" y="88" width="430" height="34" rx="12" fill="#3a4653"/>
+  <rect x="40" y="104" width="430" height="18" fill="#3a4653"/>
+  <text x="60" y="111" font-size="15" font-weight="700" fill="#ffffff">タクソノミ（辞書・型）</text>
+  <text x="452" y="111" font-size="11" fill="#c9d2db" text-anchor="end">どう読むか</text>
+
+  <g font-size="12.5">
+    <rect x="60" y="136" width="72" height="22" rx="5" fill="#dbe3ea" stroke="#b9c4ce"/>
+    <text x="96" y="151" text-anchor="middle" font-family="monospace" fill="#2c3742">.xsd</text>
+    <text x="144" y="151" fill="#2c3742">スキーマ ｜ 要素（項目）の定義・型</text>
+
+    <rect x="60" y="168" width="72" height="22" rx="5" fill="#dbe3ea" stroke="#b9c4ce"/>
+    <text x="96" y="183" text-anchor="middle" font-family="monospace" fill="#2c3742">_pre</text>
+    <text x="144" y="183" fill="#2c3742">表示リンクベース ｜ 並び順・階層</text>
+
+    <rect x="60" y="200" width="72" height="22" rx="5" fill="#dbe3ea" stroke="#b9c4ce"/>
+    <text x="96" y="215" text-anchor="middle" font-family="monospace" fill="#2c3742">_cal</text>
+    <text x="144" y="215" fill="#2c3742">計算リンクベース ｜ 合計＝内訳の加算</text>
+
+    <rect x="60" y="232" width="72" height="22" rx="5" fill="#dbe3ea" stroke="#b9c4ce"/>
+    <text x="96" y="247" text-anchor="middle" font-family="monospace" fill="#2c3742">_def</text>
+    <text x="144" y="247" fill="#2c3742">定義リンクベース ｜ 軸（ディメンション）</text>
+
+    <rect x="60" y="264" width="72" height="22" rx="5" fill="#dbe3ea" stroke="#b9c4ce"/>
+    <text x="96" y="279" text-anchor="middle" font-family="monospace" fill="#2c3742">_lab</text>
+    <text x="144" y="279" fill="#2c3742">ラベルリンクベース ｜ 日本語/英語名</text>
+  </g>
+
+  <!-- ===== INSTANCE BOX ===== -->
+  <rect x="530" y="88" width="430" height="228" rx="12" fill="#f6efe0" stroke="#e0cfa6" stroke-width="1.5"/>
+  <rect x="530" y="88" width="430" height="34" rx="12" fill="#9a6a12"/>
+  <rect x="530" y="104" width="430" height="18" fill="#9a6a12"/>
+  <text x="550" y="111" font-size="15" font-weight="700" fill="#ffffff">インスタンス（.xbrl）</text>
+  <text x="942" y="111" font-size="11" fill="#f0e2c2" text-anchor="end">何がいくつか＝実データ</text>
+
+  <g font-size="12.5">
+    <rect x="550" y="140" width="96" height="22" rx="5" fill="#ecdcbb" stroke="#d8c199"/>
+    <text x="598" y="155" text-anchor="middle" fill="#6b4a10">ファクト</text>
+    <text x="658" y="155" fill="#4a3a20">値そのもの（多数）</text>
+
+    <rect x="550" y="176" width="96" height="22" rx="5" fill="#ecdcbb" stroke="#d8c199"/>
+    <text x="598" y="191" text-anchor="middle" fill="#6b4a10">コンテキスト</text>
+    <text x="658" y="191" fill="#4a3a20">いつ・連結/個別</text>
+
+    <rect x="550" y="212" width="96" height="22" rx="5" fill="#ecdcbb" stroke="#d8c199"/>
+    <text x="598" y="227" text-anchor="middle" fill="#6b4a10">ユニット</text>
+    <text x="658" y="227" fill="#4a3a20">単位（円・株・％）</text>
+
+    <rect x="550" y="248" width="96" height="22" rx="5" fill="#ecdcbb" stroke="#d8c199"/>
+    <text x="598" y="263" text-anchor="middle" fill="#6b4a10">DEI</text>
+    <text x="658" y="263" fill="#4a3a20">会社情報・会計基準（IFRS/日本基準）</text>
+  </g>
+
+  <!-- reference arrow instance -> taxonomy -->
+  <defs>
+    <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#9a6a12"/>
+    </marker>
+  </defs>
+  <line x1="548" y1="150" x2="474" y2="150" stroke="#9a6a12" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="511" y="142" font-size="10.5" fill="#9a6a12" text-anchor="middle" font-weight="600">参照</text>
+  <text x="511" y="172" font-size="9.5" fill="#8a7a5c" text-anchor="middle">各ファクトは</text>
+  <text x="511" y="184" font-size="9.5" fill="#8a7a5c" text-anchor="middle">要素定義を指す</text>
+
+  <!-- ===== FACT ANATOMY ===== -->
+  <text x="40" y="360" font-size="16" font-weight="700" fill="#241f17">1ファクトの分解（ＡＲＥホールディングス 実例）</text>
+
+  <rect x="40" y="374" width="920" height="72" rx="8" fill="#20221f"/>
+  <text x="60" y="404" font-family="monospace" font-size="14">
+    <tspan fill="#e6e2d8">&lt;</tspan><tspan fill="#d8ab4f" font-weight="700">jpcrp_cor:RevenueIFRSSummaryOfBusinessResults</tspan>
+  </text>
+  <text x="60" y="428" font-family="monospace" font-size="14">
+    <tspan fill="#e6e2d8">  </tspan><tspan fill="#6fc0bd">contextRef="CurrentYearDuration"</tspan><tspan fill="#e6e2d8"> </tspan><tspan fill="#b39ce0">unitRef="JPY"</tspan><tspan fill="#e6e2d8">&gt;</tspan><tspan fill="#7ecb9a" font-weight="700">569992000000</tspan><tspan fill="#e6e2d8">&lt;/…&gt;</tspan>
+  </text>
+
+  <!-- four cards -->
+  <g font-size="12">
+    <!-- element -->
+    <rect x="40" y="470" width="220" height="196" rx="9" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="40" y="470" width="220" height="6" rx="3" fill="#d8ab4f"/>
+    <text x="56" y="498" font-size="13.5" font-weight="700" fill="#8a6410">要素（コンセプト）</text>
+    <text x="56" y="518" fill="#6a6353">何の項目か</text>
+    <text x="56" y="540" font-size="11" font-family="monospace" fill="#3a352a">Revenue…</text>
+    <text x="56" y="556" font-size="11" font-family="monospace" fill="#3a352a">SummaryOf</text>
+    <text x="56" y="572" font-size="11" font-family="monospace" fill="#3a352a">BusinessResults</text>
+    <text x="56" y="596" fill="#241f17" font-weight="600">＝ IFRS売上収益</text>
+    <text x="56" y="616" font-size="10.5" fill="#94886f">（経営指標等）</text>
+    <text x="56" y="646" font-size="10.5" fill="#94886f">名前空間 jpcrp_cor で</text>
+    <text x="56" y="660" font-size="10.5" fill="#94886f">辞書上の定義に紐づく</text>
+
+    <!-- context -->
+    <rect x="272" y="470" width="220" height="196" rx="9" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="272" y="470" width="220" height="6" rx="3" fill="#2f8f8a"/>
+    <text x="288" y="498" font-size="13.5" font-weight="700" fill="#1f6b67">コンテキスト</text>
+    <text x="288" y="518" fill="#6a6353">いつ・連結/個別</text>
+    <text x="288" y="540" font-size="11" font-family="monospace" fill="#3a352a">CurrentYear</text>
+    <text x="288" y="556" font-size="11" font-family="monospace" fill="#3a352a">Duration</text>
+    <text x="288" y="582" fill="#241f17" font-weight="600">＝ 当期（期間）</text>
+    <text x="288" y="602" font-size="10.5" fill="#94886f">2025/4–2026/3・連結</text>
+    <text x="288" y="632" font-size="10.5" fill="#94886f">Instant=時点／</text>
+    <text x="288" y="646" font-size="10.5" fill="#94886f">Prior1Year=前期／</text>
+    <text x="288" y="660" font-size="10.5" fill="#94886f">_NonConsolidated=個別</text>
+
+    <!-- unit -->
+    <rect x="504" y="470" width="220" height="196" rx="9" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="504" y="470" width="220" height="6" rx="3" fill="#7a5fc0"/>
+    <text x="520" y="498" font-size="13.5" font-weight="700" fill="#5a44a0">ユニット</text>
+    <text x="520" y="518" fill="#6a6353">単位</text>
+    <text x="520" y="540" font-size="11" font-family="monospace" fill="#3a352a">JPY</text>
+    <text x="520" y="564" fill="#241f17" font-weight="600">＝ 円</text>
+    <text x="520" y="592" font-size="10.5" fill="#94886f">ほかに pure（比率・株数）</text>
+    <text x="520" y="606" font-size="10.5" fill="#94886f">JPYPerShares（円/株）</text>
+
+    <!-- value -->
+    <rect x="736" y="470" width="224" height="196" rx="9" fill="#ffffff" stroke="#e6ddc9" stroke-width="1.5"/>
+    <rect x="736" y="470" width="224" height="6" rx="3" fill="#2f9d63"/>
+    <text x="752" y="498" font-size="13.5" font-weight="700" fill="#1f7d4a">値（ファクト本体）</text>
+    <text x="752" y="518" fill="#6a6353">数値そのもの</text>
+    <text x="752" y="542" font-size="12.5" font-family="monospace" fill="#3a352a">569992000000</text>
+    <text x="752" y="568" fill="#241f17" font-weight="600">＝ 5,699.92 億円</text>
+    <text x="752" y="596" font-size="10.5" fill="#94886f">decimals="-6" は</text>
+    <text x="752" y="610" font-size="10.5" fill="#94886f">百万円未満を丸める意</text>
+    <text x="752" y="640" font-size="10.5" fill="#94886f">値は円単位で格納。</text>
+    <text x="752" y="654" font-size="10.5" fill="#94886f">表示時に÷1億</text>
+  </g>
+</svg></div></div>
+<div class="col"><ul class="pts">
+<li><b>タクソノミ</b>（辞書・型）＋ <b>インスタンス</b>（実データ <span class="mono">.xbrl</span>）＝ XBRL</li>
+<li>数値の実体は<b>ファクト</b>。「どの期・連結/個別か」は<b>コンテキスト</b>で決まる</li>
+<li>取得は <b>手段1＝Web 手動DL</b>（キー不要）</li></ul>
+<div class="note">⚠️ 当日ハマる筆頭＝<b>証券コードは5桁（4桁＋末尾0）</b></div></div>
+</div><div class="foot">Claude Code 研修</div><div class="pageno">08</div></section><section class="slide "><div class="kicker">05 ・ XBRL</div><div class="title">1ファクトの実例<span class="bar"></span></div>
+<div class="body" style="display:flex;flex-direction:column;gap:14px">
+<div class="code"><span class="b">&lt;jpcrp_cor:RevenueIFRSSummaryOfBusinessResults</span>
+    contextRef="CurrentYearDuration" unitRef="JPY" decimals="-6"<span class="b">&gt;</span>569992000000<span class="b">&lt;/…&gt;</span></div>
+<div class="lead">＝「当期の売上収益 ＝ 569,992,000,000円（≒ <b>5,700億円</b>）」</div>
+<ul class="pts">
+<li><span class="mono">contextRef="CurrentYearDuration"</span> … 当期・期間（フロー項目）</li>
+<li><span class="mono">unitRef="JPY"</span> … 単位は円 → ダッシュボードでは ÷1億して「億円」表示</li>
+<li><b>人手で読むのは大変 → だから AI に任せる</b></li></ul>
+</div><div class="foot">Claude Code 研修</div><div class="pageno">09</div></section><section class="slide "><div class="kicker">06 ・ 演習</div><div class="title">1社目を作る<span class="bar"></span></div>
+<div class="body split">
+<div class="col"><div class="small" style="margin-bottom:8px">やること：<b>日本語で頼むだけ</b></div>
+<div class="code">data/トヨタ自動車_E02144 の有価証券報告書XBRLを
+解析して、主要財務をダッシュボードにして</div>
+<div class="note"><b>コスト作法</b>：巨大な XBRL 本文を会話に貼らない。<br>構成→対象タグの当たり→スクリプト化→結果だけ確認。</div></div>
+<div class="col" style="flex:1.15"><div class="small" style="margin-bottom:8px">裏で動く実処理（スキルが実行）</div>
+<div class="figwrap" style="padding:14px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 150" font-family="'Hiragino Sans','Noto Sans JP','Yu Gothic',sans-serif">
+<style>
+.bg{fill:#fff}.card{fill:#f1f5f9;stroke:#334155;stroke-width:1.5}.out{fill:#eef2ff;stroke:#4f46e5;stroke-width:1.5}
+.t{fill:#0f172a}.sub{fill:#475569}.mono{fill:#2563eb}.arw{stroke:#2563eb;stroke-width:2;fill:none;marker-end:url(#a)}
+@media (prefers-color-scheme:dark){.bg{fill:#0b1220}.card{fill:#1e293b;stroke:#94a3b8}.out{fill:#312e81;stroke:#a5b4fc}.t{fill:#e2e8f0}.sub{fill:#94a3b8}.mono{fill:#60a5fa}.arw{stroke:#60a5fa}}
+</style>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker></defs>
+<rect class="bg" width="880" height="150"/>
+<rect class="card" x="20" y="55" width="160" height="55" rx="8"/>
+<text class="t" x="100" y="78" text-anchor="middle" font-size="13" font-weight="bold">有価証券報告書</text><text class="t" x="100" y="97" text-anchor="middle" font-size="13">XBRL</text>
+<rect class="card" x="360" y="55" width="150" height="55" rx="8"/>
+<text class="t" x="435" y="88" text-anchor="middle" font-size="14" font-weight="bold">data.json</text>
+<rect class="out" x="690" y="55" width="170" height="55" rx="8"/>
+<text class="t" x="775" y="88" text-anchor="middle" font-size="14" font-weight="bold">dashboard.html</text>
+<path class="arw" d="M182,82 L356,82"/>
+<text class="mono" x="269" y="72" text-anchor="middle" font-size="11">extract_financials.py</text>
+<path class="arw" d="M512,82 L686,82"/>
+<text class="mono" x="599" y="72" text-anchor="middle" font-size="11">build_dashboard.py</text>
+<text class="sub" x="269" y="102" text-anchor="middle" font-size="11">抽出（連結優先・億円）</text>
+<text class="sub" x="599" y="102" text-anchor="middle" font-size="11">単一HTML生成</text>
+</svg></div></div>
+</div><div class="foot">Claude Code 研修</div><div class="pageno">10</div></section><section class="slide "><div class="kicker">07 ・ スキル化と横展開</div><div class="title">スキルとスラッシュコマンド<span class="bar"></span></div>
+<div class="body" style="display:flex;flex-direction:column;gap:14px">
+<table><thead><tr><th style="width:20%"></th><th>スキル</th><th>スラッシュコマンド</th></tr></thead><tbody>
+<tr><td class="k">起動</td><td>自動で発動（Claude が判断）</td><td>手動（<span class="mono">/名前</span>）</td></tr>
+<tr><td class="k">中身</td><td>手順書 ＋ 道具（スクリプト）</td><td>定型プロンプト1枚</td></tr>
+<tr><td class="k">置き場所</td><td><span class="mono">skills/&lt;名前&gt;/SKILL.md</span></td><td><span class="mono">.claude/commands/&lt;名前&gt;.md</span></td></tr>
+<tr><td class="k">向くこと</td><td>複雑な処理の再利用・横展開</td><td>決まった入口を1つ用意</td></tr>
+</tbody></table>
+<div class="note">基本は <b>「まず日本語で頼む」</b>。確実に同じ入口で起動したいときだけスラッシュ。<br>「1社目は試行錯誤、2社目は数分」を横展開で体感。</div>
+</div><div class="foot">Claude Code 研修</div><div class="pageno">11</div></section><section class="slide "><div class="kicker">07 ・ 会計基準の違い</div><div class="title">基準で「科目名」が変わる<span class="bar"></span></div>
+<div class="body split">
+<div class="col"><table><thead><tr><th style="width:30%">概念</th><th>IFRS（11社）</th><th>日本基準（6社）</th></tr></thead><tbody>
+<tr><td class="k">収益</td><td>売上収益</td><td>売上高</td></tr>
+<tr><td class="k">段階利益</td><td>税引前利益</td><td>経常利益</td></tr>
+<tr><td class="k">純利益</td><td>当期利益（親会社）</td><td>当期純利益</td></tr>
+<tr><td class="k">資本</td><td>親会社所有者持分</td><td>純資産</td></tr>
+</tbody></table></div>
+<div class="col"><div class="code"><span class="c">&lt;!-- DEIで基準を自動判定 --&gt;</span>
+&lt;jpdei_cor:AccountingStandardsDEI…&gt;<span class="b">IFRS</span>&lt;/…&gt;
+
+<span class="c"># 売上：IFRSを先に、無ければ日本基準へ</span>
+tags=[<span class="b">"RevenueIFRS…"</span>,
+      <span class="b">"NetSales…"</span>]</div>
+<ul class="pts" style="font-size:18px"><li><b>同じ入口のまま</b> IFRS 社と日本基準社（銀行）を続けて流すと両方通る</li>
+<li>Claude が「どう扱う？」と<b>確認</b>＝人間が判断／締めに<b>1社だけ検算</b></li></ul></div>
+</div><div class="foot">Claude Code 研修</div><div class="pageno">12</div></section><section class="slide "><div class="kicker">08 ・ 決まり事を教える</div><div class="title">CLAUDE.md<span class="bar"></span></div>
+<div class="body split">
+<div class="col"><div class="small" style="margin-bottom:8px">作業フォルダに置くと<b>起動時に自動で読み込まれる</b>「前提メモ」。</div>
+<div class="code"><span class="c"># このプロジェクトについて（例）</span>
+- 対象データ: EDINET の有報XBRL（./data/…）
+- 採用方針: 連結・通期を優先。表示は億円
+- 出力: ./output/ に成果物（単一HTML）
+- 会計基準は自動判定。銀行は解釈に注意</div></div>
+<div class="col"><div class="card" style="flex:1"><div class="h">読み込み順（後ほど優先）</div>
+<ul style="font-size:17px"><li>管理ポリシー（組織）</li><li><span class="mono">~/.claude/CLAUDE.md</span>（個人）</li>
+<li>上位ディレクトリ</li><li><span class="mono">./CLAUDE.md</span>（プロジェクト）</li><li><span class="mono">./CLAUDE.local.md</span></li></ul>
+<div class="note" style="margin-top:auto">見せ方：<b>「置く前／置いた後」</b>で出力の質を比較。</div></div></div>
+</div><div class="foot">Claude Code 研修</div><div class="pageno">13</div></section><section class="slide "><div class="kicker">09 ・ 使うほど馴染む</div><div class="title">メモリ（対話から自動で覚える）<span class="bar"></span></div>
+<div class="body split">
+<div class="col"><div class="small" style="margin-bottom:8px">Claude が<b>対話から自動で覚える「学習ノート」</b>。</div>
+<div class="code">~/.claude/projects/&lt;repo&gt;/memory/
+├─ MEMORY.md        （インデックス）
+└─ feedback_*.md 等 （トピック別）</div>
+<ul class="pts" style="font-size:18px"><li><span class="mono">/memory</span> で確認・編集。既定でON、マシンローカル</li>
+<li>例：「金額は億円」と一度直すと次から反映</li></ul></div>
+<div class="col"><table><thead><tr><th style="width:22%"></th><th>CLAUDE.md</th><th>メモリ</th></tr></thead><tbody>
+<tr><td class="k">書き手</td><td>人</td><td>Claude</td></tr>
+<tr><td class="k">中身</td><td>前提・ルール</td><td>学習・好み</td></tr>
+<tr><td class="k">性質</td><td>git で共有・再現</td><td>ローカル・自動</td></tr>
+</tbody></table>
+<div class="note">再現性は <b>CLAUDE.md＋スキル</b>、快適さは <b>メモリ</b>。</div></div>
+</div><div class="foot">Claude Code 研修</div><div class="pageno">14</div></section><section class="slide "><div class="kicker">10 ・ 応用</div><div class="title">応用と次の一歩<span class="bar"></span></div>
+<div class="body" style="display:flex;align-items:center">
+<div class="grid2" style="width:100%">
+<div class="card"><div class="h">🔁 API 横展開</div><ul><li><span class="mono">tools/fetch_edinet_xbrl.py</span></li><li>証券コード一覧から一括取得</li></ul></div>
+<div class="card"><div class="h">🧩 一般化</div><ul><li>「決定論スクリプト＋スキル化」の型</li><li>他の定型処理にも応用</li></ul></div>
+<div class="card"><div class="h">⏰ 定期実行</div><ul><li>スケジュール実行</li><li>“作りっぱなし”にしない</li></ul></div>
+</div></div><div class="foot">Claude Code 研修</div><div class="pageno">15</div></section><section class="slide "><div class="kicker">Summary</div><div class="title">まとめ<span class="bar"></span></div>
+<div class="body" style="display:flex;flex-direction:column;justify-content:center;gap:18px">
+<ul class="pts" style="font-size:23px;line-height:2.1">
+<li>複雑な XBRL も、<b>日本語で頼むだけ</b>でダッシュボードになる</li>
+<li>大変な部分（会計基準の分岐など）は<b>エージェントが処理し、スキルにまとめる</b></li>
+<li><b>CLAUDE.md＝共有できる決まり事</b> ／ <b>メモリ＝個人に馴染む学習</b></li>
+<li><b>まず触る → 1社作る → スキル化して横展開</b> を今日持ち帰る</li></ul></div><div class="foot">Claude Code 研修</div><div class="pageno">16</div></section></body></html>
