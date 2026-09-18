@@ -113,17 +113,27 @@ def convert(md_path, out_dir, asset_dir):
     return op
 
 def _inline_imgs(body, asset_dir):
+    import unicodedata
     def one(m):
         tag=m.group(0)
-        alt=re.search(r'alt="([^"]*)"',tag); src=re.search(r'src="([^"]+)"',tag)
-        alt=alt.group(1) if alt else ''; src=src.group(1) if src else ''
+        srcm=re.search(r'src=\"([^\"]+)\"',tag); src=srcm.group(1) if srcm else ''
+        altm=re.search(r'alt=\"([^\"]*)\"',tag); alt=altm.group(1) if altm else ''
         if not src.lower().endswith('.svg'): return tag
-        base=os.path.basename(src); path=os.path.join(asset_dir,base)
-        if not os.path.exists(path):
-            for f in os.listdir(asset_dir):
-                if unicodedata.normalize("NFC",f)==unicodedata.normalize("NFC",base):
-                    path=os.path.join(asset_dir,f); break
-        if not os.path.exists(path): return tag
+        cands=[os.path.normpath(os.path.join(asset_dir, src)),
+               os.path.join(asset_dir, os.path.basename(src))]
+        path=None
+        for c in cands:
+            if os.path.exists(c): path=c; break
+        if path is None:
+            base=os.path.basename(src)
+            dirs={asset_dir, os.path.dirname(os.path.normpath(os.path.join(asset_dir, src)))}
+            for d in dirs:
+                if os.path.isdir(d):
+                    for fn in os.listdir(d):
+                        if unicodedata.normalize('NFC',fn)==unicodedata.normalize('NFC',base):
+                            path=os.path.join(d,fn); break
+                if path: break
+        if not path or not os.path.exists(path): return tag
         svg=open(path,encoding="utf-8").read()
         svg=re.sub(r'<\?xml.*?\?>','',svg,flags=re.S).strip()
         cap=f'<figcaption>{html.escape(alt)}</figcaption>' if alt else ''

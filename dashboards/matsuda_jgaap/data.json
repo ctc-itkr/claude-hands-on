@@ -1,0 +1,74 @@
+{
+  "company": "Company E02821",
+  "company_ja": "松田産業",
+  "fiscal_year_end": "2025-03-31",
+  "report_date": "2025-06-24",
+  "consolidated": true,
+  "accounting_standard": "JGAAP",
+  "standard_label": "JGAAP（日本基準）",
+  "extracted_at": "2026-09-18T16:11:53.870251",
+  "metrics": {
+    "NetSalesSummaryOfBusinessResults": {
+      "label_ja": "売上高",
+      "standard": "JGAAP",
+      "values": {
+        "4年前": {
+          "value": 231559000000,
+          "decimals": "-6",
+          "context_ref": "Prior4YearDuration"
+        },
+        "3年前": {
+          "value": 272292000000,
+          "decimals": "-6",
+          "context_ref": "Prior3YearDuration"
+        },
+        "2年前": {
+          "value": 351028000000,
+          "decimals": "-6",
+          "context_ref": "Prior2YearDuration"
+        },
+        "前年": {
+          "value": 360527000000,
+          "decimals": "-6",
+          "context_ref": "Prior1YearDuration"
+        },
+        "当年": {
+          "value": 468841000000,
+          "decimals": "-6",
+          "context_ref": "CurrentYearDuration"
+        }
+      }
+    },
+    "TotalAssetsSummaryOfBusinessResults": {
+      "label_ja": "総資産",
+      "standard": "JGAAP",
+      "values": {
+        "4年前": {
+          "value": 104265000000,
+          "decimals": "-6",
+          "context_ref": "Prior4YearInstant"
+        },
+        "3年前": {
+          "value": 115797000000,
+          "decimals": "-6",
+          "context_ref": "Prior3YearInstant"
+        },
+        "2年前": {
+          "value": 129208000000,
+          "decimals": "-6",
+          "context_ref": "Prior2YearInstant"
+        },
+        "前年": {
+          "value": 148937000000,
+          "decimals": "-6",
+          "context_ref": "Prior1YearInstant"
+        },
+        "当年": {
+          "value": 168900000000,
+          "decimals": "-6",
+          "context_ref": "CurrentYearInstant"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "company": "Company E21187",
+  "company_ja": "AREホールディングス",
+  "fiscal_year_end": "2026-03-31",
+  "report_date": "2026-06-15",
+  "consolidated": true,
+  "accounting_standard": "IFRS",
+  "standard_label": "IFRS（国際財務報告基準）",
+  "extracted_at": "2026-09-18T16:11:49.039956",
+  "metrics": {
+    "RevenueIFRSSummaryOfBusinessResults": {
+      "label_ja": "売上高",
+      "standard": "IFRS",
+      "values": {
+        "4年前": {
+          "value": 192442000000,
+          "decimals": "-6",
+          "context_ref": "Prior4YearDuration"
+        },
+        "3年前": {
+          "value": 274209000000,
+          "decimals": "-6",
+          "context_ref": "Prior3YearDuration"
+        },
+        "2年前": {
+          "value": 322253000000,
+          "decimals": "-6",
+          "context_ref": "Prior2YearDuration"
+        },
+        "前年": {
+          "value": 506211000000,
+          "decimals": "-6",
+          "context_ref": "Prior1YearDuration"
+        },
+        "当年": {
+          "value": 569992000000,
+          "decimals": "-6",
+          "context_ref": "CurrentYearDuration"
+        }
+      }
+    },
+    "ProfitLossBeforeTaxIFRSSummaryOfBusinessResults": {
+      "label_ja": "税前利益",
+      "standard": "IFRS",
+      "values": {
+        "4年前": {
+          "value": 26372000000,
+          "decimals": "-6",
+          "context_ref": "Prior4YearDuration"
+        },
+        "3年前": {
+          "value": 12649000000,
+          "decimals": "-6",
+          "context_ref": "Prior3YearDuration"
+        },
+        "2年前": {
+          "value": 12426000000,
+          "decimals": "-6",
+          "context_ref": "Prior2YearDuration"
+        },
+        "前年": {
+          "value": 20483000000,
+          "decimals": "-6",
+          "context_ref": "Prior1YearDuration"
+        },
+        "当年": {
+          "value": 34706000000,
+          "decimals": "-6",
+          "context_ref": "CurrentYearDuration"
+        }
+      }
+    },
+    "ProfitLossAttributableToOwnersOfParentIFRSSummaryOfBusinessResults": {
+      "label_ja": "親会社帰属利益",
+      "standard": "IFRS",
+      "values": {
+        "4年前": {
+          "value": 18735000000,
+          "decimals": "-6",
+          "context_ref": "Prior4YearDuration"
+        },
+        "3年前": {
+          "value": 10929000000,
+          "decimals": "-6",
+          "context_ref": "Prior3YearDuration"
+        },
+        "2年前": {
+          "value": 24490000000,
+          "decimals": "-6",
+          "context_ref": "Prior2YearDuration"
+        },
+        "前年": {
+          "value": 14319000000,
+          "decimals": "-6",
+          "context_ref": "Prior1YearDuration"
+        },
+        "当年": {
+          "value": 24441000000,
+          "decimals": "-6",
+          "context_ref": "CurrentYearDuration"
+        }
+      }
+    },
+    "TotalAssetsIFRSSummaryOfBusinessResults": {
+      "label_ja": "総資産",
+      "standard": "IFRS",
+      "values": {
+        "4年前": {
+          "value": 298387000000,
+          "decimals": "-6",
+          "context_ref": "Prior4YearInstant"
+        },
+        "3年前": {
+          "value": 287448000000,
+          "decimals": "-6",
+          "context_ref": "Prior3YearInstant"
+        },
+        "2年前": {
+          "value": 317998000000,
+          "decimals": "-6",
+          "context_ref": "Prior2YearInstant"
+        },
+        "前年": {
+          "value": 490037000000,
+          "decimals": "-6",
+          "context_ref": "Prior1YearInstant"
+        },
+        "当年": {
+          "value": 615388000000,
+          "decimals": "-6",
+          "context_ref": "CurrentYearInstant"
+        }
+      }
+    }
+  }
+}
