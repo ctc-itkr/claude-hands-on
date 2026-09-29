@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>スキル と カスタムスラッシュコマンド（説明資料）</title>
+<style>
+:root{--bg:#ffffff;--fg:#1f2937;--muted:#6b7280;--card:#f8fafc;--border:#e5e7eb;
+--code-bg:#f1f5f9;--code-fg:#0f172a;--accent:#2563eb;--quote:#f1f5f9;--quote-bd:#94a3b8;--th:#f1f5f9;}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1220;--fg:#e5e7eb;--muted:#94a3b8;--card:#111a2e;
+--border:#334155;--code-bg:#0f172a;--code-fg:#e2e8f0;--accent:#60a5fa;--quote:#111a2e;--quote-bd:#475569;--th:#1e293b;}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);
+font-family:'Hiragino Sans','Noto Sans JP','Yu Gothic','Meiryo',system-ui,sans-serif;
+line-height:1.75;font-size:16px}
+.wrap{max-width:840px;margin:0 auto;padding:40px 20px 96px}
+h1,h2,h3,h4{line-height:1.35;font-weight:700}
+h1{font-size:1.8rem;margin:.2em 0 .6em;padding-bottom:.3em;border-bottom:2px solid var(--border)}
+h2{font-size:1.4rem;margin:1.8em 0 .5em;padding-bottom:.2em;border-bottom:1px solid var(--border)}
+h3{font-size:1.15rem;margin:1.4em 0 .4em}
+h4{font-size:1rem;margin:1.2em 0 .3em}
+p{margin:.6em 0}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+ul,ol{padding-left:1.4em;margin:.5em 0}li{margin:.25em 0}
+code{background:var(--code-bg);color:var(--code-fg);padding:.12em .4em;border-radius:5px;
+font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,'Noto Sans Mono',monospace;font-size:.9em}
+pre{background:var(--code-bg);color:var(--code-fg);padding:14px 16px;border-radius:10px;overflow:auto;
+border:1px solid var(--border)}
+pre code{background:none;padding:0;font-size:.86em;line-height:1.55}
+blockquote{margin:1em 0;padding:.6em 1em;background:var(--quote);
+border-left:4px solid var(--quote-bd);border-radius:0 8px 8px 0;color:var(--fg)}
+blockquote p{margin:.3em 0}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.95em;display:block;overflow-x:auto}
+th,td{border:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--th);font-weight:700}
+hr{border:none;border-top:1px solid var(--border);margin:2em 0}
+figure.fig{margin:1.2em 0;text-align:center}
+figure.fig svg{max-width:100%;height:auto}
+figure.fig figcaption{color:var(--muted);font-size:.85em;margin-top:.4em}
+.doc-foot{margin-top:64px;color:var(--muted);font-size:.8em;border-top:1px solid var(--border);padding-top:16px}
+</style></head>
+<body><main class="wrap">
+<h1 id="_1">スキル と カスタムスラッシュコマンド（説明資料）</h1>
+<p>Claude Code を使ううえで混同しやすい2つ、<strong>スキル</strong>と<strong>カスタムスラッシュコマンド</strong>の違いと使い方をまとめる。</p>
+<hr />
+<h2 id="1">1. スキルとは</h2>
+<ul>
+<li><strong>定義</strong>：作業の「やり方（手順書）」と「道具（スクリプト等）」を<strong>パッケージ化した再利用パーツ</strong>。</li>
+<li><strong>正体</strong>：<code>SKILL.md</code>（Claude向けの手順書）を中心にしたフォルダ一式。<strong>スキル＝Pythonスクリプトそのものではない</strong>。スクリプトは手順が呼ぶ"道具"として同梱されているだけ。</li>
+<li><strong>呼び出し</strong>：<strong>自動</strong>が基本。Claudeが状況と<code>SKILL.md</code>の説明（description）を見て「これ使えそう」と判断し、自分で読み込んで実行する。</li>
+<li><strong>中身は厚い</strong>：手順・補助ファイル・判断のコツ・トラブルシュートまで持てる。道具はPythonでもシェルでもNode.jsでも、あるいは道具なしの手順だけでもよい。</li>
+</ul>
+<h3 id="edinet-xbrl-dashboard">例：本プロジェクトの <code>edinet-xbrl-dashboard</code></h3>
+<pre><code>skills/edinet-xbrl-dashboard/
+├─ SKILL.md          ← スキルの本体（いつ・どう使うかの説明書）
+├─ scripts/          ← 道具（Python）
+│   ├─ extract_financials.py
+│   └─ build_dashboard.py
+└─ assets/
+    └─ dashboard_template.html   ← ひな形
+</code></pre>
+<p><code>SKILL.md</code> に「有価証券報告書XBRLを渡されたら、この2つのPythonを順に実行してダッシュボードを作る」と書いてある。発動すると <strong>Claude（エージェント）が自分のシェルでそのPythonを実行</strong>する。</p>
+<hr />
+<h2 id="2">2. カスタムスラッシュコマンドとは</h2>
+<ul>
+<li><strong>定義</strong>：<code>.claude/commands/&lt;名前&gt;.md</code> に置く、<strong>定型プロンプトのショートカット</strong>。</li>
+<li><strong>呼び出し</strong>：<strong>手動</strong>。<code>/名前 引数</code> と明示的に打って起動する。</li>
+<li><strong>中身は薄い</strong>：基本は「Claudeへの指示文」1枚。<code>$ARGUMENTS</code> で引数を受け取れる。</li>
+</ul>
+<h3 id="edinet-dashboard">例：<code>/edinet-dashboard</code></h3>
+<pre><code>.claude/commands/edinet-dashboard.md
+</code></pre>
+<pre><code class="language-markdown">有価証券報告書XBRL（$ARGUMENTS）から財務ダッシュボードを作成して。
+skills/edinet-xbrl-dashboard の手順に従い、
+extract_financials.py → build_dashboard.py を実行し、dashboard.html を開いて確認する。
+</code></pre>
+<p>→ <code>/edinet-dashboard data/AREホールディングス_E21187</code> のように起動できる。</p>
+<hr />
+<h2 id="3">3. 違いの早わかり</h2>
+<p><figure class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 270" font-family="'Hiragino Sans','Noto Sans JP','Yu Gothic',sans-serif">
+<style>
+.bg{fill:#fff}.a{fill:#eef2ff;stroke:#4f46e5;stroke-width:1.5}.b{fill:#fef2f2;stroke:#dc2626;stroke-width:1.5}
+.t{fill:#0f172a}.sub{fill:#475569}.k{fill:#64748b}.mono{fill:#2563eb}
+@media (prefers-color-scheme:dark){.bg{fill:#0b1220}.a{fill:#312e81;stroke:#a5b4fc}.b{fill:#7f1d1d;stroke:#fca5a5}.t{fill:#e2e8f0}.sub{fill:#cbd5e1}.k{fill:#94a3b8}.mono{fill:#60a5fa}}
+</style>
+<rect class="bg" width="740" height="270"/>
+<rect class="a" x="30" y="30" width="320" height="200" rx="10"/>
+<rect class="b" x="390" y="30" width="320" height="200" rx="10"/>
+<text class="t" x="190" y="62" text-anchor="middle" font-size="16" font-weight="bold">スキル</text>
+<text class="t" x="550" y="62" text-anchor="middle" font-size="16" font-weight="bold">スラッシュコマンド</text>
+<text class="k" x="50" y="100" font-size="12">起動</text><text class="sub" x="150" y="100" font-size="13">自動で発動（Claudeが判断）</text>
+<text class="k" x="410" y="100" font-size="12">起動</text><text class="sub" x="510" y="100" font-size="13">手動（/名前）</text>
+<text class="k" x="50" y="135" font-size="12">中身</text><text class="sub" x="150" y="135" font-size="13">手順書＋道具</text>
+<text class="k" x="410" y="135" font-size="12">中身</text><text class="sub" x="510" y="135" font-size="13">定型プロンプト</text>
+<text class="k" x="50" y="170" font-size="12">場所</text><text class="mono" x="150" y="170" font-size="12">skills/&lt;名前&gt;/SKILL.md</text>
+<text class="k" x="410" y="170" font-size="12">場所</text><text class="mono" x="510" y="170" font-size="12">.claude/commands/&lt;名前&gt;.md</text>
+<text class="sub" x="190" y="208" text-anchor="middle" font-size="12">必要なとき自分で取り出す能力</text>
+<text class="sub" x="550" y="208" text-anchor="middle" font-size="12">人が打つ定型指示</text>
+<text class="k" x="370" y="262" text-anchor="middle" font-size="12">/ で起動 → 中でスキルが動く（組み合わせ可）</text>
+</svg><figcaption>スキルとスラッシュの違い</figcaption></figure></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>スキル</th>
+<th>カスタムスラッシュコマンド</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>何か</td>
+<td>手順書＋道具のパッケージ</td>
+<td>定型プロンプト1枚</td>
+</tr>
+<tr>
+<td>置き場所</td>
+<td><code>skills/&lt;名前&gt;/SKILL.md</code></td>
+<td><code>.claude/commands/&lt;名前&gt;.md</code></td>
+</tr>
+<tr>
+<td>呼び出し</td>
+<td><strong>自動</strong>（Claudeが判断）</td>
+<td><strong>手動</strong>（<code>/名前</code>と打つ）</td>
+</tr>
+<tr>
+<td>中身</td>
+<td>手順・スクリプト・コツまで厚く持てる</td>
+<td>Claudeへの指示文が中心</td>
+</tr>
+<tr>
+<td>向くこと</td>
+<td>複雑な処理の再利用・横展開</td>
+<td>決まった入口を1つ用意する</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一言でいうと</strong>：スキル＝<strong>Claudeが必要なときに自分で取り出す能力</strong>／スラッシュコマンド＝<strong>人が明示的に打つ定型指示</strong>。</p>
+<hr />
+<h2 id="4">4. 組み合わせられる</h2>
+<p>両者は排他ではない。スラッシュコマンドの中身を「◯◯スキルの手順で実行して」とすれば、<strong>人が<code>/</code>で起動 → 中でスキルが動く</strong>という橋渡しになる。入口が1つに決まるので、迷わず起動できる。</p>
+<hr />
+<h2 id="5">5. ユーザー視点での使い方（いちばん大事）</h2>
+<p>普段は<strong>難しく考えず、日本語で頼むだけ</strong>でよい。</p>
+<pre><code>この有価証券報告書XBRLを財務ダッシュボードにして
+→ data/AREホールディングス_E21187 のXBRL
+</code></pre>
+<p>これだけで、Claudeが裏で <code>edinet-xbrl-dashboard</code> スキルを選び、Pythonの実行まで全部やって <code>dashboard.html</code> を返す。<strong>コマンドを覚える必要も、Pythonを自分で打つ必要もない。</strong></p>
+<ul>
+<li><strong>明示的に呼ばなくていい</strong>：「有価証券報告書」「XBRL」「財務を可視化して」等でClaudeが自動で気づく。</li>
+<li><strong>入力を渡すだけ</strong>：XBRLのZIP／解凍フォルダ／<code>.xbrl</code>ファイルのパスを伝える。</li>
+<li><strong>横展開も同じ</strong>：「次はこの会社のXBRLで同じものを」でそのまま再適用。</li>
+<li><strong>確実に同じ入口で起動したい人向け</strong>にだけ、<code>/edinet-dashboard &lt;パス&gt;</code> のスラッシュを用意しておくとよい。</li>
+</ul>
+<blockquote>
+<p>基本は <strong>「まず日本語で頼む」</strong>。確実に同じ入口で起動したいときだけスラッシュを使う、の二本立てでよい。</p>
+</blockquote>
+<div class="doc-foot">Claude Code 研修 配布資料 — スキルとスラッシュコマンド.md</div>
+</main></body></html>

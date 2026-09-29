@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code ハンズオン 用語集</title>
+<style>
+:root{--bg:#ffffff;--fg:#1f2937;--muted:#6b7280;--card:#f8fafc;--border:#e5e7eb;
+--code-bg:#f1f5f9;--code-fg:#0f172a;--accent:#2563eb;--quote:#f1f5f9;--quote-bd:#94a3b8;--th:#f1f5f9;}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1220;--fg:#e5e7eb;--muted:#94a3b8;--card:#111a2e;
+--border:#334155;--code-bg:#0f172a;--code-fg:#e2e8f0;--accent:#60a5fa;--quote:#111a2e;--quote-bd:#475569;--th:#1e293b;}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);
+font-family:'Hiragino Sans','Noto Sans JP','Yu Gothic','Meiryo',system-ui,sans-serif;
+line-height:1.75;font-size:16px}
+.wrap{max-width:840px;margin:0 auto;padding:40px 20px 96px}
+h1,h2,h3,h4{line-height:1.35;font-weight:700}
+h1{font-size:1.8rem;margin:.2em 0 .6em;padding-bottom:.3em;border-bottom:2px solid var(--border)}
+h2{font-size:1.4rem;margin:1.8em 0 .5em;padding-bottom:.2em;border-bottom:1px solid var(--border)}
+h3{font-size:1.15rem;margin:1.4em 0 .4em}
+h4{font-size:1rem;margin:1.2em 0 .3em}
+p{margin:.6em 0}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+ul,ol{padding-left:1.4em;margin:.5em 0}li{margin:.25em 0}
+code{background:var(--code-bg);color:var(--code-fg);padding:.12em .4em;border-radius:5px;
+font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,'Noto Sans Mono',monospace;font-size:.9em}
+pre{background:var(--code-bg);color:var(--code-fg);padding:14px 16px;border-radius:10px;overflow:auto;
+border:1px solid var(--border)}
+pre code{background:none;padding:0;font-size:.86em;line-height:1.55}
+blockquote{margin:1em 0;padding:.6em 1em;background:var(--quote);
+border-left:4px solid var(--quote-bd);border-radius:0 8px 8px 0;color:var(--fg)}
+blockquote p{margin:.3em 0}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.95em;display:block;overflow-x:auto}
+th,td{border:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--th);font-weight:700}
+hr{border:none;border-top:1px solid var(--border);margin:2em 0}
+figure.fig{margin:1.2em 0;text-align:center}
+figure.fig svg{max-width:100%;height:auto}
+figure.fig figcaption{color:var(--muted);font-size:.85em;margin-top:.4em}
+.doc-foot{margin-top:64px;color:var(--muted);font-size:.8em;border-top:1px solid var(--border);padding-top:16px}
+</style></head>
+<body><main class="wrap">
+<h1 id="claude-code">Claude Code ハンズオン 用語集</h1>
+<p>Claude Code特有・この案件特有の用語をまとめたもの。</p>
+<h2 id="claude-code_1">Claude Code特有の用語</h2>
+<h3 id="1-ai">1. エージェント（自律型AI）とは</h3>
+<ul>
+<li><strong>定義</strong>：指示に答えるだけの"チャット"と違い、<strong>ファイルを読む/書く・コマンドを実行する・結果を見て自分で直す</strong>を繰り返して、タスクを最後までやり切るAI。</li>
+<li><strong>ポイント</strong>：人に例えると「調べて、手を動かして、動作確認して、直す」まで自分で回す新人。あなた（利用者）は方針とゴールを与え、要所で確認するだけでよい。</li>
+<li><strong>使いどころ</strong>：XBRLの解析→ダッシュボード生成→修正、という一連をエージェントが自走する。これがClaude Codeの価値の中心。</li>
+<li><strong>間違えやすい点</strong>：文章を返すだけの生成AIではない。"実行して直す"ループがある点が本質。</li>
+</ul>
+<h3 id="2-skillmd">2. スキル（SKILL.md）とは</h3>
+<ul>
+<li><strong>定義</strong>：作業の「やり方」をファイル（<code>SKILL.md</code>）にまとめた<strong>再利用パーツ</strong>。毎回説明しなくてよくなる。</li>
+<li><strong>ポイント</strong>：人でいう「手順書＋道具箱」。必要なときClaudeが自動で読み込み、その手順どおり動く。一度作れば<strong>誰でも同じ品質で再現・横展開</strong>できる。</li>
+<li><strong>使いどころ</strong>：XBRL→ダッシュボードの手順をスキル化すれば、別企業でも一発。属人化を防ぐ"内製の資産"になる（このあとのスキル化の演習で体験する）。</li>
+<li><strong>間違えやすい点</strong>：単発プロンプト＝その場限り／スキル＝再利用資産。MCP（外部ツール接続）とは別物。</li>
+</ul>
+<h3 id="3-claudemd">3. CLAUDE.md とは</h3>
+<ul>
+<li><strong>定義</strong>：作業フォルダに置く「このプロジェクトの前提メモ」。Claudeが毎回自動で参照する。</li>
+<li><strong>ポイント</strong>：データの場所・採用ルール（連結/通期、単位）・コーディング規約などを書いておくと、毎回指示しなくても品質が安定する。</li>
+<li><strong>使いどころ</strong>：CLAUDE.mdを「置く前／置いた後」で、出力の質が変わるのを体験できる。</li>
+<li><strong>間違えやすい点</strong>：スキルが"手順"なのに対し、CLAUDE.mdは"前提・文脈"。役割が違う。</li>
+</ul>
+<h3 id="4-auto-memory">4. メモリ機能（Auto Memory）とは</h3>
+<ul>
+<li><strong>定義</strong>：Claudeが対話から<strong>自動で覚える学習ノート</strong>。CLAUDE.mdが"人が書く前提"なのに対し、こちらは"Claudeが勝手に貯める経験"。</li>
+<li><strong>ポイント</strong>：あなたのロール・与えた修正・進行中の判断・参照先などを、Claudeが必要と判断した分だけ記録（<code>~/.claude/projects/&lt;repo&gt;/memory/</code> に <code>MEMORY.md</code>＋トピック別ファイル）。<code>/memory</code> で確認・編集でき、既定でON。<strong>マシンローカル＆リポジトリ単位</strong>で、複数マシン間では共有されない。</li>
+<li><strong>使いどころ</strong>：2社目・3社目と進めるうちに、一度直した好み（例：金額は億円、銀行は営業CFを強調しない）が次から反映される。<code>/memory</code> で中身を確認できる。</li>
+<li><strong>間違えやすい点</strong>：①CLAUDE.md（gitに乗る＝共有・再現できる"憲法"）とは別物で、メモリは個人・自動の層。<strong>再現性はCLAUDE.md＋スキル、快適さはメモリ</strong>。②APIの"Memory Tool"とも別物。③Bedrockでも挙動は同じ。</li>
+</ul>
+<h3 id="5-bedrock">5. Bedrockバックエンドとは</h3>
+<p><figure class="fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 250" font-family="'Hiragino Sans','Noto Sans JP','Yu Gothic',sans-serif">
+<style>
+.bg{fill:#fff}.card{fill:#f1f5f9;stroke:#334155;stroke-width:1.5}.brain{fill:#eef2ff;stroke:#4f46e5;stroke-width:1.5}
+.t{fill:#0f172a}.sub{fill:#475569}.acc{fill:#2563eb}.arw{stroke:#2563eb;stroke-width:2;fill:none;marker-end:url(#a)}
+@media (prefers-color-scheme:dark){.bg{fill:#0b1220}.card{fill:#1e293b;stroke:#94a3b8}.brain{fill:#312e81;stroke:#a5b4fc}.t{fill:#e2e8f0}.sub{fill:#94a3b8}.acc{fill:#60a5fa}.arw{stroke:#60a5fa}}
+</style>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker></defs>
+<rect class="bg" width="760" height="250"/>
+<rect class="card" x="30" y="60" width="300" height="120" rx="10"/>
+<text class="t" x="180" y="94" text-anchor="middle" font-size="15" font-weight="bold">手元PC（デスクトップアプリ）</text>
+<text class="t" x="180" y="118" text-anchor="middle" font-size="14">Claude Code</text>
+<text class="sub" x="180" y="150" text-anchor="middle" font-size="12">ファイル操作・コマンド実行＝「やって」</text>
+<rect class="brain" x="430" y="60" width="300" height="120" rx="10"/>
+<text class="t" x="580" y="94" text-anchor="middle" font-size="15" font-weight="bold">Amazon Bedrock（クラウド・東京）</text>
+<text class="sub" x="580" y="124" text-anchor="middle" font-size="12">モデルが考える＝「考えて」</text>
+<text class="sub" x="580" y="148" text-anchor="middle" font-size="12">認証：Entra ID 連携</text>
+<path class="arw" d="M335,100 L425,100"/>
+<text class="acc" x="380" y="92" text-anchor="middle" font-size="12">考えて</text>
+<path class="arw" d="M425,140 L335,140"/>
+<text class="acc" x="380" y="160" text-anchor="middle" font-size="12">応答</text>
+<text class="sub" x="380" y="215" text-anchor="middle" font-size="12">外部通信で明示的に不可なのは MCP外部連携のみ</text>
+</svg><figcaption>環境図（Bedrock＝頭脳／手元PC＝手）</figcaption></figure></p>
+<ul>
+<li><strong>定義</strong>：<strong>モデル（頭脳）はAWS Bedrock、実際の作業（ファイル操作・コマンド）は手元のPC</strong>、という構成。</li>
+<li><strong>ポイント</strong>：Claudeへの「考えて」はクラウド（Bedrock）に、「やって」は手元で実行される。認証はEntra ID連携のAPIキー。</li>
+<li><strong>使いどころ（通信の切り分け）</strong>：明示的に不可なのは<strong>MCP外部連携</strong>。</li>
+<li><strong>間違えやすい点</strong>：「Bedrockが外部通信できない＝pipやデータ取得も不可」ではない。層が違う。</li>
+</ul>
+<h3 id="6">6. トークン／コンテキストとは</h3>
+<ul>
+<li><strong>定義</strong>：Claudeが1回に読む/書く情報の量。<strong>これがそのままコスト</strong>（Bedrock課金、HyperBillingで可視化）。</li>
+<li><strong>ポイント</strong>：会話に載せた文章・ファイルの中身すべてがトークンとして課金される。巨大データを丸ごと載せると急に増える。</li>
+<li><strong>使いどころ</strong>：XBRLは巨大なので、<strong>本文を貼らずスクリプトで処理し、結果だけ確認する</strong>のがコスト最適。この作法が日々の費用対効果に直接つながる。</li>
+<li><strong>間違えやすい点</strong>：「とりあえず全部貼れば正確」ではない。載せる情報を絞る方が速く・安く・正確なことが多い。</li>
+</ul>
+<h2 id="_1">参考情報</h2>
+<h3 id="7-copilot">7. Copilot との住み分け</h3>
+<ul>
+<li><strong>定義</strong>：Copilot＝市民開発・SaaS壁打ち・Office連携向け／Claude Code＝自律型エージェント・複雑データ処理・コード生成/大規模開発向け。</li>
+<li><strong>使いどころ</strong>：「置き換え」ではなく用途の棲み分け。複雑なデータ処理・コード生成・内製化はClaude Codeの領域。</li>
+</ul>
+<h3 id="8">8. 権限確認・安全性</h3>
+<ul>
+<li><strong>定義</strong>：エージェントがコマンド実行やファイル変更をする前に<strong>確認を挟める</strong>。何をしようとしているか読んでから許可する。</li>
+<li><strong>使いどころ</strong>：権限確認ダイアログは「エージェントが何をしようとしているか」を読むチャンス。内容を確認してから許可すればよい。</li>
+</ul>
+<h3 id="9-edinet">9. EDINET とは</h3>
+<ul>
+<li><strong>定義</strong>：金融庁が運営する<strong>電子開示システム</strong>。上場企業などの有価証券報告書・四半期報告書・大量保有価証券報告書告書などが<strong>誰でも無料で閲覧・ダウンロード</strong>できる。</li>
+<li><strong>ポイント</strong>：「Electronic Disclosure for Investors' NETwork」の略。Web画面での手動ダウンロードのほか、<strong>API（v2、要APIキー）</strong>でプログラムから取得もできる。原則、直近5年程度の書類を保持。</li>
+<li><strong>使いどころ</strong>：題材データの出どころ。AREホールディングス（5857）を含む各社の有価証券報告書XBRLがここで公開されている。今回は配布済みのデータを使う。</li>
+<li><strong>間違えやすい点</strong>：EDINET＝データの提供元。XBRL＝そこで配られるデータの形式。</li>
+</ul>
+<h3 id="10-xbrl">10. XBRL とは</h3>
+<ul>
+<li><strong>定義</strong>：有価証券報告書などを<strong>機械可読にした構造化データ形式</strong>（タグ付きの財務データ）。</li>
+<li><strong>ポイント</strong>：タクソノミ（定義体系）・コンテキスト（期間・連結/単体）・ディメンションがあり、人が直接読むのは辛い＝だからAIを使う。</li>
+<li><strong>使いどころ</strong>：人手では辛いこの構造を、Claude Codeに解かせてまとめて可視化するのが今回のテーマ。</li>
+</ul>
+<div class="doc-foot">Claude Code 研修 配布資料 — 用語集.md</div>
+</main></body></html>

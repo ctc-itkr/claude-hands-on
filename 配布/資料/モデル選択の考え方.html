@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>モデル選択の考え方（精度とトークンのバランス）</title>
+<style>
+:root{--bg:#ffffff;--fg:#1f2937;--muted:#6b7280;--card:#f8fafc;--border:#e5e7eb;
+--code-bg:#f1f5f9;--code-fg:#0f172a;--accent:#2563eb;--quote:#f1f5f9;--quote-bd:#94a3b8;--th:#f1f5f9;}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1220;--fg:#e5e7eb;--muted:#94a3b8;--card:#111a2e;
+--border:#334155;--code-bg:#0f172a;--code-fg:#e2e8f0;--accent:#60a5fa;--quote:#111a2e;--quote-bd:#475569;--th:#1e293b;}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);
+font-family:'Hiragino Sans','Noto Sans JP','Yu Gothic','Meiryo',system-ui,sans-serif;
+line-height:1.75;font-size:16px}
+.wrap{max-width:840px;margin:0 auto;padding:40px 20px 96px}
+h1,h2,h3,h4{line-height:1.35;font-weight:700}
+h1{font-size:1.8rem;margin:.2em 0 .6em;padding-bottom:.3em;border-bottom:2px solid var(--border)}
+h2{font-size:1.4rem;margin:1.8em 0 .5em;padding-bottom:.2em;border-bottom:1px solid var(--border)}
+h3{font-size:1.15rem;margin:1.4em 0 .4em}
+h4{font-size:1rem;margin:1.2em 0 .3em}
+p{margin:.6em 0}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+ul,ol{padding-left:1.4em;margin:.5em 0}li{margin:.25em 0}
+code{background:var(--code-bg);color:var(--code-fg);padding:.12em .4em;border-radius:5px;
+font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,'Noto Sans Mono',monospace;font-size:.9em}
+pre{background:var(--code-bg);color:var(--code-fg);padding:14px 16px;border-radius:10px;overflow:auto;
+border:1px solid var(--border)}
+pre code{background:none;padding:0;font-size:.86em;line-height:1.55}
+blockquote{margin:1em 0;padding:.6em 1em;background:var(--quote);
+border-left:4px solid var(--quote-bd);border-radius:0 8px 8px 0;color:var(--fg)}
+blockquote p{margin:.3em 0}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.95em;display:block;overflow-x:auto}
+th,td{border:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--th);font-weight:700}
+hr{border:none;border-top:1px solid var(--border);margin:2em 0}
+figure.fig{margin:1.2em 0;text-align:center}
+figure.fig svg{max-width:100%;height:auto}
+figure.fig figcaption{color:var(--muted);font-size:.85em;margin-top:.4em}
+.doc-foot{margin-top:64px;color:var(--muted);font-size:.8em;border-top:1px solid var(--border);padding-top:16px}
+</style></head>
+<body><main class="wrap">
+<h1 id="_1">モデル選択の考え方（精度とトークンのバランス）</h1>
+<h2 id="_2">この資料の目的</h2>
+<p>「有価証券報告書XBRL → 財務ダッシュボード」の処理を回すとき、どの Claude モデルを選ぶのが
+精度とトークン使用量（＝コスト）のバランスとして最適かを整理する。結論を一言で言うと、
+<strong>「作るときは強いモデル、動かすときは軽いモデル」</strong> の二段構えが最適になる。</p>
+<p>なぜモデルを一律に決められないかというと、フェーズによってコストの決まり方が
+根本的に違うからである。この点を理解することが、この資料の一番の要点である。</p>
+<h2 id="_3">大前提：解析はモデルにやらせない</h2>
+<p>まず押さえるべきは、完成後のこの仕組みでは <strong>XBRL の数値抽出にモデル（LLM）は
+関与していない</strong> という点である。数値を抜き出すのは同梱の Python スクリプト
+（<code>extract_financials.py</code>）で、標準ライブラリだけで動く決定論的な処理である。
+数MB規模の XBRL 生ファイルはモデルのコンテキストに一度も載らず、モデルがやるのは
+「スクリプトを起動し、出てきた結果を確認する」ことだけである。</p>
+<p>これが重要なのは、財務数値は1円単位で正確でなければならないのに、生の XBRL タグを
+LLM に解釈させると、桁の取り違え・会計期間（context）のずれ・単位（百万円／億円）の
+誤りといったハルシネーションが起きやすいからである。数値の正確性が本質的に求められる
+処理は、LLM ではなく決定論的スクリプトに任せる——これがこの設計の背骨である。</p>
+<h2 id="_4">コスト構造は「実行」と「構築」で逆転する</h2>
+<p>同じ処理でも、次の2つのフェーズはコストの決まり方が正反対になる。</p>
+<p><strong>実行フェーズ</strong>（出来たスキルを別の会社データに適用する）は、コストが
+「1回分のトークン単価」でほぼ決まる。やることが定型化されているため、
+安いモデルでも取りこぼしが少ない。</p>
+<p><strong>構築フェーズ</strong>（データしかない状態から、構造を読み解き、抽出ロジックを設計し、
+スクリプトを書き、ダッシュボードまで作り切る）は、コストが <strong>試行回数
+（イテレーション数）</strong> で決まる。XBRL はタクソノミ（IFRS／日本基準）、context、
+単位、iXBRL 埋め込みなど落とし穴が多く、弱いモデルだと「取り違える→出力がおかしい→
+直す」というループを何度も回す。結果として総トークンが膨らみ、しかもバグの残った
+パーサーが出来上がる。強いモデルは初回の設計精度が高くループが減るため、
+1トークンの単価が高くても <strong>総額ではむしろ安くなる</strong> ことが多い。</p>
+<p>つまり構築フェーズでは、単価の安さでモデルを選ぶと逆に高くつく。</p>
+<h2 id="20269">現行モデルの位置づけ（2026年9月時点・目安）</h2>
+<p>本ハンズオンは <strong>Amazon Bedrock 経由での利用が前提</strong> のため、下表の価格は
+あくまで相対感をつかむための参考程度に見てほしい。実際の料金・利用可能なモデル・
+モデル名（Bedrock 上のモデルID）・リージョン提供状況は Bedrock 側に従うので、
+正確な値は AWS（Amazon Bedrock）の料金ページと、契約中のリージョンの
+モデルカタログで確認すること。ここで重要なのは個々の単価ではなく、
+<strong>「構築＝強いモデル、実行＝軽いモデル」という相対的な使い分けの考え方</strong> である。</p>
+<table>
+<thead>
+<tr>
+<th>モデル</th>
+<th>入力 / 100万トークン</th>
+<th>出力 / 100万トークン</th>
+<th>この処理での使いどころ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Haiku 4.5</td>
+<td>約 $1.00</td>
+<td>約 $5.00</td>
+<td>最安。安定後の量産（実行）向け。細かなトラブルは取りこぼしやすい</td>
+</tr>
+<tr>
+<td>Sonnet 5</td>
+<td>約 $2.00</td>
+<td>約 $10.00</td>
+<td>実行フェーズの本命。ツール操作の信頼性が高く、Opus の約1/3のコスト</td>
+</tr>
+<tr>
+<td>Opus 5</td>
+<td>約 $5.00</td>
+<td>約 $25.00</td>
+<td>構築フェーズの本命。設計・コード生成・例外対応に強い</td>
+</tr>
+<tr>
+<td>Fable 5.1</td>
+<td>約 $10.00</td>
+<td>約 $50.00</td>
+<td>フロンティア級。XBRL が特殊で一発の正確さを最優先する場合のみ</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_5">フェーズ別のおすすめ</h2>
+<table>
+<thead>
+<tr>
+<th>フェーズ</th>
+<th>内容</th>
+<th>最適モデル（Bedrock 東京リージョンで使える範囲で）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>構築（コールドスタート）</td>
+<td>構造解読・抽出設計・スクリプト作成・ダッシュボード設計</td>
+<td>使える中で<strong>一番強い上位モデル</strong>（Opus 系。特殊で一発精度を要するなら最上位のフロンティア系）</td>
+</tr>
+<tr>
+<td>実行・横展開</td>
+<td>出来たスキルを別会社データに適用</td>
+<td><strong>中位モデル</strong>（Sonnet 系）→ 安定後は<strong>軽量モデル</strong>（Haiku 系）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>具体的なバージョン名（Opus 5 など）は世代交代で変わるうえ、Bedrock は最新モデルの提供が
+本家より遅れることがある。<strong>大事なのは「上位／中位／軽量」の相対的な位置づけ</strong>であり、
+その時点で東京リージョンのモデルカタログに載っている中から、上位・中位・軽量を選べばよい。</p>
+</blockquote>
+<h2 id="2">モデル選び以上に重要な2つの設計レバー</h2>
+<p>モデルの選択より、次の2つの工夫のほうがコストと精度に大きく影響する。</p>
+<p>ひとつは、構築中でも <strong>生 XBRL を丸ごとコンテキストに流し込まない</strong> こと。
+モデルには「まず構造を調べる小さなスクリプトを書かせる」（タグ一覧・context 一覧を
+grep するなど）ようにすると、探索を決定論処理に外出しでき、どのモデルでもトークンが
+青天井にならない。</p>
+<p>もうひとつが <strong>スキル化による償却</strong> である。「データだけ→ダッシュボード」を毎回
+コールドスタートで解けば毎回 Opus 級のコストがかかるが、一度 Opus で作り切って
+スキル（＝スクリプト同梱）として保存すれば、2社目以降は Sonnet／Haiku ＋
+決定論スクリプトで回せる。つまり高いモデルを払うのは「最初の1回」だけになる。</p>
+<h2 id="_6">まとめ</h2>
+<p>「何もわからない状態から、ゴールだけがある」構築フェーズに正面から答えるなら、
+<strong>Bedrock 東京リージョンで使える中で一番強い上位モデル（Opus 系）</strong> が最適である。
+ただしその狙いは、一度きちんと作り切って「二度とその値段を払わなくて済む状態
+（＝スキル）」にすることにある。出来上がったスキルを実行・横展開する段階では
+<strong>中位モデル（Sonnet 系）</strong>、安定したら <strong>軽量モデル（Haiku 系）</strong> まで下げて
+コストを最小化する。</p>
+<p>この「作るときは強く、動かすときは軽く」という二段構えと、
+「数値の解析は決定論スクリプトに任せる」という設計判断こそが、
+精度とトークンのバランスを最適化する要である。</p>
+<div class="doc-foot">Claude Code 研修 配布資料 — モデル選択の考え方.md</div>
+</main></body></html>
