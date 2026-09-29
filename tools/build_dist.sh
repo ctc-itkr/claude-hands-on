@@ -9,13 +9,12 @@
 set -euo pipefail
 export OUT_DATA="データ"     # 演習用XBRL（唯一の実体。build_distは触らない）
 export OUT_REF="資料"        # 参考HTML の生成先
-export SLIDE="研修スライド.pptx"  # 説明用スライド（配布直下）
+# SLIDE は廃止：配布/研修スライド.pptx を唯一の実体とし build_dist はコピーしない
 export DIST_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 python3 - <<'PY'
 import os, glob, shutil, subprocess, unicodedata
 ROOT=os.environ['DIST_ROOT']; DIST=os.path.join(ROOT,'配布')
-OUT_REF=os.environ['OUT_REF']; OUT_DATA=os.environ['OUT_DATA']; SLIDE=os.environ['SLIDE']
-nfc=lambda s: unicodedata.normalize('NFC',s)
+OUT_REF=os.environ['OUT_REF']; OUT_DATA=os.environ['OUT_DATA']; nfc=lambda s: unicodedata.normalize('NFC',s)
 print('配布先:',DIST); print(f'  HTML生成→ {OUT_REF}/ , データは {OUT_DATA}/（実体・非コピー） , サンプル/等は対象外')
 
 # 索引（配布/・.git 除外）
@@ -34,9 +33,7 @@ refdir=os.path.join(DIST,OUT_REF); os.makedirs(refdir,exist_ok=True)
 subprocess.run(['python3', os.path.join(ROOT,'tools','md2html.py'), MDDIR, refdir], check=True)
 print(f'  {OUT_REF}:', len(glob.glob(os.path.join(refdir,"*.html"))), '点（md={}）'.format(MDDIR))
 
-# 2) 説明スライド（配布直下へコピー。小さいので複製許容）
-sp=find_one(SLIDE)
-if sp: shutil.copy2(sp, os.path.join(DIST, os.path.basename(sp))); print('  説明スライド:', os.path.basename(sp))
+# 2) 説明スライドは 配布/研修スライド.pptx が実体（build_distは触らない）
 
 # 3) データ：配布/データ が実体。ここでは触らない
 n=len(glob.glob(os.path.join(DIST,OUT_DATA,'*_E*')))

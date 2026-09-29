@@ -27,6 +27,8 @@ EDINETに開示された有価証券報告書のXBRLは、タクソノミ・コ�
 
 `scripts/` の2本を順に実行するだけ。どちらも**標準ライブラリのみ**で動く（arelle・lxml・pandas不要）。パスはこのSKILL.mdからの相対で示す。
 
+> **実行メモ（OS差）**：以下のコマンドの `python3` は macOS/Linux 前提。**Windows で `python3` が見つからない場合は `python`（または `py -3`）に読み替える**こと。スクリプトはどのPythonでも動作し、ファイル入出力はUTF-8固定（日本語Windowsのcp932でも文字化けしない）。Microsoft Store 版のPythonなら `python3` がそのまま使える。
+
 ### STEP 1. 財務指標を抽出する
 
 ```bash
