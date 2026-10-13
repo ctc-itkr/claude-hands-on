@@ -15,3 +15,6 @@ key.txt
 
 # 削除予定（git管理外。実体はローカルのみ）
 /_to_delete/
+
+# fetchツールの実行記録（配布不要）
+edinet_fetch_manifest.json
