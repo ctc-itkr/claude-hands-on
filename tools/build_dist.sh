@@ -36,7 +36,12 @@ print(f'  {OUT_REF}:', len(glob.glob(os.path.join(refdir,"*.html"))), '点（md=
 # 2) 説明スライドは 配布/研修スライド.pptx が実体（build_distは触らない）
 
 # 3) データ：配布/データ が実体。ここでは触らない
-n=len(glob.glob(os.path.join(DIST,OUT_DATA,'*_E*')))
+_dirs=sorted(glob.glob(os.path.join(DIST,OUT_DATA,'*_E*')))
+_labels=[os.path.basename(d) for d in _dirs]
+n=len(_dirs)
+_example=_labels[0] if _labels else '<社名>_<EDINETコード>'
+_example_name=_example.rsplit('_E',1)[0] if _labels else '対象企業'
+_companies='、'.join(_labels) if _labels else '(なし)'
 print(f'  {OUT_DATA}: {n} 社（実体・build_dist は変更しない）')
 
 # 4) README
@@ -50,9 +55,10 @@ Claude Code に「このフォルダ」を作業フォルダとして教えて�
 
 ## 演習で使う
 - **{OUT_REF}/Code用サンプルプロンプト.html** … 演習で使うプロンプト集。この順に進めます。
-- **{OUT_DATA}/** … 演習用の有価証券報告書XBRL（全17社）。
+- **{OUT_DATA}/** … 演習用の有価証券報告書XBRL（全{n}社）。
   プロンプトの「{OUT_DATA}/<社名>_<EDINETコード>」はこのフォルダの各社に対応します。
-  例）{OUT_DATA}/トヨタ自動車_E02144
+  例）{OUT_DATA}/{_example}
+  収録: {_companies}
 
 ## 参考資料（{OUT_REF}/ フォルダ・読む用）
 - XBRL入門.html
@@ -65,7 +71,7 @@ Claude Code に「このフォルダ」を作業フォルダとして教えて�
 - サンプル/ … 演習のゴール例（ダッシュボード・ツール）。手動で用意。
 
 ## 進め方（概要）
-1. まず1社（例：トヨタ自動車）で、XBRL → 主要財務 → ダッシュボードを作る
+1. まず1社（例：{_example_name}）で、XBRL → 主要財務 → ダッシュボードを作る
 2. その手順を「スキル」にまとめる
 3. スキルを使って他の会社へ横展開する
 '''
