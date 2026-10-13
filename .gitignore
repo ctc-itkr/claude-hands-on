@@ -5,10 +5,13 @@ key.txt
 **/.DS_Store
 
 # 配布パッケージ（build_dist.sh で再生成）
-/配布/
+# /配布/
 
 # Office 一時ロックファイル
 ~$*
 
 # data は 配布/データ へのシンボリックリンク（実体は .gitignore の配布配下）
 /data
+
+# 削除予定（git管理外。実体はローカルのみ）
+/_to_delete/
