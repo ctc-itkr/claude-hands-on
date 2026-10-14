@@ -456,13 +456,13 @@ CurrentFiscalYearEndDateDEI = 2026-03-31
 <text class="sub" x="440" y="290" text-anchor="middle" font-size="12">同じ入口・同じ操作。基準ごとの分岐はスキルが引き受ける</text>
 </svg><figcaption>会計基準の自動判定と分岐</figcaption></figure></p>
 <p>有価証券報告書には <strong>IFRS と 日本基準（Japan GAAP）</strong> が混在する。手で実装するなら、<code>AccountingStandardsDEI</code> で基準を判定し、基準ごとに拾う要素を分岐し（IFRS <code>RevenueIFRS…</code> ／ 日本基準 <code>NetSales…</code>）、さらに銀行など様式の違う業種まで面倒を見る必要がある——ここが本来いちばん手間のかかる部分。Claude Code はこの「調べて・分岐を書いて・スキルにまとめる」までを自走し、<strong>難しさをエージェントが一度だけ担い、スキルの中に収める</strong>。結果、使う側から見れば「どの会社を指しても同じ一言で動く」体験になる。これが"本来は大変→簡単"の中身であり、<strong>違いが消えるのではなく、複雑さの担い手が人からエージェントへ移る</strong>点がポイント。</p>
-<p>配布データ17社（時価総額上位15社＋既存サンプル2社）の内訳は <strong>IFRS 11／日本基準 6</strong>。基準で変わる主なラベル：</p>
+<p>配布データ3社の内訳は <strong>IFRS 1（ＡＲＥ）／日本基準 2（キーエンス・三菱UFJ）</strong>。基準で変わる主なラベル：</p>
 <table>
 <thead>
 <tr>
 <th>概念</th>
-<th>IFRS勢（例：トヨタ・ソニー・ファストリ）</th>
-<th>日本基準勢（例：キーエンス・銀行3行）</th>
+<th>IFRS（例：ＡＲＥ）</th>
+<th>日本基準（例：キーエンス・三菱UFJ〈銀行〉）</th>
 </tr>
 </thead>
 <tbody>
@@ -494,7 +494,7 @@ CurrentFiscalYearEndDateDEI = 2026-03-31
 </tbody>
 </table>
 <blockquote>
-<p>日本基準6社＝三菱UFJ・三井住友・みずほ（銀行）／キーエンス／東京エレクトロン／松田産業、残り11社はIFRS。銀行は「売上高＝経常収益」「自己資本比率＝BIS規制比率ではない」等、業種特有の読み替えが要る点に注意（誤読しやすい）。スクリプトは基準を自動判定して分岐するので、この複雑さを意識せず同じ操作で扱える。</p>
+<p>配布3社＝ＡＲＥ（IFRS）／キーエンス（日本基準）／三菱UFJ（日本基準・銀行）。銀行は「売上高＝経常収益」「自己資本比率＝BIS規制比率ではない」等、業種特有の読み替えが要る点に注意（誤読しやすい）。スクリプトは基準を自動判定して分岐するので、この複雑さを意識せず同じ操作で扱える。</p>
 </blockquote>
 <div class="doc-foot">Claude Code 研修 配布資料 — XBRL入門.md</div>
 </main></body></html>

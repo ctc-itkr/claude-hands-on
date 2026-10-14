@@ -50,9 +50,9 @@ figure.fig figcaption{color:var(--muted);font-size:.85em;margin-top:.4em}
 </code></pre>
 <p><strong>狙い</strong>：一言の指示でも、その場で動くツールができる感覚をつかむ。困ったらエラーをそのまま貼って、対話で直す。</p>
 <h2 id="1-xbrl-datajson-dashboardhtml">1. 実際にやってみる（演習：XBRL → data.json → dashboard.html）</h2>
-<pre><code>data/トヨタ自動車_E02144 の有価証券報告書XBRLから主要財務（連結・通期）を抽出して data.json にまとめ、その data.json から外部ライブラリなしの単一HTMLダッシュボード（dashboard.html）を作って。抽出・生成はスクリプトで行い、結果を見ながら仕上げて。
+<pre><code>data/AREホールディングス_E21187 の有価証券報告書XBRLから主要財務（連結・通期）を抽出して data.json にまとめ、その data.json から外部ライブラリなしの単一HTMLダッシュボード（dashboard.html）を作って。抽出・生成はスクリプトで行い、結果を見ながら仕上げて。
 </code></pre>
-<p><strong>狙い</strong>：1社目（トヨタ自動車＝IFRS）で、XBRL → data.json → dashboard.html を通す。
+<p><strong>狙い</strong>：1社目（AREホールディングス＝IFRS）で、XBRL → data.json → dashboard.html を通す。
 <strong>コスト作法</strong>：巨大な XBRL 本文を会話に貼らない。構成 → 対象タグ → スクリプト化 → 結果だけ確認。</p>
 <h2 id="2">2. スキルにする（スキルは、プロンプトで作れる）</h2>
 <pre><code>今やった「有価証券報告書XBRL → 主要財務の抽出 → ダッシュボード生成」の一連の手順を、
@@ -63,7 +63,7 @@ figure.fig figcaption{color:var(--muted);font-size:.85em;margin-top:.4em}
 </code></pre>
 <p><strong>狙い</strong>：試行錯誤の成果を、そのまま“再利用できる資産”に変える。次からは「このスキルで、この会社を」と一言でよい。</p>
 <h2 id="3">3. 会計基準への対応（気づいた対応は、スキルに反映する）</h2>
-<p>まず別の会社（例：松田産業_E02821＝日本基準）に同じスキルを適用します。1社目（トヨタ自動車＝IFRS）と科目名やタグが変わる（売上収益 → 売上高 など）ので、差が出たら次のプロンプトでスキルに反映します。</p>
+<p>まず別の会社（例：キーエンス_E01967＝日本基準）に同じスキルを適用します。1社目（AREホールディングス＝IFRS）と科目名やタグが変わる（売上収益 → 売上高 など）ので、差が出たら次のプロンプトでスキルに反映します。</p>
 <pre><code>日本基準の会社で必要になった科目の対応を、edinet-xbrl-dashboard スキルに反映して、
 次からは自動で切り替わるようにしてください。
 </code></pre>
