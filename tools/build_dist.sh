@@ -3,7 +3,8 @@
 # build_dist.sh ── 配布パッケージ（配布/）を最新化する
 #   ● 配布/ が「正」。data は 配布/データ を唯一の実体とし、build_dist は data を触らない。
 #   ● HTML は md から 配布/資料 へ「直接生成」する（docs 側に html を二重に持たない）。
-#   ● 触るのは 資料/（HTML生成）と ルートのスライド/README だけ。サンプル/等の手作りには触れない。
+#   ● 触るのは 資料/（md→HTML生成）だけ。README/スライド/データ/サンプル等の手作りには触れない。
+#     （README は 配布/README.md を静的ファイルとして手で管理する。）
 #   出力フォルダ名は下の変数で管理（手動リネームに追従）。
 # ------------------------------------------------------------
 set -euo pipefail
@@ -39,46 +40,11 @@ print(f'  {OUT_REF}:', len(glob.glob(os.path.join(refdir,"*.html"))), '点（配
 
 # 2) 説明スライドは 配布/研修スライド.pptx が実体（build_distは触らない）
 
-# 3) データ：配布/データ が実体。ここでは触らない
-_dirs=sorted(glob.glob(os.path.join(DIST,OUT_DATA,'*_E*')))
-_labels=[os.path.basename(d) for d in _dirs]
-n=len(_dirs)
-_example=_labels[0] if _labels else '<社名>_<EDINETコード>'
-_example_name=_example.rsplit('_E',1)[0] if _labels else '対象企業'
-_companies='、'.join('`'+l+'`' for l in _labels) if _labels else '(なし)'
+# 3) データ：配布/データ が実体。ここでは触らない（社数を表示するだけ）
+n=len(glob.glob(os.path.join(DIST,OUT_DATA,'*_E*')))
 print(f'  {OUT_DATA}: {n} 社（実体・build_dist は変更しない）')
 
-# 4) README
-# 事前セットアップ手順は手置き（日付でリネームされ得る）ため動的に拾う
-_setup_hits=sorted(f for f in os.listdir(refdir) if nfc(f).startswith('事前セットアップ手順') and f.endswith('.html'))
-_setup_line=('\n（事前準備は `'+OUT_REF+'/'+_setup_hits[0]+'` を参照）') if _setup_hits else ''
-README=f'''# Claude Code ハンズオン 配布一式
+# 4) README は 配布/README.md を静的ファイルとして手で管理する（build_dist は生成しない）
 
-このフォルダは、ハンズオン当日に使う資料とデータの一式です。
-Claude Code に「このフォルダ」を作業フォルダとして教えてから進めてください。{_setup_line}
-
-## 説明スライド
-- `研修スライド.pptx` … 研修の説明用スライド（このフォルダ直下・PowerPoint）。
-
-## 演習で使う
-- `{OUT_REF}/Code用サンプルプロンプト.html` … 演習で使うプロンプト集。この順に進めます。
-- `{OUT_DATA}/` … 演習用の有価証券報告書XBRL（全{n}社）。
-  - プロンプトの `{OUT_DATA}/<社名>_<EDINETコード>` が各社に対応します。
-  - 例）`{OUT_DATA}/{_example}`
-  - 収録: {_companies}
-
-## 参考資料（`{OUT_REF}/` フォルダ・読む用）
-- `用語集.html` … 用語の早見表
-
-## サンプル（完成イメージ＝ゴール例）
-- `サンプル/` … ウォームアップで作る小ツール（`金買取概算計算ツール.html`）と、
-  本演習で作る財務ダッシュボード（ARE・キーエンス）の完成例。手動で用意。
-
-## 進め方
-- `研修スライド.pptx` の説明を見ながら演習を進めます。
-- プロンプトは自分で書いても、`{OUT_REF}/Code用サンプルプロンプト.html` をコピペしてもOKです。
-- `サンプル/` の完成例を、作るもののゴールイメージにしてください。
-'''
-open(os.path.join(DIST,'README.md'),'w',encoding='utf-8').write(README)
 print('完了:',DIST)
 PY
