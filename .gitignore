@@ -18,3 +18,9 @@ key.txt
 
 # fetchツールの実行記録（配布不要）
 edinet_fetch_manifest.json
+
+# スライドPDF（ビルド成果物。md/pptxから再生成するため追跡しない）
+docs/**/pdf/*.pdf
+
+# 別スレッドの試作出力（野良ファイル。配布不要）
+/Claude outputs/
