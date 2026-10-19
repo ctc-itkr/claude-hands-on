@@ -45,36 +45,34 @@ _labels=[os.path.basename(d) for d in _dirs]
 n=len(_dirs)
 _example=_labels[0] if _labels else '<社名>_<EDINETコード>'
 _example_name=_example.rsplit('_E',1)[0] if _labels else '対象企業'
-_companies='、'.join(_labels) if _labels else '(なし)'
+_companies='、'.join('`'+l+'`' for l in _labels) if _labels else '(なし)'
 print(f'  {OUT_DATA}: {n} 社（実体・build_dist は変更しない）')
 
 # 4) README
+# 事前セットアップ手順は手置き（日付でリネームされ得る）ため動的に拾う
+_setup_hits=sorted(f for f in os.listdir(refdir) if nfc(f).startswith('事前セットアップ手順') and f.endswith('.html'))
+_setup_line=('\n（事前準備は `'+OUT_REF+'/'+_setup_hits[0]+'` を参照）') if _setup_hits else ''
 README=f'''# Claude Code ハンズオン 配布一式
 
 このフォルダは、ハンズオン当日に使う資料とデータの一式です。
-Claude Code に「このフォルダ」を作業フォルダとして教えてから進めてください。
+Claude Code に「このフォルダ」を作業フォルダとして教えてから進めてください。{_setup_line}
 
 ## 説明スライド
-- **研修スライド.pptx** … 研修の説明用スライド（このフォルダ直下・PowerPoint）。
+- `研修スライド.pptx` … 研修の説明用スライド（このフォルダ直下・PowerPoint）。
 
 ## 演習で使う
-- **{OUT_REF}/Code用サンプルプロンプト.html** … 演習で使うプロンプト集。この順に進めます。
-- **{OUT_DATA}/** … 演習用の有価証券報告書XBRL（全{n}社）。
-  プロンプトの「{OUT_DATA}/<社名>_<EDINETコード>」はこのフォルダの各社に対応します。
-  例）{OUT_DATA}/{_example}
-  収録: {_companies}
+- `{OUT_REF}/Code用サンプルプロンプト.html` … 演習で使うプロンプト集。この順に進めます。
+- `{OUT_DATA}/` … 演習用の有価証券報告書XBRL（全{n}社）。
+  - プロンプトの `{OUT_DATA}/<社名>_<EDINETコード>` が各社に対応します。
+  - 例）`{OUT_DATA}/{_example}`
+  - 収録: {_companies}
 
-## 参考資料（{OUT_REF}/ フォルダ・読む用）
-- 用語集.html
-- Code用サンプルプロンプト.html
+## 参考資料（`{OUT_REF}/` フォルダ・読む用）
+- `用語集.html` … 用語の早見表
 
-## サンプル（完成イメージ）
-- サンプル/ … 演習のゴール例（ダッシュボード・ツール）。手動で用意。
-
-## 進め方（概要）
-1. まず1社（例：{_example_name}）で、XBRL → 主要財務 → ダッシュボードを作る
-2. その手順を「スキル」にまとめる
-3. スキルを使って他の会社へ横展開する
+## サンプル（完成イメージ＝ゴール例）
+- `サンプル/` … ウォームアップで作る小ツール（`金買取概算計算ツール.html`）と、
+  本演習で作る財務ダッシュボード（ARE・キーエンス）の完成例。手動で用意。
 '''
 open(os.path.join(DIST,'README.md'),'w',encoding='utf-8').write(README)
 print('完了:',DIST)
