@@ -26,12 +26,16 @@ def find_one(name):
     hits=sorted(index.get(nfc(name),[]),key=len); return hits[0] if hits else None
 
 # 1) HTML を md から 配布/資料 へ直接生成
+#    配布するのは下記ホワイトリストのみ。XBRL入門／スキルとスラッシュコマンド／
+#    モデル選択の考え方 は「中身は md で残すが配布はしない」方針のため対象外
+#    （内容は研修スライド側で扱う。mdとSVGは docs/03_参考資料 に保持）。
+DISTRIBUTE=['用語集.md','Code用サンプルプロンプト.md']
 md_probe=find_one('用語集.md')
 if not md_probe: raise SystemExit('★ md が見つからない（用語集.md）')
 MDDIR=os.path.dirname(md_probe)
 refdir=os.path.join(DIST,OUT_REF); os.makedirs(refdir,exist_ok=True)
-subprocess.run(['python3', os.path.join(ROOT,'tools','md2html.py'), MDDIR, refdir], check=True)
-print(f'  {OUT_REF}:', len(glob.glob(os.path.join(refdir,"*.html"))), '点（md={}）'.format(MDDIR))
+subprocess.run(['python3', os.path.join(ROOT,'tools','md2html.py'), MDDIR, refdir, *DISTRIBUTE], check=True)
+print(f'  {OUT_REF}:', len(glob.glob(os.path.join(refdir,"*.html"))), '点（配布={} / md源={}）'.format(len(DISTRIBUTE),MDDIR))
 
 # 2) 説明スライドは 配布/研修スライド.pptx が実体（build_distは触らない）
 
@@ -61,9 +65,6 @@ Claude Code に「このフォルダ」を作業フォルダとして教えて�
   収録: {_companies}
 
 ## 参考資料（{OUT_REF}/ フォルダ・読む用）
-- XBRL入門.html
-- スキルとスラッシュコマンド.html
-- モデル選択の考え方.html
 - 用語集.html
 - Code用サンプルプロンプト.html
 

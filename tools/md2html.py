@@ -142,6 +142,10 @@ def _inline_imgs(body, asset_dir):
 
 if __name__=="__main__":
     src_dir=sys.argv[1]; out_dir=sys.argv[2]
+    # 第3引数以降があれば「変換する md のベース名」ホワイトリスト（無指定なら全 md）
+    whitelist={unicodedata.normalize('NFC',a) for a in sys.argv[3:]}
     os.makedirs(out_dir,exist_ok=True)
     for md in sorted(glob.glob(os.path.join(src_dir,"*.md"))):
+        if whitelist and unicodedata.normalize('NFC',os.path.basename(md)) not in whitelist:
+            continue
         print("converted:", convert(md, out_dir, src_dir))
