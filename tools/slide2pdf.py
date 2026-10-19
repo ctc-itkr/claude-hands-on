@@ -1,3 +1,7 @@
+# ⚠ 注意：md（研修スライド.md）→ PDF 変換。pptx には一切触れない。
+#   現在 配布/研修スライド.pptx が「正」（手編集）で、研修スライド.md とは乖離している。
+#   そのため本スクリプトが作る PDF は「正」ではない。PDF は追跡解除済み（docs/**/pdf/*.pdf）。
+#   md はリンク切れ等を含む参照用の位置づけ。pptx を作り替える経路ではない。
 import sys,os,re,html,unicodedata,markdown
 sys.path.insert(0,"/home/claude")
 from md2html import _inline_imgs

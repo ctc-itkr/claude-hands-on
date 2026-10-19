@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Claude Code 研修スライド：デザイン版デッキ（1280x720）を組み立てる。"""
+"""Claude Code 研修スライド：デザイン版デッキ（1280x720）を組み立てる。【旧・HTML版】
+
+⚠ 現在は使用しない。配布/研修スライド.pptx が「正」（人手で直接編集）。
+   本スクリプトは HTML デッキ（deck.html）を出力する旧ジェネレータで、
+   pptx も 研修スライド.md も生成・変更しない（内容はこのPythonにハードコード）。
+   デザイン参照用に残置。デッキ作り直しの用途では使わないこと。
+"""
 import sys, os, re, glob
 
 UP = sys.argv[1] if len(sys.argv) > 1 else "/mnt/user-data/uploads"

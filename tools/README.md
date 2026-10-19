@@ -43,16 +43,27 @@ python3 tools/fetch_edinet_xbrl.py --out ./data --list data/時価総額上位.t
 
 ---
 
-## 配布資料の変換運用（md → HTML / PDF）
+## スライド（pptx）の運用 ── 重要
 
-資料フォルダは **形式ごとにサブフォルダで分ける**運用：
+- **配布/研修スライド.pptx が「正」**。以降は **PowerPoint で人手編集**しており、
+  md やスクリプトからは**再生成しない**。
+- **`研修スライド.md`（docs/00_説明スライド/md/）→ pptx という変換経路は存在しない。**
+  md を編集しても pptx は変わらない。逆に、下記の旧ジェネレータで pptx を作り直すと
+  **手編集が失われる**ため使わないこと。
+  - `tools/build_pptx.js` … 旧 pptx ジェネレータ（内容ハードコード／出力は sandbox パス）。**実行しない**。
+  - `tools/build_deck.py` … 旧 HTML デッキ生成。pptx には無関係。使わない。
+  - `tools/slide2pdf.py` … md→PDF。pptx には触れない。PDF は追跡解除済みで「正」ではない。
+- `tools/build_dist.sh` は設計上 **pptx を触らない**（配布/研修スライド.pptx をそのまま同梱）。
 
-- ソース … `<フォルダ>/md/*.md`（図SVGは資料フォルダ直下に置く＝共有アセット）
-- HTML … `<フォルダ>/html/*.html`（`tools/md2html.py`。図SVGとCSSを内包した自己完結HTML）
-- PDF（スライド）… `<フォルダ>/pdf/*.pdf`（`tools/slide2pdf.py`。A4横・`##`見出し＝スライド境界）
+## 参考資料の変換運用（md → HTML）
 
-例）`docs/03_説明資料/md/用語集.md` → `docs/03_説明資料/html/用語集.html`、
-`docs/00_導入/md/研修スライド.md` → `docs/00_導入/pdf/研修スライド.pdf`。
+参考資料は `md2html.py` で md から HTML を直接生成する：
 
-スクリプトは `markdown`／`cairosvg`／`playwright(chromium)` に依存するため、
-再変換は原則このクラウドセッション（Claude）側で実行する。出力は必ず上記サブフォルダへ。
+- ソース … `docs/03_参考資料/md/*.md`（図SVGは `docs/03_参考資料/` 直下＝共有アセット）
+- 生成 … `配布/資料/*.html`（`tools/md2html.py`。図SVGとCSSを内包した自己完結HTML）
+- 配布対象は `build_dist.sh` のホワイトリストで限定（現状：用語集／Code用サンプルプロンプト）。
+
+例）`docs/03_参考資料/md/用語集.md` → `配布/資料/用語集.html`。
+
+`md2html.py` は `markdown`／`cairosvg` に依存するため、再変換は原則このクラウドセッション
+（Claude）側で実行する。通常は `tools/build_dist.sh` 経由で生成する。
