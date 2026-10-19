@@ -1,69 +1,253 @@
 <!DOCTYPE html>
-<html lang="ja"><head><meta charset="utf-8">
+<html lang="ja">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Claude Code ハンズオン研修 — 事前インストール一覧</title>
+<title>ハンズオン セットアップ手順（Windows）</title>
 <style>
-:root{--bg:#ffffff;--fg:#1f2937;--muted:#6b7280;--card:#f8fafc;--border:#e5e7eb;
---code-bg:#f1f5f9;--code-fg:#0f172a;--accent:#2563eb;--quote:#f1f5f9;--quote-bd:#94a3b8;--th:#f1f5f9;}
-@media (prefers-color-scheme:dark){:root{--bg:#0b1220;--fg:#e5e7eb;--muted:#94a3b8;--card:#111a2e;
---border:#334155;--code-bg:#0f172a;--code-fg:#e2e8f0;--accent:#60a5fa;--quote:#111a2e;--quote-bd:#475569;--th:#1e293b;}}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--fg);
-font-family:'Hiragino Sans','Noto Sans JP','Yu Gothic','Meiryo',system-ui,sans-serif;
-line-height:1.75;font-size:16px}
-.wrap{max-width:840px;margin:0 auto;padding:40px 20px 96px}
-h1,h2,h3,h4{line-height:1.35;font-weight:700}
-h1{font-size:1.8rem;margin:.2em 0 .6em;padding-bottom:.3em;border-bottom:2px solid var(--border)}
-h2{font-size:1.4rem;margin:1.8em 0 .5em;padding-bottom:.2em;border-bottom:1px solid var(--border)}
-h3{font-size:1.15rem;margin:1.4em 0 .4em}
-h4{font-size:1rem;margin:1.2em 0 .3em}
-p{margin:.6em 0}
-a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-ul,ol{padding-left:1.4em;margin:.5em 0}li{margin:.25em 0}
-code{background:var(--code-bg);color:var(--code-fg);padding:.12em .4em;border-radius:5px;
-font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,'Noto Sans Mono',monospace;font-size:.9em}
-pre{background:var(--code-bg);color:var(--code-fg);padding:14px 16px;border-radius:10px;overflow:auto;
-border:1px solid var(--border)}
-pre code{background:none;padding:0;font-size:.86em;line-height:1.55}
-blockquote{margin:1em 0;padding:.6em 1em;background:var(--quote);
-border-left:4px solid var(--quote-bd);border-radius:0 8px 8px 0;color:var(--fg)}
-blockquote p{margin:.3em 0}
-table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.95em;display:block;overflow-x:auto}
-th,td{border:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
-th{background:var(--th);font-weight:700}
-hr{border:none;border-top:1px solid var(--border);margin:2em 0}
-figure.fig{margin:1.2em 0;text-align:center}
-figure.fig svg{max-width:100%;height:auto}
-figure.fig figcaption{color:var(--muted);font-size:.85em;margin-top:.4em}
-.doc-foot{margin-top:64px;color:var(--muted);font-size:.8em;border-top:1px solid var(--border);padding-top:16px}
-</style></head>
-<body><main class="wrap">
-<h1 id="claude-code">Claude Code ハンズオン研修 — 事前インストール一覧</h1>
-<p><strong>ゴール</strong>：参加者の Windows PC で Python が動き、Claude デスクトップアプリからスクリプトを実行できる状態。なお、Mac OSX では Claude デスクトップアプリ以外のインストールは不要です。</p>
-<h2 id="1-claude-windows">1. Claude デスクトップアプリ（Windows 版）〔インストール〕</h2>
-<p>研修で使う本体です。参加者はこのアプリ上で Claude にコードを書かせ、実行します。</p>
-<ul>
-<li>入手：公式サイト <strong>claude.com/download</strong> から Windows 版をインストール。</li>
-</ul>
-<h2 id="2-python-3x">2. Python 3.x〔インストール〕</h2>
-<p>本研修では「Claude がその場で実際にプログラムを書いて動かす」体験が目標の1つです。その実行に Python を使います。PythonはClaudeが扱いやすい言語ですが、Windows には標準搭載されていません。</p>
-<p>バージョンは、サポートが継続している Python 3 系であれば問いません。<code>python</code>（または <code>python3</code>）が動く状態になれば、入手方法も問いません。代表的な方法は次のとおりです。</p>
-<ul>
-<li><strong>python.org</strong> (python.org/downloads): 全ユーザー向け・一括配布がしやすく標準的。インストーラで「<strong>Add python.exe to PATH</strong>」を有効化してください。</li>
-<li><strong>Microsoft Store 版</strong> : 管理者権限なしで入り、<code>python3</code> コマンドも使えます。個別に入れる場合に手軽です。</li>
-</ul>
-<p>完了確認：PowerShell で <code>python --version</code>（Store 版なら <code>python3 --version</code>）が通ればOK。</p>
-<h2 id="3-ab">3. シェル〔次の (A)(B) どちらか一方〕</h2>
-<p>Claude が Python・コマンド を実行するには「シェル」が要ります。Windows ＋ Bedrock では既定でオフのため、<strong>どちらか一方</strong>をご用意ください（両方は不要）。</p>
-<ul>
-<li><strong>(A) Git for Windows をインストール</strong> : 付属の Git Bash を使い、<strong>追加設定なしで</strong>動作します。入手：<strong>git-scm.com/download/win</strong> から既定設定のままインストール。</li>
-<li><strong>(B) 環境変数を設定（インストール不要）</strong> : <code>CLAUDE_CODE_USE_POWERSHELL_TOOL=1</code> を設定すると、Windows 標準の PowerShell をシェルとして使います。設定場所：Windows の環境変数（<code>setx</code>／GPO で一括配布可）、または Claude Code の <code>settings.json</code> の <code>env</code>。</li>
-</ul>
-<p>目安：ソフト追加を避けたい／環境変数の一括配布がが可能な場合 <strong>(B)</strong>、アプリを一つ入れる方が運用しやすい場合 <strong>(A)</strong>。</p>
-<h2 id="_1">追加ライブラリは不要</h2>
-<p>Python の標準ライブラリのみで完結します。pandas・lxml などのライブラリや、Node.js などの他ランタイムは使用しません。</p>
-<h2 id="_2">完了の目安</h2>
-<p>Claude デスクトップアプリ →「<strong>Code</strong>」タブ → <strong>Local</strong> → 作業フォルダを選択 → 「<strong>Python で hello world を書いて実行して</strong>」でなどを実行できれば、準備完了です。</p>
-<div class="doc-foot">Claude Code 研修 配布資料 — 事前インストール一覧.md</div>
-</main></body></html>
+  :root{
+    --bg:#ffffff; --surface:#f8fafc; --surface2:#f1f5f9; --ink:#0f172a; --ink2:#475569; --ink3:#94a3b8;
+    --border:#e2e8f0; --accent:#0f766e; --accent-wash:#ccfbf1;
+    --both:#0f766e; --both-bg:#d1fae5; --cowork:#b45309; --cowork-bg:#fef3c7; --code:#4338ca; --code-bg:#e0e7ff;
+    --infra:#334155; --infra-bg:#e2e8f0; --ok:#15803d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+    line-height:1.9;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:34px 26px 64px}
+
+  header{border-bottom:3px solid var(--ink);padding-bottom:18px;margin-bottom:8px}
+  .eyebrow{font-size:11.5px;letter-spacing:.14em;color:var(--accent);font-weight:700;margin:0 0 7px}
+  h1{font-size:26px;margin:0;font-weight:800;letter-spacing:.01em;line-height:1.35}
+  .lead{color:var(--ink2);font-size:14px;margin:12px 0 0}
+
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 0;font-size:12.5px;color:var(--ink3)}
+  .flow span.ph{border:1px solid var(--border);border-radius:6px;padding:3px 10px;background:var(--surface);color:var(--ink2)}
+  .flow span.ar{color:var(--ink3)}
+
+  .scope{margin:18px 0;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);
+    border-radius:10px;padding:13px 16px;font-size:13.5px;color:var(--ink2)}
+  .scope b{color:var(--ink)}
+  .scope.infra{border-left-color:var(--infra)}
+  .scope.cw{border-left-color:var(--cowork)}
+  .refnote{font-size:12.5px;color:var(--ink3);margin:8px 0 0}
+  .refnote a{color:var(--ink2)}
+
+  h2{font-size:18px;margin:36px 0 6px;font-weight:800;display:flex;align-items:center;gap:10px}
+  h2 .pz{font-size:11px;font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.1em;
+    color:#fff;background:var(--ink);border-radius:5px;padding:2px 8px;font-weight:700}
+  h2 .who{font-size:12px;font-weight:600;color:var(--ink3);margin-left:auto}
+  .h2sub{font-size:13.5px;color:var(--ink2);margin:0 0 12px}
+
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--ink2);margin:10px 0 6px}
+  .legend .b{display:inline-flex;align-items:center;gap:6px}
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap;line-height:1.5}
+  .b-both{background:var(--both-bg);color:var(--both)}
+  .b-cowork{background:var(--cowork-bg);color:var(--cowork)}
+  .b-code{background:var(--code-bg);color:var(--code)}
+  .b-infra{background:var(--infra-bg);color:var(--infra)}
+  .b-set{background:#eef2ff;color:#4338ca}
+  .b-opt{background:#eef2f6;color:#64748b;border:1px solid #d9e0e8}
+
+  .tblwrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:8px 0}
+  table{border-collapse:collapse;width:100%;font-size:13px;background:#fff;min-width:520px}
+  th,td{padding:10px 14px;border-bottom:1px solid var(--border);text-align:left}
+  thead th{background:var(--surface2);font-weight:700;font-size:12px;color:var(--ink2)}
+  td.c,th.c{text-align:center;width:88px;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  .yes{color:var(--ok);font-weight:800}.no{color:var(--ink3)}
+  .opt{color:var(--cowork);font-weight:700;font-size:12px}
+  td.item{font-weight:600}
+
+  .step{border:1px solid var(--border);border-radius:12px;padding:15px 18px;margin:11px 0;background:#fff}
+  .step.config{background:var(--surface);border-style:dashed}
+  .step .top{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
+  .num{flex:0 0 auto;min-width:30px;height:28px;padding:0 6px;border-radius:8px;background:var(--ink);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+  .step h3{margin:2px 0;font-size:15px;font-weight:700;flex:1 1 auto;min-width:150px}
+  .step .badges{display:flex;gap:6px;flex-wrap:wrap}
+  .step p{margin:9px 0 0;font-size:13.5px;color:var(--ink2)}
+  .step p b,.step li b{color:var(--ink)}
+  .step ol.sub{margin:9px 0 0;padding-left:1.35em;font-size:13.5px;color:var(--ink2)}
+  .step ol.sub li{margin:6px 0}
+  code{background:var(--surface2);padding:.08em .4em;border-radius:5px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85em;color:#0b3b38}
+  .cmd{display:block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;color:#0b3b38;
+    background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 11px;margin:6px 0 0;overflow-x:auto;white-space:pre}
+  a{color:var(--accent);word-break:break-all}
+  .note{font-size:12.5px;color:var(--ink3);margin:8px 0 0}
+
+  .notes{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-top:8px}
+  .notes ul{margin:4px 0 0;padding-left:1.2em}
+  .notes li{margin:7px 0;font-size:13.5px;color:var(--ink2)}
+  .notes li b{color:var(--ink)}
+
+  .done{background:var(--accent-wash);border:1px solid #99f6e4;border-radius:12px;padding:14px 18px;margin-top:10px;font-size:13.5px;color:#134e4a}
+  .done b{color:#0f766e}
+
+  footer{margin-top:28px;border-top:1px solid var(--border);padding-top:12px;font-size:11.5px;color:var(--ink3);line-height:1.8}
+  footer a{color:var(--ink2)}
+
+  @media print{
+    body{font-size:12px}.wrap{max-width:none;padding:0 6mm}
+    .step,.notes,.done,.tblwrap,.scope{break-inside:avoid}
+    a{color:var(--ink)} header{border-color:#000}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">ハンズオン セットアップ手順（Windows）</p>
+    <h1>Claude Cowork ＋ Code 同日ハンズオン セットアップ手順</h1>
+    <p class="lead">同じ日に行う「Claude Cowork」と「Claude Code」の両方のハンズオンで使う、Windows PC のセットアップ手順をまとめています。各 PC でインストールと設定を行う担当者の方に向けた資料です。上から順に進めていただくと、両方のハンズオンが動く状態になります。</p>
+  </header>
+
+  <div class="flow">
+    <span class="ph">前提：インフラ準備（AWS）</span><span class="ar">→</span>
+    <span class="ph">STEP 1：インストール</span><span class="ar">→</span>
+    <span class="ph">STEP 2：Claude Desktop 設定</span><span class="ar">→</span>
+    <span class="ph">STEP 3：MCP 設定</span><span class="ar">→</span>
+    <span class="ph">STEP 4：動作確認</span>
+  </div>
+
+  <div class="scope">
+    本書は各 PC のセットアップを対象としています。各ステップには、Cowork と Code のどちらで必要かを示すラベルを付けています。接続に使う値（APIキー・リージョン・モデルID）や、演習で使うデータ・教材は、別途配布・案内いたします。
+    <div class="refnote">※ 各設定画面の操作イメージについては、本手順の元にした AWS Japan の記事（<a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup">zenn.dev：aws-bedrock-claude-cowork-setup</a>）を併せてご参照ください。本書では画面キャプチャは転載していません。</div>
+  </div>
+
+  <h2>凡例</h2>
+  <div class="legend">
+    <span class="b"><span class="badge b-both">共通</span> Cowork と Code の両方で必要です</span>
+    <span class="b"><span class="badge b-cowork">Cowork</span> Cowork で必要です</span>
+    <span class="b"><span class="badge b-code">Code</span> Code で必要です</span>
+    <span class="b"><span class="badge b-infra">インフラ</span> AWS 管理者が行う前提作業です</span>
+    <span class="b"><span class="badge b-opt">任意</span> 行わなくても進められます</span>
+  </div>
+
+  <!-- 前提 -->
+  <h2><span class="pz">前提</span>インフラ準備（AWS）<span class="who">担当：AWS 管理者</span></h2>
+  <p class="h2sub">本手順を始める前に、AWS 側で Bedrock の準備が完了している必要があります。ここは AWS 管理者が行う前提作業です。この作業が終わると、各 PC のセットアップに使う接続情報（APIキー・リージョン・モデルID）が配布されます。</p>
+  <div class="scope infra">
+    <b>AWS 管理者が行うことの概要です。</b>
+    <ol class="sub" style="margin-top:7px;color:var(--ink2)">
+      <li>Bedrock の Quota を確認します。値が 0 や極端に低い場合は、営業または AWS Support に問い合わせます。</li>
+      <li>Bedrock の Playground で対象モデル（例：Opus・Sonnet・Haiku）を選び、Use case を入力して利用を有効化します。</li>
+      <li>IAM で、Bearer Token 用のアクション（<code>bedrock:CallWithBearerToken</code>・<code>bedrock:InvokeModel</code> など）と Marketplace のサブスクリプション権限を持つポリシーを作成し、IAM ユーザーにアタッチします。</li>
+      <li>そのユーザーの Security credentials で、Service を Amazon Bedrock として APIキーを発行します。表示は一度きりなので控えておきます。</li>
+      <li>発行した APIキー・リージョン・モデルID を、各 PC のセットアップ担当へ共有します。</li>
+    </ol>
+    <div class="refnote">※ IAM ポリシーの具体的な内容や各画面の操作については、<a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup">zenn 記事</a>の該当章（AWS／Bedrock の準備）をご参照ください。</div>
+  </div>
+
+  <!-- ① インストール -->
+  <h2><span class="pz">STEP 1</span>各 PC にインストール<span class="who">担当：セットアップ者</span></h2>
+  <p class="h2sub">まずは必要なソフトを入れていきます。VM 機能の有効化や Git・Node.js のインストールには管理者権限が必要です（GPO／Intune での一括展開も可能です）。下の表が全体像で、続けて各手順を説明します。</p>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>インストールするもの</th><th class="c">Cowork</th><th class="c">Code</th><th>区分</th></tr></thead>
+      <tbody>
+        <tr><td class="item">1. Claude デスクトップアプリ</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td><td><span class="badge b-both">共通</span></td></tr>
+        <tr><td class="item">2. Git for Windows（Git Bash）</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td><td><span class="badge b-both">共通</span></td></tr>
+        <tr><td class="item">3. Node.js</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="no">—</span></td><td><span class="badge b-cowork">Cowork</span></td></tr>
+        <tr><td class="item">4. uv</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="no">—</span></td><td><span class="badge b-cowork">Cowork</span></td></tr>
+        <tr><td class="item">5. Google Chrome</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="opt">任意</span></td><td><span class="badge b-both">共通</span></td></tr>
+        <tr><td class="item">6. 仮想マシンプラットフォーム（Windows 機能）</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="no">—</span></td><td><span class="badge b-cowork">Cowork</span></td></tr>
+        <tr><td class="item">7. Python 3.x</td><td class="c"><span class="no">—</span></td><td class="c"><span class="yes">✓</span></td><td><span class="badge b-code">Code</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="step"><div class="top"><div class="num">1</div><h3>Claude デスクトップアプリ（Windows 版）</h3><div class="badges"><span class="badge b-both">共通</span></div></div>
+    <p>研修の本体です。Cowork と Code のどちらも、このアプリから操作します。公式サイト <a href="https://claude.com/download">claude.com/download</a> から Windows 版をダウンロードして、インストールしてください。</p></div>
+
+  <div class="step"><div class="top"><div class="num">2</div><h3>Git for Windows（Git Bash）</h3><div class="badges"><span class="badge b-both">共通</span></div></div>
+    <p>Claude が Python やコマンドを実行する際のシェル（bash）として使います。Windows には bash が標準で入っていないため、Git に付属する Git Bash を利用します。<a href="https://git-scm.com/download/win">git-scm.com/download/win</a> から、既定の設定のままインストールしてください。</p>
+    <p class="note">インストールした bash を Claude に使わせる設定は、このあとの STEP 2（2-3）で行います。</p></div>
+
+  <div class="step"><div class="top"><div class="num">3</div><h3>Node.js</h3><div class="badges"><span class="badge b-cowork">Cowork</span></div></div>
+    <p>Cowork では、MCP サーバーを <code>npx</code> で起動するために Node.js を使います。<a href="https://nodejs.org/">nodejs.org</a> の LTS 版インストーラを、既定の設定でインストールしてください。</p></div>
+
+  <div class="step"><div class="top"><div class="num">4</div><h3>uv</h3><div class="badges"><span class="badge b-cowork">Cowork</span></div></div>
+    <p>Cowork の一部の MCP サーバーの起動に使います。PowerShell で、次のコマンドを実行してインストールしてください（公式インストーラです）。</p>
+    <span class="cmd">powershell -c "irm https://astral.sh/uv/install.ps1 | iex"</span></div>
+
+  <div class="step"><div class="top"><div class="num">5</div><h3>Google Chrome</h3><div class="badges"><span class="badge b-both">共通</span></div></div>
+    <p>Cowork では、Chrome DevTools の MCP で Chrome を使います。<a href="https://www.google.com/chrome/">google.com/chrome</a> からインストールしてください。</p>
+    <p class="note">Code だけを行う場合は、作成した <code>dashboard.html</code> の表示や EDINET の閲覧に使うだけなので、既定のブラウザでも代用できます。そのため Code のみであれば Chrome のインストールは<b>任意</b>です。</p></div>
+
+  <div class="step"><div class="top"><div class="num">6</div><h3>仮想マシンプラットフォーム（Windows の機能）</h3><div class="badges"><span class="badge b-cowork">Cowork</span></div></div>
+    <p>Cowork は内部で小さな Linux 仮想マシンを動かすため、この Windows 機能を有効化します。「Windows の機能の有効化または無効化」から有効にするか、管理者の PowerShell で次のコマンドを実行してください。</p>
+    <span class="cmd">Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform</span>
+    <p class="note">有効化したら PC を再起動してください。Cowork の readiness check を使うと、PC がスペック要件を満たしているかを確認できます。</p></div>
+
+  <div class="step"><div class="top"><div class="num">7</div><h3>Python 3.x</h3><div class="badges"><span class="badge b-code">Code</span></div></div>
+    <p>Code の研修では「Claude がその場でプログラムを書いて実行する」体験を行い、その実行に Python を使います。Windows には標準で搭載されていないため、インストールが必要です。次のいずれかの方法で入れてください。</p>
+    <ol class="sub">
+      <li><a href="https://www.python.org/downloads/">python.org</a> のインストーラを使う場合は、最初の画面で「<b>Add python.exe to PATH</b>」にチェックを入れてください。</li>
+      <li>Microsoft Store 版を使う場合は、管理者権限なしで導入でき、<code>python3</code> コマンドも使えます。</li>
+    </ol>
+    <p>サポートが継続している Python 3 系であれば、入手方法は問いません。インストールが終わったら、PowerShell で <code>python --version</code>（Microsoft Store 版の場合は <code>python3 --version</code>）を実行し、バージョンが表示されれば完了です。</p></div>
+
+  <!-- ② 設定 -->
+  <h2><span class="pz">STEP 2</span>Claude Desktop の設定<span class="who">担当：セットアップ者</span></h2>
+  <p class="h2sub">アプリに、Bedrock への接続とシェルを設定します。入力する接続値（APIキー・リージョン・モデルID）は、前提（インフラ）で配布されたものを使います。</p>
+  <p class="refnote">各設定画面の操作イメージは、<a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup">zenn 記事</a>の該当章（Claude Desktop の設定）をご参照ください。</p>
+
+  <div class="step config"><div class="top"><div class="num">2-1</div><h3>開発者モードを有効にする</h3><div class="badges"><span class="badge b-both">共通</span></div></div>
+    <p>アプリの「ヘルプ」から「トラブルシューティング」を開き、開発者モードを有効にします。このあとの接続設定や MCP 設定で必要になります。</p></div>
+
+  <div class="step config"><div class="top"><div class="num">2-2</div><h3>Bedrock に接続する（サードパーティ推論）</h3><div class="badges"><span class="badge b-both">共通</span></div></div>
+    <p>サードパーティ推論の設定画面で、次のように設定してください。</p>
+    <ol class="sub">
+      <li>認証情報の種類を「静的APIキー」にします。</li>
+      <li>配布されたリージョンと APIキー（トークン）を入力し、接続テストを行います。</li>
+      <li>モデル検出を OFF にします。</li>
+      <li>モデルID を登録します（例：<code>global.anthropic.claude-sonnet-4-6</code> など。実際の値は配布されたものを使ってください）。</li>
+    </ol></div>
+
+  <div class="step config"><div class="top"><div class="num">2-3</div><h3>Git Bash をシェルとして設定する</h3><div class="badges"><span class="badge b-both">共通</span></div></div>
+    <p>STEP 1 の手順 2（Git for Windows）でインストールした Git Bash を、Claude が使うシェルとして指定します。次の2つを設定してください。</p>
+    <ol class="sub">
+      <li>環境変数 <code>CLAUDE_CODE_GIT_BASH_PATH</code> に、Git Bash（<code>bash.exe</code>）のパスを設定します。たとえば <code>C:\Program Files\Git\bin\bash.exe</code> のようになります。</li>
+      <li><code>%USERPROFILE%\.claude\settings.json</code> の <code>SHELL</code> に、<code>bash.exe</code> を指定します。</li>
+    </ol></div>
+
+  <!-- ③ MCP -->
+  <h2><span class="pz">STEP 3</span>MCP を設定する<span class="who">担当：セットアップ者</span></h2>
+  <p class="h2sub">MCP（Model Context Protocol）は、Claude に外部ツールを連携させる仕組みです。Cowork では次の2つを設定します。これらを動かす実体は、先にインストールした Node.js と Chrome です。</p>
+  <p class="refnote">各 MCP の設定画面の操作イメージは、<a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup">zenn 記事</a>の該当章（MCP の設定）をご参照ください。</p>
+
+  <div class="step config"><div class="top"><div class="num">3-1</div><h3>Web 検索の MCP サーバー（brave-search）</h3><div class="badges"><span class="badge b-cowork">Cowork</span><span class="badge b-set">MCP</span><span class="badge b-opt">任意</span></div></div>
+    <p>Brave Search を MCP サーバーとして利用します。<code>npx</code> で起動するため、Node.js を使います。利用には Brave の APIキーが必要で、AWS Marketplace から取得して登録します。</p>
+    <p class="note">brave-search は外部の Web 検索を行う MCP です。外部 MCP や Web 検索を使えるかどうかは案件の方針によって異なりますので、ご利用方針を確認したうえで設定してください。方針上使わない場合は、この項目は設定しなくても問題ありません。</p></div>
+
+  <div class="step config"><div class="top"><div class="num">3-2</div><h3>ブラウザ操作の MCP サーバー（chrome-devtools）</h3><div class="badges"><span class="badge b-cowork">Cowork</span><span class="badge b-set">MCP</span></div></div>
+    <p>Chrome の操作やデバッグを MCP から行います。ブラウザの実体は、先にインストールした Chrome です。Chrome で <code>chrome://inspect/#remote-debugging</code> を開き、リモートデバッグを ON にしてください。</p></div>
+
+  <div class="scope cw" style="margin-top:12px">設定を変更したら、Claude デスクトップアプリをタスクトレイから一度終了し、起動し直してください。これで設定が反映されます。</div>
+
+  <!-- ④ 動作確認 -->
+  <h2><span class="pz">STEP 4</span>動作を確認する<span class="who">担当：セットアップ者</span></h2>
+  <p class="h2sub">最後に、それぞれが動くことを確認します。</p>
+  <div class="done"><b>Code の確認：</b> アプリの「Code」タブを開き、Local から作業フォルダを選択します。そのうえで「<b>Python で hello world を書いて実行して</b>」と指示し、実行できれば準備完了です。</div>
+  <div class="done" style="background:var(--cowork-bg);border-color:#fcd34d;color:#78350f;margin-top:10px"><b>Cowork の確認：</b> readiness check で要件を確認したうえで Cowork を起動し、指示が通れば準備完了です。</div>
+
+  <!-- 補足 -->
+  <h2>補足</h2>
+  <div class="notes">
+    <ul>
+      <li><b>管理者権限について：</b> 仮想マシンプラットフォームの有効化や、Git・Node.js のインストールには管理者権限が必要です。GPO／Intune での一括展開も可能です。</li>
+      <li><b>シェルについて：</b> 本書では Git Bash に統一しています。Windows 標準の PowerShell をシェルにする環境変数方式もありますが、Cowork が Git Bash を使うため、こちらに揃えています。</li>
+      <li><b>以前の設定が残っている場合：</b> <code>claude_desktop_config.json</code> に古い <code>mcpServers</code> が残っているときは、それを削除してから、画面で設定し直してください。</li>
+    </ul>
+  </div>
+
+  <footer>
+    出典・参考：Cowork 側の AWS／Bedrock の準備および MCP の設定手順については、AWS Japan の公開記事（<a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup">zenn.dev：aws-bedrock-claude-cowork-setup</a>）を元に、自組織向けに要約・再構成しています。画面キャプチャ等は転載していません。<br>
+    Claude Code／Cowork ハンズオン 配布資料 ― セットアップ手順（Windows・セットアップ担当者向け）。演習用のデータ・教材は別資料です。
+  </footer>
+</div>
+</body>
+</html>

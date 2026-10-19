@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ハンズオン 事前セットアップ手順（Windows）</title>
+<style>
+  :root{
+    --bg:#ffffff; --surface:#f7f7f5; --surface2:#ededea; --ink:#22262b; --ink2:#53585d; --ink3:#8a8f94;
+    --border:#e4e4e2; --accent:#35526b;
+    --cowork:#8a6a2e; --code:#3a5a7a; --ok:#3f7757;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+    line-height:1.9;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:34px 26px 64px}
+
+  header{border-bottom:3px solid var(--ink);padding-bottom:18px}
+  .eyebrow{font-size:11.5px;letter-spacing:.14em;color:var(--accent);font-weight:700;margin:0 0 7px}
+  h1{font-size:26px;margin:0;font-weight:800;line-height:1.35}
+  .lead{color:var(--ink2);font-size:14px;margin:12px 0 0}
+  a{color:var(--accent);word-break:break-all}
+
+  h2{font-size:18px;margin:36px 0 8px;font-weight:800}
+  .h2sub{font-size:13.5px;color:var(--ink2);margin:0 0 12px}
+
+  .scope{margin:18px 0;background:var(--surface);border:1px solid var(--border);
+    border-radius:8px;padding:14px 16px;font-size:13.5px;color:var(--ink2)}
+  .scope b{color:var(--ink)}
+
+  .tblwrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:8px 0}
+  table{border-collapse:collapse;width:100%;font-size:13px;background:#fff;min-width:560px}
+  th,td{padding:10px 14px;border-bottom:1px solid var(--border);text-align:left;vertical-align:middle}
+  thead th{background:var(--surface2);font-weight:700;font-size:12px;color:var(--ink2)}
+  td.c,th.c{text-align:center;width:78px;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  .yes{color:var(--ok);font-weight:800}.no{color:var(--ink3)}
+  .opt{color:var(--cowork);font-weight:700;font-size:11.5px}
+  td.item{font-weight:600}
+  td.ref a{font-size:12.5px;white-space:nowrap}
+  td.ref .self{color:var(--ink3);font-size:12px}
+
+  .callout{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin:10px 0;font-size:13.5px;color:var(--ink2)}
+  .callout b{color:var(--ink)}
+
+  .step{border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin:11px 0;background:#fff}
+  .step h3{margin:0 0 4px;font-size:15.5px;font-weight:700}
+  .step p{margin:9px 0 0;font-size:13.5px;color:var(--ink2)}
+  .step p b,.step li b{color:var(--ink)}
+  .step ul{margin:9px 0 0;padding-left:1.3em;font-size:13.5px;color:var(--ink2)}
+  .step ul li{margin:7px 0}
+  code{background:var(--surface2);padding:.08em .4em;border-radius:5px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85em;color:#2b2f34}
+
+  .done{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-top:10px;font-size:13.5px;color:var(--ink2)}
+  .done b{color:var(--ink)}
+
+  footer{margin-top:30px;border-top:1px solid var(--border);padding-top:12px;font-size:11.5px;color:var(--ink3);line-height:1.8}
+  footer a{color:var(--ink2)}
+
+  @media print{body{font-size:12px}.wrap{max-width:none;padding:0 6mm}.step,.done,.scope,.tblwrap,.callout{break-inside:avoid}a{color:var(--ink)}header{border-color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Claude Cowork ＋ Code ハンズオン セットアップ手順</h1>
+    <p class="lead">「Claude Cowork」と「Claude Code」の両方のハンズオンで使う、Windows PC のセットアップ手順です。基本的には AWS Japan の記事の手順どおりに進めていただきます。そのうえで、Claude Code 用に Python のセットアップをお願いします。</p>
+  </header>
+
+  <h2>セットアップしていただきたいもの一覧</h2>
+  <p class="h2sub">各項目について、Cowork と Code のどちらで必要かを示しています。</p>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>項目</th><th class="c">Cowork</th><th class="c">Code</th><th>参照（zenn の該当章）</th></tr></thead>
+      <tbody>
+        <tr><td class="item">Claude デスクトップアプリ</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td><td class="ref"><a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup#claude-desktop-%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A8%E8%A8%AD%E5%AE%9A">Claude Desktop のインストールと設定 ↗</a></td></tr>
+        <tr><td class="item">Bedrock への接続（サードパーティ推論）</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td><td class="ref"><a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup#%E3%82%B5%E3%83%BC%E3%83%89%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E6%8E%A8%E8%AB%96%E3%81%AE%E8%A8%AD%E5%AE%9A">サードパーティ推論の設定 ↗</a></td></tr>
+        <tr><td class="item">Git for Windows（Git Bash・シェル設定）</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td><td class="ref"><a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup#git-for-windows-%E3%81%AE%E8%A8%AD%E5%AE%9A">Git for Windows の設定 ↗</a></td></tr>
+        <tr><td class="item">Node.js</td><td class="c"><span class="opt">任意</span></td><td class="c"><span class="no">—</span></td><td class="ref"><a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup#node.js-%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">Node.js のインストール ↗</a></td></tr>
+        <tr><td class="item">uv</td><td class="c"><span class="opt">任意</span></td><td class="c"><span class="no">—</span></td><td class="ref"><a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup#uv-%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">uv のインストール ↗</a></td></tr>
+        <tr><td class="item">仮想マシンプラットフォーム（Windows 機能）</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="no">—</span></td><td class="ref"><a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup#%E4%BB%AE%E6%83%B3%E3%83%9E%E3%82%B7%E3%83%B3%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%AE%E6%9C%89%E5%8A%B9%E5%8C%96">仮想マシンプラットフォームの有効化 ↗</a></td></tr>
+        <tr><td class="item">MCP：Web 検索（brave-search）</td><td class="c"><span class="opt">任意</span></td><td class="c"><span class="no">—</span></td><td class="ref"><a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup#mcp-%3A-brave-%E3%81%AE%E8%A8%AD%E5%AE%9A">MCP : Brave の設定 ↗</a></td></tr>
+        <tr><td class="item">MCP：ブラウザ操作（chrome-devtools）</td><td class="c"><span class="opt">任意</span></td><td class="c"><span class="no">—</span></td><td class="ref"><a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup#mcp-%3A-chrome-devtools">MCP : Chrome DevTools ↗</a></td></tr>
+        <tr><td class="item">Python 3.x</td><td class="c"><span class="no">—</span></td><td class="c"><span class="yes">✓</span></td><td class="ref"><a class="self" href="#python">本書で説明 ↓</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="scope infra">
+    <b>AWS 管理者の作業</b>：各 PC のセットアップの前に、AWS 側で Bedrock の準備を行っていただく必要があります。詳細は zenn の「<a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup#aws-%E7%AE%A1%E7%90%86%E8%80%85%E3%81%AE%E4%BD%9C%E6%A5%AD">AWS 管理者の作業</a>」をご参照ください。
+  </div>
+
+  <h2>手順 1：AWS Japan の記事に従ってセットアップする</h2>
+  <div class="callout">
+    <b>セットアップ手順（AWS Japan）</b>：<a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup">zenn.dev：aws-bedrock-claude-cowork-setup</a><br>
+    記事の手順を上から順に進めていただくと、Claude デスクトップアプリ・Bedrock への接続・Git Bash・Node.js・uv・仮想マシンプラットフォーム・MCP までが整います。
+  </div>
+  <p class="h2sub" style="margin-top:10px"><b>※ Node.js・uv・MCP（brave-search／chrome-devtools）は任意です。</b> Cowork の基本的な演習（プロンプトで資料やダッシュボードなどを作る課題）では使いません。ブラウザを操作してシステムを扱うオプション演習を行う場合にのみ、chrome-devtools（とその起動に使う Node.js）を設定してください。uv は MCP を設定するために AWS Japan の記事の手順でインストールしますが、今回設定する MCP（brave-search・chrome-devtools）はいずれも npx（Node.js）で起動するため、本ハンズオンでは uv を使う場面はありません。brave-search（Web 検索）は、外部 MCP・Web 検索を使えるかどうかが案件の方針によって変わりますので、方針を確認したうえで設定してください。</p>
+
+  <h2 id="python">手順 2：Python のセットアップ（Code 用）</h2>
+  <p class="h2sub">AWS Japan の記事には Python が含まれていません。Claude Code 用に、Python のインストールをお願いします。</p>
+  <div class="step">
+    <h3>Python 3.x</h3>
+    <p>Claude Code の研修では、Claude がその場でプログラムを書いて実行します。その実行に Python を使うため、Windows にインストールしてください（Windows には標準では入っていません）。インストール方法はいくつかありますが、代表的には次のどちらかです。</p>
+    <ul>
+      <li><b>公式サイトからインストーラを入れる</b>：Python の公式サイト <a href="https://www.python.org/downloads/">python.org</a> からインストーラをダウンロードして実行します。このとき、<b>最初の画面にある「Add python.exe to PATH」のチェックを必ずオンにしてください</b>（コマンドから Python を使えるようにするための設定です）。</li>
+      <li><b>Microsoft Store から入れる</b>：Store で「Python」を検索してインストールします。管理者権限がなくても入れられます。</li>
+    </ul>
+    <p>サポートが継続している Python 3 系であれば、どちらの方法でも構いません。インストールが終わったら、PowerShell で <code>python --version</code> を実行してください（うまくいかない場合は <code>python3 --version</code> も試してください）。バージョンが表示され、<b><code>python</code> または <code>python3</code> のどちらかで Python を呼び出せる</b>状態になっていれば完了です。</p>
+  </div>
+
+  <h2>手順 3：動作を確認する</h2>
+  <ul style="font-size:13.5px;color:var(--ink2);margin:8px 0 0;padding-left:1.3em;line-height:1.85">
+    <li><b>Code</b>：Claude デスクトップアプリの「Code」タブで作業フォルダを開き、簡単な指示が実行できれば準備完了です。</li>
+    <li><b>Cowork</b>：Claude デスクトップアプリの Cowork で作業フォルダを開き、簡単な指示が実行できれば準備完了です。</li>
+  </ul>
+
+  <!-- <footer> -->
+  <!--   出典・参考：AWS Japan の公開記事（<a href="https://zenn.dev/aws_japan/articles/aws-bedrock-claude-cowork-setup">zenn.dev：aws-bedrock-claude-cowork-setup</a>） -->
+  <!-- </footer> -->
+</div>
+</body>
+</html>
