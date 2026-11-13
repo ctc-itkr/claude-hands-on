@@ -6,7 +6,7 @@ Claude Code ハンズオン（研修）の教材リポジトリ。講師が作�
 
 - `配布/` : 受講者に配る一式（`README.md` が受講者向けの案内）
   - `研修スライド.pptx` : 研修スライド。**正本は人が PowerPoint で編集する**
-  - `データ/` : 演習用のEDINET有報XBRL。`データ/<社名>_<EDINETコード>/` の形式。`data@` はこのフォルダへのシンボリックリンク
+  - `データ/` : 演習用のEDINET有報XBRL。`データ/<社名>_<EDINETコード>/` の形式
   - `資料/` : 配布用の参考資料HTML（`md2html.py` で生成）
 - `skills/edinet-xbrl-dashboard/` : 有報XBRL → 財務ダッシュボードのスキル（`SKILL.md` を参照）
 - `tools/` : 配布・変換・取得のスクリプト（`tools/README.md` を参照）

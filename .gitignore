@@ -9,10 +9,7 @@ key.txt
 # Python のキャッシュ
 __pycache__/
 
-# data は 配布/データ へのシンボリックリンク（各自の手元で作る）
-/data
-
-# fetch ツールの実行記録（配布不要）
+# fetch ツールの実行記録（プロジェクト直下に作られる。配布不要）
 edinet_fetch_manifest.json
 
 # 配布用 zip（tools/make_dist_zip.sh で 配布/ から随時生成する）

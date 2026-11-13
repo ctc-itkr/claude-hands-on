@@ -1,8 +1,8 @@
 # tools/fetch_edinet_xbrl.py ── EDINET 有報XBRL 一括取得
 
-配布教材用に、証券コード一覧から各社の**最新の有価証券報告書**のXBRL一式を
-EDINET API v2 で取得し、`data/<ラベル>_<EDINETコード>/XBRL/...` に展開する。
-既存の `data/AREホールディングス_E21187/` 等と同じ構造で揃う。
+配布教材用に、証券コードを指定して各社の**最新の有価証券報告書**のXBRL一式を
+EDINET API v2 で取得し、`配布/データ/<ラベル>_<EDINETコード>/XBRL/...` に展開する。
+既存の `配布/データ/AREホールディングス_E21187/` 等と同じ構造で揃う。
 
 ## 重要：実行環境
 - **EDINET(api.edinet-fsa.go.jp) に到達できる環境で実行する**こと。
@@ -17,27 +17,29 @@ EDINET API v2 で取得し、`data/<ラベル>_<EDINETコード>/XBRL/...` に�
 
 ## 使い方
 ```bash
-# プロジェクト直下で（key.txt を自動参照）
-python3 tools/fetch_edinet_xbrl.py --out ./data
-
 # まず docID だけ解決して確認（ダウンロードしない）
-python3 tools/fetch_edinet_xbrl.py --out ./data --dry-run
+python3 tools/fetch_edinet_xbrl.py --codes 7203,6758 --dry-run
 
-# 一部だけ / ランキングtxtから
-python3 tools/fetch_edinet_xbrl.py --out ./data --codes 7203,6758
-python3 tools/fetch_edinet_xbrl.py --out ./data --list data/時価総額上位.txt
+# 取得（既定の出力先は 配布/データ）
+python3 tools/fetch_edinet_xbrl.py --codes 7203,6758
+
+# 配布物に入れずに試すときは、出力先を変える
+python3 tools/fetch_edinet_xbrl.py --codes 7203 --out /tmp/edinet_test
 ```
+
+- `--codes` も `--list` も付けないと、スクリプトに書かれた**15社**をまとめて `配布/データ` に取得する。
+  配布データが増えるので、ふだんは `--codes` で会社を指定する。
+- `--list <txt>` で、Markdown の表（2列目が証券コード）から会社を読み込むこともできる。
 
 ## 動作
 1. 今日から遡って `documents.json` を日次で走査し、各コードの
    最新の有報（docTypeCode=120）の docID を特定（全社見つかれば早期終了）。
 2. `documents/{docID}?type=1`（XBRLのZIP）をダウンロードし解凍。
-3. 取得結果を `data/edinet_fetch_manifest.json` に記録。
-4. 既に `data/<ラベル>_<EDINET>/XBRL/` があるコードはスキップ（再実行は安全）。
+3. 取得結果をプロジェクト直下の `edinet_fetch_manifest.json` に記録（`.gitignore` 済み。配布用 zip にも入らない）。
+4. 既に `<出力先>/<ラベル>_<EDINET>/XBRL/` があるコードはスキップ（再実行は安全）。
 
 ## メモ
-- 3月決算が多く、有報は概ね6月提出。ファーストリテイリング(9983)は8月決算で
-  11月提出（本リポジトリでは `data/ファーストリテイリング_E03217` として取得済み）。
+- 3月決算が多く、有報は概ね6月提出。ファーストリテイリング(9983)は8月決算で11月提出。
 - 見つからない場合は `--max-days` を増やす（既定500）。
 - 285A（キオクシア）等の英字入りコードにも対応。
 

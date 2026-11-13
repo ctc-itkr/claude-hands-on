@@ -6,7 +6,8 @@ fetch_edinet_xbrl.py ── EDINET から「最新の有価証券報告書」XBR
 配布教材用に、証券コードのリストを渡すと、各社の最新の有報(docTypeCode=120)を
 EDINET API v2 で探し、XBRL(type=1) の ZIP をダウンロードして
   <out>/<ラベル>_<EDINETコード>/XBRL/...
-に解凍する。既存の data/AREホールディングス_E21187 等と同じ構造で揃う。
+に解凍する。<out> の既定は 配布/データ で、既存の 配布/データ/AREホールディングス_E21187 等と同じ構造で揃う。
+取得の記録(edinet_fetch_manifest.json)はプロジェクト直下に書く(配布用 zip に入れないため)。
 
 【重要】このスクリプトは EDINET(api.edinet-fsa.go.jp) に到達できる環境で実行すること。
         Claude の実行環境(クラウド/手元VM)は組織ポリシーで EDINET への接続が
@@ -16,9 +17,9 @@ EDINET API v2 で探し、XBRL(type=1) の ZIP をダウンロードして
 
 使い方(例):
     # キーは key.txt / 環境変数 EDINET_API_KEY / --key のいずれかで渡す
-    python3 fetch_edinet_xbrl.py --out ./data
-    python3 fetch_edinet_xbrl.py --out ./data --codes 7203,6758 --max-days 400
-    python3 fetch_edinet_xbrl.py --list data/時価総額上位.txt --out ./data
+    python3 tools/fetch_edinet_xbrl.py --codes 7203,6758
+    python3 tools/fetch_edinet_xbrl.py --codes 7203 --max-days 400 --dry-run
+    python3 tools/fetch_edinet_xbrl.py --list <証券コード一覧.txt> --out <出力先>
 
 API仕様(EDINET API v2):
     一覧: GET /api/v2/documents.json?date=YYYY-MM-DD&type=2&Subscription-Key=KEY
@@ -38,6 +39,11 @@ import urllib.request
 import zipfile
 
 API_BASE = "https://api.edinet-fsa.go.jp/api/v2"
+
+# プロジェクト直下(このスクリプトの1つ上)。どこから実行しても同じ場所を指す。
+ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+DEFAULT_OUT = os.path.join(ROOT, "配布", "データ")
+MANIFEST_PATH = os.path.join(ROOT, "edinet_fetch_manifest.json")
 DOC_TYPE_YUHO = "120"  # 有価証券報告書(訂正=130は除外)
 
 # 証券コード -> 配布フォルダ用の日本語社名ラベル。未知コードはコードそのものを使う。
@@ -201,7 +207,7 @@ def download_and_extract(info, key, out_dir, sleep):
 
 def main():
     ap = argparse.ArgumentParser(description="EDINETから最新の有報XBRLを一括取得")
-    ap.add_argument("--out", default="./data", help="出力先ルート(既定 ./data)")
+    ap.add_argument("--out", default=DEFAULT_OUT, help="出力先ルート(既定 配布/データ)")
     ap.add_argument("--list", dest="list_path", default=None,
                     help="証券コード一覧のtxt(Markdown表)。未指定は内蔵の15社")
     ap.add_argument("--codes", default=None, help="カンマ区切りの証券コードで上書き")
@@ -250,8 +256,7 @@ def main():
                 "found": found, "missing": sorted(missing)}
 
     if args.dry_run:
-        os.makedirs(args.out, exist_ok=True)
-        mpath = os.path.join(args.out, "edinet_fetch_manifest.json")
+        mpath = MANIFEST_PATH
         with io.open(mpath, "w", encoding="utf-8") as f:
             json.dump(manifest, f, ensure_ascii=False, indent=2)
         log(f"\n[dry-run] docIDのみ解決。manifest: {mpath}")
@@ -273,7 +278,7 @@ def main():
         except Exception as e:  # noqa
             log(f"  ! {code} {info['label']} ダウンロード失敗: {e}")
 
-    mpath = os.path.join(args.out, "edinet_fetch_manifest.json")
+    mpath = MANIFEST_PATH
     with io.open(mpath, "w", encoding="utf-8") as f:
         json.dump(manifest, f, ensure_ascii=False, indent=2)
 

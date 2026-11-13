@@ -23,19 +23,13 @@ Claude Code ハンズオン（研修）の教材を管理するリポジトリ�
 
 ## はじめに（clone した後）
 
-1. `data` という近道（シンボリックリンク）を作ります。`配布/データ` を短い名前で指すためのものです。
-
-   ```bash
-   ln -s 配布/データ data
-   ```
-
-2. 資料の HTML を作り直す人は、Python の `markdown` パッケージを入れます。
+1. 資料の HTML を作り直す人は、Python の `markdown` パッケージを入れます。
 
    ```bash
    pip3 install markdown
    ```
 
-3. EDINET からデータを取り直す人は、EDINET の APIキーをプロジェクト直下の `key.txt` に保存します。`key.txt` は `.gitignore` に入っているので、コミットされません。**APIキーは絶対にコミットしないでください。**
+2. EDINET からデータを取り直す人は、EDINET の APIキーをプロジェクト直下の `key.txt` に保存します。`key.txt` は `.gitignore` に入っているので、コミットされません。**APIキーは絶対にコミットしないでください。**
 
 ## よくある作業
 
@@ -76,10 +70,10 @@ Claude Code の中では `/edinet-dashboard <XBRLのパス>` でも実行でき�
 ### 演習用のデータを取り直す
 
 ```bash
-python3 tools/fetch_edinet_xbrl.py --out ./data --codes 7203
+python3 tools/fetch_edinet_xbrl.py --codes 7203
 ```
 
-EDINET の API に接続できる環境（自分の PC のターミナルなど）で実行します。詳しくは [`tools/README.md`](tools/README.md) を見てください。
+指定した会社（例はトヨタ自動車、証券コード 7203）のデータを `配布/データ/` に取得します。`--codes` を付けないと15社をまとめて取得するので、必ず会社を指定してください。EDINET の API に接続できる環境（自分の PC のターミナルなど）で実行します。詳しくは [`tools/README.md`](tools/README.md) を見てください。
 
 ## 決まりごと
 
