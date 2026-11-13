@@ -90,6 +90,7 @@
     font-family:inherit;box-shadow:var(--shadow)}
   .toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media(max-width:600px){header{padding-top:44px}}
 </style>
 </head>
 <body>
@@ -204,7 +205,7 @@ let html = chartKeys.map(k=>{ const s=M[k];
   if(has("revenue")){ const a=M.revenue.data.filter(v=>v!=null);
     if(a.length>=2 && a[0]>0){ const mult=(last(a)/a[0]); bits.push(`売上は期間で <b>約${mult.toFixed(1)}倍</b>（${fmt(a[0],"億円")}→${fmt(last(a),"億円")}億円）`);} }
   if(has("cfo")){ const c=M.cfo.data; const negI=c.findIndex(v=>v!=null&&v<0);
-    if(negI>=0) bits.push(`一方で <b>${FY[negI]}期の営業CFは${fmt(c[negI],"億円")}億円</b> とマイナス。運転資本・在庫変動の影響が読み取れる`); }
+    if(negI>=0) bits.push(`一方で <b>${FY[negI]}期の営業CFは${fmt(c[negI],"億円")}億円</b> とマイナス。要因はキャッシュ・フロー計算書で確認を`); }
   if(bits.length) html += `<div class="note">📌 <b>自動サマリ</b>：${bits.join("。 ")}。（数値はXBRLの「経営指標等」より機械抽出）</div>`;
   document.getElementById("grid").innerHTML = html;
 })();

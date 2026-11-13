@@ -22,6 +22,8 @@ PERIODS = ["Prior4Year", "Prior3Year", "Prior2Year", "Prior1Year", "CurrentYear"
 METRICS = [
     dict(key="revenue", li="売上収益", lj="売上高", unit="億円", kind="bar", scale=1e8,
          tags=["RevenueIFRSSummaryOfBusinessResults", "NetSalesSummaryOfBusinessResults",
+               # 銀行など: 連結の経常収益。個別だけに営業収益が入る会社で個別値が混ざらないよう先に置く
+               "OrdinaryIncomeSummaryOfBusinessResults",
                "OperatingRevenue1SummaryOfBusinessResults", "GrossOperatingRevenueSummaryOfBusinessResults",
                "OrdinaryIncomeRevenueSummaryOfBusinessResults", "TotalOperatingRevenueSummaryOfBusinessResults"]),
     dict(key="income2", li="税引前利益", lj="経常利益", unit="億円", kind="line", scale=1e8,
