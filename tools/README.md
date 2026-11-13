@@ -56,11 +56,12 @@ python3 tools/fetch_edinet_xbrl.py --out ./data --list data/時価総額上位.t
 
 参考資料は `md2html.py` で md から HTML を直接生成する：
 
-- ソース … `docs/03_参考資料/md/*.md`（図SVGは `docs/03_参考資料/` 直下＝共有アセット）
+- ソース … `資料ソース/*.md`（md が参照する図SVGも同じフォルダに置く）
 - 生成 … `配布/資料/*.html`（`tools/md2html.py`。図SVGとCSSを内包した自己完結HTML）
 - 配布対象は `build_dist.sh` のホワイトリストで限定（現状：用語集／Code用サンプルプロンプト）。
 
-例）`docs/03_参考資料/md/用語集.md` → `配布/資料/用語集.html`。
+例）`資料ソース/用語集.md` → `配布/資料/用語集.html`。
 
-`md2html.py` は `markdown`／`cairosvg` に依存するため、再変換は原則このクラウドセッション
-（Claude）側で実行する。通常は `tools/build_dist.sh` 経由で生成する。
+`md2html.py` は Python の `markdown` パッケージに依存する（`pip install markdown`）。
+通常は `bash tools/build_dist.sh` で生成する。
+`配布/資料/事前セットアップ手順_20261015.html` は md のソースがなく、HTML を直接編集する。

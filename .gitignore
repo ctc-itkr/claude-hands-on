@@ -1,40 +1,24 @@
-# EDINETのキー
+# EDINET の APIキー
 key.txt
 
+# macOS / Office の一時ファイル
 .DS_Store
 **/.DS_Store
-
-# 配布パッケージ（build_dist.sh で再生成）
-# /配布/
-
-# Office 一時ロックファイル
 ~$*
 
-# data は 配布/データ へのシンボリックリンク（実体は .gitignore の配布配下）
+# Python のキャッシュ
+__pycache__/
+
+# data は 配布/データ へのシンボリックリンク（各自の手元で作る）
 /data
 
-# 削除予定（git管理外。実体はローカルのみ）
-/_to_delete/
-
-# fetchツールの実行記録（配布不要）
+# fetch ツールの実行記録（配布不要）
 edinet_fetch_manifest.json
 
-# スライドPDF（ビルド成果物。md/pptxから再生成するため追跡しない）
-docs/**/pdf/*.pdf
-
-# 別スレッドの試作出力（野良ファイル。配布不要）
-/Claude outputs/
-
-# 配布用zip（ビルド成果物。配布/ から随時生成する）
+# 配布用 zip（tools/make_dist_zip.sh で 配布/ から随時生成する）
 *.zip
 
-# CTC公式テンプレート（配布対象外・サイズ大）
-/CTCスライドテンプレート/
-
-# ローカルバックアップ（配布対象外）
-/_backup/
-
-# Claudeで作った試作ページ（手元専用。チームのリポジトリには入れない）
+# Claude で作った試作ページ（手元専用）
 /artifacts/
 
 # 演習の出力（受講者が作る完成品。配布に含めない）

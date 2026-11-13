@@ -10,9 +10,10 @@ Claude Code ハンズオン（研修）の教材リポジトリ。講師が作�
   - `資料/` : 配布用の参考資料HTML（`md2html.py` で生成）
 - `skills/edinet-xbrl-dashboard/` : 有報XBRL → 財務ダッシュボードのスキル（`SKILL.md` を参照）
 - `tools/` : 配布・変換・取得のスクリプト（`tools/README.md` を参照）
-- `docs/` : 設計・議事録・説明スライド・参考資料のソース（md）
+- `資料ソース/` : `配布/資料/` の HTML の元になる md と図SVG
+- `スライド/` : 受講者には配らないスライド（Copilot と Cowork の比較など）。研修スライドと同じく、人が PowerPoint で編集する
 - `.claude/commands/` : プロジェクトのスラッシュコマンド
-- 手元専用（git 管理外）・触らない: `CTCスライドテンプレート/`, `artifacts/`, `ClaudeCode_ハンズオン配布一式_*.zip`
+- 手元専用（git 管理外）・触らない: `artifacts/`, `ClaudeCode_ハンズオン配布一式_*.zip`
 
 ## 厳守ルール
 
@@ -40,10 +41,11 @@ python3 skills/edinet-xbrl-dashboard/scripts/build_dashboard.py data.json -o das
 
 ## 資料の変換と配布
 
-- 参考資料のソースは `docs/03_参考資料/md/*.md`。図SVGは `docs/03_参考資料/` 直下に置く。
-- HTML化は `tools/md2html.py` で行い、出力は `配布/資料/`。
+- 参考資料のソースは `資料ソース/*.md`。md が参照する図SVGも同じフォルダに置く。
+- HTML化は `tools/build_dist.sh`（中で `tools/md2html.py` を呼ぶ）で行い、出力は `配布/資料/`。生成した HTML を直接編集しない。
 - 配布対象は `tools/build_dist.sh` のホワイトリストで決まる。新しい資料を配布に含めるなら、そこに追加する。
-- `md2html.py` は `markdown` と `cairosvg` に依存する。
+- `md2html.py` は Python の `markdown` パッケージに依存する。
+- `配布/資料/事前セットアップ手順_*.html` だけは md のソースがなく、HTML を直接編集する。
 
 ## EDINET 取得
 
