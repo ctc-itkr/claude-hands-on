@@ -47,12 +47,9 @@ python3 tools/fetch_edinet_xbrl.py --out ./data --list data/時価総額上位.t
 
 - **配布/研修スライド.pptx が「正」**。以降は **PowerPoint で人手編集**しており、
   md やスクリプトからは**再生成しない**。
-- **`研修スライド.md`（docs/00_説明スライド/md/）→ pptx という変換経路は存在しない。**
-  md を編集しても pptx は変わらない。逆に、下記の旧ジェネレータで pptx を作り直すと
-  **手編集が失われる**ため使わないこと。
-  - `tools/build_pptx.js` … 旧 pptx ジェネレータ（内容ハードコード／出力は sandbox パス）。**実行しない**。
-  - `tools/build_deck.py` … 旧 HTML デッキ生成。pptx には無関係。使わない。
-  - `tools/slide2pdf.py` … md→PDF。pptx には触れない。PDF は追跡解除済みで「正」ではない。
+- スライドの md 版は持たない（旧 `研修スライド.md` は pptx と内容がずれたため削除済み）。
+- pptx をスクリプトで生成・作り直すと**手編集が失われる**ため、そうしたツールは作らない
+  （旧ジェネレータ `build_pptx.js` / `build_deck.py` / `slide2pdf.py` は削除済み）。
 - `tools/build_dist.sh` は設計上 **pptx を触らない**（配布/研修スライド.pptx をそのまま同梱）。
 
 ## 参考資料の変換運用（md → HTML）
