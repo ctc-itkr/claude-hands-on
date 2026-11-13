@@ -17,7 +17,7 @@
 ## 1. 実際にやってみる（演習：XBRL → data.json → dashboard.html）
 
 ```
-data/AREホールディングス_E21187 の有価証券報告書XBRLから主要財務（連結・通期）を抽出して data.json にまとめ、その data.json から外部ライブラリなしの単一HTMLダッシュボード（dashboard.html）を作って。抽出・生成はスクリプトで行い、結果を見ながら仕上げて。
+データ/AREホールディングス_E21187 の有価証券報告書XBRLから主要財務（連結・通期）を抽出して data.json にまとめ、その data.json から外部ライブラリなしの単一HTMLダッシュボード（dashboard.html）を作って。抽出・生成はスクリプトで行い、結果を見ながら仕上げて。
 ```
 
 **狙い**：1社目（AREホールディングス＝IFRS）で、XBRL → data.json → dashboard.html を通す。
